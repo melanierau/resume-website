@@ -1,0 +1,474 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Melanie Rau | Strategic Cloud, Data & AI Leader</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <style>
+        /* Original Color Scheme */
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #0A0A0A;
+            color: #E2E2E2;
+            cursor: none; /* Hide the default cursor */
+        }
+        .gradient-text {
+            background: linear-gradient(90deg, #A78BFA, #F472B6); /* Violet to Pink */
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .glassmorphism {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: transform 0.3s ease-out, box-shadow 0.3s ease-out;
+        }
+        .glow-effect {
+            box-shadow: 0 0 15px rgba(167, 139, 250, 0.2), 0 0 30px rgba(244, 114, 182, 0.1);
+        }
+        .glassmorphism:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(167, 139, 250, 0.3), 0 5px 15px rgba(244, 114, 182, 0.2);
+        }
+        .section-fade-in {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+        }
+        .section-fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        .faq-question { cursor: pointer; }
+        .faq-answer {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.5s ease-in-out;
+        }
+        .faq-item.active .faq-answer { max-height: 500px; }
+        .faq-item.active .faq-arrow { transform: rotate(180deg); }
+        .faq-arrow { transition: transform 0.3s ease-out; }
+        
+        #mouse-follower {
+            position: fixed;
+            top: 0; left: 0; width: 40px; height: 40px;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(167, 139, 250, 0.5) 0%, rgba(244, 114, 182, 0.3) 100%);
+            filter: blur(15px);
+            z-index: 9999;
+            pointer-events: none;
+            transform: translate(-50%, -50%);
+            transition: width 0.2s ease-out, height 0.2s ease-out;
+        }
+        body:hover #mouse-follower { opacity: 1; }
+        a, button, .faq-question { cursor: none; }
+    </style>
+</head>
+<body class="antialiased">
+
+    <!-- Mouse Follower Element -->
+    <div id="mouse-follower"></div>
+
+    <!-- Header & Navigation -->
+    <header id="header" class="fixed top-0 left-0 right-0 z-50 transition-all duration-300 glassmorphism">
+        <div class="container mx-auto px-6 py-4 flex justify-between items-center">
+            <a href="#" class="text-2xl font-bold tracking-tighter text-white">Melanie Rau</a>
+            <nav class="hidden md:flex items-center space-x-4 lg:space-x-6">
+                <a href="#about" class="hover:text-violet-300 transition-colors duration-300">About</a>
+                <a href="#skills" class="hover:text-violet-300 transition-colors duration-300">Skills</a>
+                <a href="#projects" class="hover:text-violet-300 transition-colors duration-300">Projects</a>
+                <a href="#experience" class="hover:text-violet-300 transition-colors duration-300">Experience</a>
+                <a href="#faq" class="hover:text-violet-300 transition-colors duration-300">FAQ</a>
+                <a href="./Resume-Melanie_Rau.pdf" download="Resume-Melanie_Rau.pdf" class="border border-violet-400 text-violet-300 hover:bg-violet-400 hover:text-gray-900 font-medium py-2 px-4 rounded-lg transition-all duration-300 transform hover:scale-105">Download CV</a>
+                <a href="#contact" class="bg-violet-600 hover:bg-violet-700 text-white font-medium py-2 px-4 rounded-lg transition-all duration-300 transform hover:scale-105">Contact</a>
+            </nav>
+            <button id="mobile-menu-button" class="md:hidden p-2">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-4 6h4" /></svg>
+            </button>
+        </div>
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="hidden md:hidden px-6 pb-4">
+            <a href="#about" class="block py-2 hover:text-violet-300">About</a>
+            <a href="#skills" class="block py-2 hover:text-violet-300">Skills</a>
+            <a href="#projects" class="block py-2 hover:text-violet-300">Projects</a>
+            <a href="#experience" class="block py-2 hover:text-violet-300">Experience</a>
+            <a href="#certifications" class="block py-2 hover:text-violet-300">Certifications</a>
+            <a href="#languages" class="block py-2 hover:text-violet-300">Languages</a>
+            <a href="#faq" class="block py-2 hover:text-violet-300">FAQ</a>
+            <a href="./Resume-Melanie_Rau.pdf" download="Resume-Melanie_Rau.pdf" class="block mt-2 border border-violet-400 text-violet-300 font-medium py-2 px-4 rounded-lg text-center">Download CV</a>
+            <a href="#contact" class="block mt-2 bg-violet-600 hover:bg-violet-700 text-white font-medium py-2 px-4 rounded-lg text-center">Contact</a>
+        </div>
+    </header>
+
+    <main>
+        <!-- Hero Section -->
+        <section id="hero" class="min-h-screen flex items-center pt-32 pb-12">
+            <div class="container mx-auto px-6">
+                <div class="flex flex-col md:flex-row items-center justify-between gap-12">
+                    <div class="md:w-3/5 text-center md:text-left">
+                        <h1 class="text-4xl md:text-6xl lg:text-7xl font-extrabold tracking-tighter mb-4 leading-tight text-white">
+                            Strategic <span class="gradient-text">Cloud, Data & AI</span> Technology Leader
+                        </h1>
+                        <p class="text-lg md:text-xl text-gray-300 mb-8 max-w-2xl mx-auto md:mx-0">
+                            Driving business transformation through FinOps, Zero Trust, and secure, scalable architecture on Azure & GCP.
+                        </p>
+                        <div class="flex justify-center md:justify-start space-x-4">
+                            <a href="#projects" class="bg-violet-600 hover:bg-violet-700 text-white font-bold py-3 px-8 rounded-lg transition-transform hover:scale-105">View My Work</a>
+                            <a href="#contact" class="bg-gray-700 hover:bg-gray-600 text-white font-bold py-3 px-8 rounded-lg transition-transform hover:scale-105">Get In Touch</a>
+                        </div>
+                    </div>
+                    <div class="md:w-2/5 flex justify-center">
+                         <div class="relative w-64 h-64 md:w-80 md:h-80">
+                            <div class="absolute inset-0 rounded-full bg-gradient-to-br from-violet-500 to-pink-500 blur-2xl"></div>
+                            <img src="https://placehold.co/320x320/e2e2e2/0a0a0a?text=MR" alt="Melanie Rau" class="relative w-full h-full rounded-full object-cover border-4 border-gray-800 shadow-2xl">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- About Section -->
+        <section id="about" class="py-20 section-fade-in">
+            <div class="container mx-auto px-6">
+                <div class="text-center max-w-3xl mx-auto">
+                     <h2 class="text-3xl md:text-4xl font-bold mb-4 text-white">About Me</h2>
+                     <p class="text-lg text-gray-300 leading-relaxed">
+                        I am a strategic technology leader who thrives on turning complex challenges into simple, high-impact business wins. With over 15 years of experience spanning from hands-on engineering to executive-level strategy, my passion is to act as the bridge between technology's potential and an organization's goals.
+                        <br><br>
+                        My approach is built on two core principles: driving measurable value and building empowered teams. Whether I'm pioneering a FinOps culture to bring financial accountability to the cloud, or architecting a Zero Trust security model to protect critical data, I focus on delivering outcomes that are secure, cost-effective, and sustainable. I believe the best leaders don't just manage work; they create an environment where talented people can deliver their best.
+                     </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Skills Section -->
+        <section id="skills" class="py-20 section-fade-in bg-black bg-opacity-20">
+            <div class="container mx-auto px-6">
+                <div class="text-center mb-12">
+                    <h2 class="text-3xl md:text-4xl font-bold mb-2 text-white">Core Skills</h2>
+                    <p class="text-gray-400">The capabilities I use to deliver strategic value.</p>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    <div class="glassmorphism p-8 rounded-2xl glow-effect">
+                        <h3 class="text-xl font-bold mb-2 gradient-text">FinOps & GreenOps</h3>
+                        <p class="text-gray-300">Pioneering financial governance and sustainability in the cloud, cutting costs by 15% and reducing carbon emissions.</p>
+                    </div>
+                    <div class="glassmorphism p-8 rounded-2xl glow-effect">
+                        <h3 class="text-xl font-bold mb-2 gradient-text">Zero Trust Architecture</h3>
+                        <p class="text-gray-300">Designing and implementing security models based on the principle of "never trust, always verify" to protect critical assets.</p>
+                    </div>
+                    <div class="glassmorphism p-8 rounded-2xl glow-effect">
+                        <h3 class="text-xl font-bold mb-2 gradient-text">Cloud Frameworks (CAF & WAF)</h3>
+                        <p class="text-gray-300">Applying Microsoft's Cloud Adoption and Well-Architected Frameworks to build secure, scalable, and resilient solutions.</p>
+                    </div>
+                    <div class="glassmorphism p-8 rounded-2xl glow-effect">
+                        <h3 class="text-xl font-bold mb-2 gradient-text">Multi-Cloud Strategy (Azure & GCP)</h3>
+                        <p class="text-gray-300">Architecting solutions across both major cloud platforms to leverage the best services and avoid vendor lock-in.</p>
+                    </div>
+                    <div class="glassmorphism p-8 rounded-2xl glow-effect">
+                        <h3 class="text-xl font-bold mb-2 gradient-text">Infrastructure as Code (Terraform)</h3>
+                        <p class="text-gray-300">Automating infrastructure provisioning to reduce manual error and accelerate delivery from days to hours.</p>
+                    </div>
+                    <div class="glassmorphism p-8 rounded-2xl glow-effect">
+                        <h3 class="text-xl font-bold mb-2 gradient-text">Agile Team Leadership</h3>
+                        <p class="text-gray-300">Leading high-performing engineering squads, clearing blockers, and managing stakeholder expectations to ensure delivery momentum.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Key Projects Section -->
+        <section id="projects" class="py-20 section-fade-in">
+            <div class="container mx-auto px-6">
+                <div class="text-center mb-12">
+                    <h2 class="text-3xl md:text-4xl font-bold mb-2 text-white">Key Projects & Initiatives</h2>
+                    <p class="text-gray-400">A selection of strategic work I've led and delivered.</p>
+                </div>
+                <div class="space-y-12">
+                    <div class="grid grid-cols-1 md:grid-cols-5 gap-8 items-center">
+                        <div class="md:col-span-2 glassmorphism rounded-2xl p-4 glow-effect"><img src="https://placehold.co/600x400/1e1b4b/a78bfa?text=FinOps+Strategy" alt="FinOps Strategy" class="rounded-xl w-full h-full object-cover"></div>
+                        <div class="md:col-span-3">
+                            <h3 class="text-2xl font-bold mb-3 text-white">FinOps & Governance Board Creation</h3>
+                            <p class="text-gray-300 mb-4">Authored the business case for and pioneered the council's FinOps culture from the ground up. Established and now chair the Azure Governance Board, creating the central authority for overseeing all cloud spending, new projects, and architectural standards.</p><span class="text-violet-400 font-medium">Result: 15% reduction in annual cloud spend.</span>
+                        </div>
+                    </div>
+                    <div class="grid grid-cols-1 md:grid-cols-5 gap-8 items-center">
+                        <div class="md:col-span-3 md:order-2">
+                            <h3 class="text-2xl font-bold mb-3 text-white">Azure Tenancy Disaggregation</h3>
+                            <p class="text-gray-300 mb-4">Authored the Statement of Work for a complex project to separate our Azure tenancy from two other councils. This strategic move is designed to enhance security, provide licensing flexibility, and gain full control over our cloud environment.</p><span class="text-violet-400 font-medium">Role: Lead Technical Architect & Strategist.</span>
+                        </div>
+                        <div class="md:col-span-2 md:order-1 glassmorphism rounded-2xl p-4 glow-effect"><img src="https://placehold.co/600x400/1e1b4b/f472b6?text=Azure+Disaggregation" alt="Azure Disaggregation" class="rounded-xl w-full h-full object-cover"></div>
+                    </div>
+                    <div class="grid grid-cols-1 md:grid-cols-5 gap-8 items-center">
+                        <div class="md:col-span-2 glassmorphism rounded-2xl p-4 glow-effect"><img src="https://placehold.co/600x400/1e1b4b/a78bfa?text=DDI+Strategy" alt="DDI Strategy" class="rounded-xl w-full h-full object-cover"></div>
+                        <div class="md:col-span-3">
+                            <h3 class="text-2xl font-bold mb-3 text-white">DDI & Zero Trust Strategy Review</h3>
+                            <p class="text-gray-300 mb-4">Acting as the cloud lead for the DDI (DNS, DHCP, IPAM) Strategy Review. Defining the future architecture for Azure DNS to support disaggregation, enhance security through a Zero Trust model, and improve automation across the enterprise.</p><span class="text-violet-400 font-medium">Focus: Security, Automation, Scalability.</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Experience Section -->
+        <section id="experience" class="py-20 section-fade-in bg-black bg-opacity-20">
+            <div class="container mx-auto px-6">
+                <div class="text-center mb-12">
+                    <h2 class="text-3xl md:text-4xl font-bold mb-2 text-white">Professional Experience</h2>
+                    <p class="text-gray-400">My career journey in technology leadership.</p>
+                </div>
+                <div class="max-w-3xl mx-auto relative border-l-2 border-violet-800 space-y-16 pl-8">
+                    <div class="relative">
+                        <div class="absolute -left-10 top-1 h-4 w-4 rounded-full bg-violet-400"></div>
+                        <h3 class="text-xl font-bold text-white">Cloud Engineering Manager</h3>
+                        <p class="text-violet-300 mb-2">Westminster City Council | Oct 2024 - Present</p>
+                        <ul class="list-disc list-inside text-gray-300 space-y-1">
+                            <li>Lead a five-person cloud squad, running all Agile ceremonies to clear blockers and maintain delivery momentum.</li>
+                            <li>Set clear expectations with Delivery Managers on the true cost and overhead of new ideas and scope changes.</li>
+                            <li>Act as the reality check for the business; challenging requests that are not sustainable or cost-effective.</li>
+                            <li>Swapped manual builds for Terraform; server provisioning is now 2 hours, not days.</li>
+                            <li>Overseeing the team’s migration from Synapse and ADF to our new Snowflake data platform.</li>
+                        </ul>
+                    </div>
+                    <div class="relative">
+                        <div class="absolute -left-10 top-1 h-4 w-4 rounded-full bg-violet-400"></div>
+                        <h3 class="text-xl font-bold text-white">Technical Architect</h3>
+                        <p class="text-violet-300 mb-2">Westminster City Council | Feb 2024 - Present</p>
+                        <ul class="list-disc list-inside text-gray-300 space-y-1">
+                            <li>Act as the lead technical advisor to the leadership board on cloud architecture and strategy.</li>
+                            <li>Run fair procurement: leading the technical evaluation for panel selections and direct awards on G-Cloud 14.</li>
+                            <li>Produce HLD/LLD for Azure & GCP, applying CAF, WAF, and creating secure Landing Zones.</li>
+                            <li>Create and present regular Power BI reports to the Head of Finance for cloud spend oversight.</li>
+                            <li>Introduced and lead FinOps, cutting cloud bills by 15% in six months.</li>
+                        </ul>
+                    </div>
+                    <div class="relative">
+                        <div class="absolute -left-10 top-1 h-4 w-4 rounded-full bg-violet-400"></div>
+                        <h3 class="text-xl font-bold text-white">Senior Associate - Cloud & Data Engineering</h3>
+                        <p class="text-violet-300 mb-2">PwC UK | Apr 2022 - Feb 2024</p>
+                        <ul class="list-disc list-inside text-gray-300 space-y-1">
+                            <li>Built secure Azure and GCP landing zones with policy-as-code guardrails for AI workloads.</li>
+                            <li>Introduced Microsoft Cloud for Sustainability; enabled carbon tracking for enterprise clients.</li>
+                            <li>Developed dashboards surfacing £300k+ in annual savings, guiding board-level decisions.</li>
+                        </ul>
+                    </div>
+                    <div class="relative">
+                        <div class="absolute -left-10 top-1 h-4 w-4 rounded-full bg-gray-600"></div>
+                        <p class="text-gray-400">Additional experience includes roles at Revolent Group, NextGEN360, Hologic Inc., and more.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Certifications Section -->
+        <section id="certifications" class="py-20 section-fade-in">
+            <div class="container mx-auto px-6">
+                <div class="text-center mb-12">
+                    <h2 class="text-3xl md:text-4xl font-bold mb-2 text-white">Certifications</h2>
+                    <p class="text-gray-400">My commitment to continuous learning and validated expertise.</p>
+                </div>
+                <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-6">
+                    <div class="glassmorphism p-4 rounded-xl text-center glow-effect flex flex-col items-center justify-center h-24"><span class="font-semibold text-sm">Google AI Essentials</span></div>
+                    <div class="glassmorphism p-4 rounded-xl text-center glow-effect flex flex-col items-center justify-center h-24"><span class="font-semibold text-sm">PagerDuty Administrator</span></div>
+                    <div class="glassmorphism p-4 rounded-xl text-center glow-effect flex flex-col items-center justify-center h-24"><span class="font-semibold text-sm">Azure Administrator Associate</span></div>
+                    <div class="glassmorphism p-4 rounded-xl text-center glow-effect flex flex-col items-center justify-center h-24"><span class="font-semibold text-sm">Azure Fundamentals</span></div>
+                    <div class="glassmorphism p-4 rounded-xl text-center glow-effect flex flex-col items-center justify-center h-24"><span class="font-semibold text-sm">CompTIA IT Fundamentals</span></div>
+                    <div class="glassmorphism p-4 rounded-xl text-center glow-effect flex flex-col items-center justify-center h-24"><span class="font-semibold text-sm">Elements of AI</span></div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Languages Section -->
+        <section id="languages" class="py-20 section-fade-in bg-black bg-opacity-20">
+            <div class="container mx-auto px-6">
+                <div class="text-center mb-12">
+                    <h2 class="text-3xl md:text-4xl font-bold mb-2 text-white">Languages</h2>
+                    <p class="text-gray-400">Communicating across cultures.</p>
+                </div>
+                <div class="max-w-xl mx-auto space-y-4">
+                    <div>
+                        <div class="flex justify-between mb-1"><span class="font-semibold text-white">German</span><span class="text-gray-400">Native</span></div>
+                        <div class="w-full bg-gray-700 rounded-full h-2.5"><div class="bg-gradient-to-r from-violet-500 to-pink-500 h-2.5 rounded-full" style="width: 100%"></div></div>
+                    </div>
+                     <div>
+                        <div class="flex justify-between mb-1"><span class="font-semibold text-white">English</span><span class="text-gray-400">Fluent</span></div>
+                        <div class="w-full bg-gray-700 rounded-full h-2.5"><div class="bg-gradient-to-r from-violet-500 to-pink-500 h-2.5 rounded-full" style="width: 95%"></div></div>
+                    </div>
+                     <div>
+                        <div class="flex justify-between mb-1"><span class="font-semibold text-white">Romanian</span><span class="text-gray-400">Basic</span></div>
+                        <div class="w-full bg-gray-700 rounded-full h-2.5"><div class="bg-gradient-to-r from-violet-500 to-pink-500 h-2.5 rounded-full" style="width: 30%"></div></div>
+                    </div>
+                     <div>
+                        <div class="flex justify-between mb-1"><span class="font-semibold text-white">Spanish</span><span class="text-gray-400">Basic</span></div>
+                        <div class="w-full bg-gray-700 rounded-full h-2.5"><div class="bg-gradient-to-r from-violet-500 to-pink-500 h-2.5 rounded-full" style="width: 25%"></div></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- FAQ Section -->
+        <section id="faq" class="py-20 section-fade-in">
+            <div class="container mx-auto px-6">
+                <div class="text-center mb-12">
+                    <h2 class="text-3xl md:text-4xl font-bold mb-2 text-white">Frequently Asked Questions</h2>
+                    <p class="text-gray-400">My approach to work, leadership, and strategy.</p>
+                </div>
+                <div class="max-w-3xl mx-auto space-y-4">
+                    <div class="faq-item glassmorphism rounded-xl p-6">
+                        <div class="faq-question flex justify-between items-center">
+                            <h4 class="font-semibold text-lg text-white">Tell me about yourself.</h4>
+                            <svg class="faq-arrow w-6 h-6 text-violet-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                        </div>
+                        <div class="faq-answer pt-4 text-gray-300">
+                            <p>I'm a strategic technology leader who gets results by bridging the gap between technical possibilities and business goals. I thrive on making complex technology simple and delivering measurable value, whether that's through financial governance, robust security architecture, or building empowered, high-performing teams.</p>
+                        </div>
+                    </div>
+                    <div class="faq-item glassmorphism rounded-xl p-6">
+                        <div class="faq-question flex justify-between items-center">
+                            <h4 class="font-semibold text-lg text-white">What makes you stand out?</h4>
+                            <svg class="faq-arrow w-6 h-6 text-violet-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                        </div>
+                        <div class="faq-answer pt-4 text-gray-300">
+                            <p>My ability to operate at both the 30,000-foot strategic level and the 3-foot delivery level. I can architect a multi-year Zero Trust strategy and, in the same day, work with my engineering team to unblock a critical Terraform script. This blend of executive vision and deep technical credibility allows me to lead effectively and earn the trust of both the boardroom and the server room.</p>
+                        </div>
+                    </div>
+                    <div class="faq-item glassmorphism rounded-xl p-6">
+                        <div class="faq-question flex justify-between items-center">
+                            <h4 class="font-semibold text-lg text-white">Can you share a major professional achievement?</h4>
+                            <svg class="faq-arrow w-6 h-6 text-violet-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                        </div>
+                        <div class="faq-answer pt-4 text-gray-300">
+                             <p><strong>Situation:</strong> When I joined the council, cloud spending was reactive and lacked centralized oversight, leading to budget overruns and inconsistent security practices. <br><strong>Task:</strong> My goal was to establish a culture of financial accountability and strategic governance for our entire cloud estate. <br><strong>Action:</strong> I researched, proposed, and pioneered the adoption of a FinOps methodology. This involved creating clear Power BI reports for finance, establishing a cross-departmental Azure Governance Board which I now chair, and embedding cost-awareness into our project lifecycle. <br><strong>Result:</strong> We cut our annual cloud bill by 15% within six months, eliminated surprise costs, and now make all cloud investment decisions based on clear data and business alignment.</p>
+                        </div>
+                    </div>
+                     <div class="faq-item glassmorphism rounded-xl p-6">
+                        <div class="faq-question flex justify-between items-center">
+                            <h4 class="font-semibold text-lg text-white">What are your key strengths and areas for improvement?</h4>
+                            <svg class="faq-arrow w-6 h-6 text-violet-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                        </div>
+                        <div class="faq-answer pt-4 text-gray-300">
+                            <p>My key strength is strategic problem-solving—I excel at untangling complex technical and business challenges and creating a clear, actionable path forward. I'm also very effective at managing stakeholder expectations and communicating the 'why' behind technical decisions. An area I'm actively focused on improving is delegation; with my hands-on background, my instinct is often to jump in and help solve a problem directly. I'm consciously working on stepping back more, empowering my team to find the solution, and focusing my energy on the higher-level strategic blockers only I can solve.</p>
+                        </div>
+                    </div>
+                     <div class="faq-item glassmorphism rounded-xl p-6">
+                        <div class="faq-question flex justify-between items-center">
+                            <h4 class="font-semibold text-lg text-white">What motivates you?</h4>
+                            <svg class="faq-arrow w-6 h-6 text-violet-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                        </div>
+                        <div class="faq-answer pt-4 text-gray-300">
+                            <p>I'm motivated by tangible impact. I love the challenge of taking a chaotic system or a vague business problem and creating an elegant, efficient, and secure solution that makes people's jobs easier and saves the organization money. Seeing my team succeed and grow their skills is also a huge driver for me. What I enjoy most about my current role is the variety—one day I'm deep in a DDI strategy review, the next I'm helping the team navigate a complex data migration, and the day after I'm presenting financial reports to leadership. The main challenge is always balancing urgent, tactical needs with long-term strategic goals, which is a puzzle I enjoy solving.</p>
+                        </div>
+                    </div>
+                    <div class="faq-item glassmorphism rounded-xl p-6">
+                        <div class="faq-question flex justify-between items-center">
+                            <h4 class="font-semibold text-lg text-white">What is your notice period and location preference?</h4>
+                            <svg class="faq-arrow w-6 h-6 text-violet-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                        </div>
+                        <div class="faq-answer pt-4 text-gray-300">
+                            <p>My current notice period is three months. I am based in Manchester and am ideally looking for remote or hybrid roles. I am open to hybrid work in the Manchester area.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Contact Section -->
+        <section id="contact" class="py-20 section-fade-in">
+            <div class="container mx-auto px-6">
+                <div class="text-center max-w-3xl mx-auto">
+                    <h2 class="text-3xl md:text-4xl font-bold mb-4 text-white">Let's Connect</h2>
+                    <p class="text-gray-300 mb-8">I'm always open to discussing new opportunities, strategic challenges, and collaborations. Feel free to reach out or download my resume for your records.</p>
+                    <div class="flex flex-col sm:flex-row justify-center items-center space-y-4 sm:space-y-0 sm:space-x-6">
+                        <a href="mailto:melanie-rau@outlook.com" class="inline-flex items-center justify-center w-full sm:w-auto bg-violet-600 hover:bg-violet-700 text-white font-bold py-3 px-6 rounded-lg transition-transform hover:scale-105">
+                           <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" viewBox="0 0 20 20" fill="currentColor"><path d="M2.003 5.884L10 9.882l7.997-3.998A2 2 0 0016 4H4a2 2 0 00-1.997 1.884z" /><path d="M18 8.118l-8 4-8-4V14a2 2 0 002 2h12a2 2 0 002-2V8.118z" /></svg>
+                            Send an Email
+                        </a>
+                        <a href="tel:+447365955511" class="inline-flex items-center justify-center w-full sm:w-auto bg-gray-700 hover:bg-gray-600 text-white font-bold py-3 px-6 rounded-lg transition-transform hover:scale-105">
+                           <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" viewBox="0 0 20 20" fill="currentColor"><path d="M2 3a1 1 0 011-1h2.153a1 1 0 01.986.836l.74 4.435a1 1 0 01-.54 1.06l-1.548.773a11.037 11.037 0 006.105 6.105l.774-1.548a1 1 0 011.059-.54l4.435.74a1 1 0 01.836.986V17a1 1 0 01-1 1h-2C7.82 18 2 12.18 2 5V3z" /></svg>
+                            Schedule a Call
+                        </a>
+                    </div>
+                     <div class="mt-12 flex justify-center space-x-6">
+                        <a href="https://www.linkedin.com/in/melanie-rau" target="_blank" rel="noopener noreferrer" class="text-gray-400 hover:text-violet-400 transition-colors">
+                            <svg class="w-8 h-8" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg>
+                        </a>
+                        <a href="https://github.com/melanierau" target="_blank" rel="noopener noreferrer" class="text-gray-400 hover:text-violet-400 transition-colors">
+                           <svg class="w-8 h-8" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="border-t border-gray-800">
+        <div class="container mx-auto px-6 py-6 text-center text-gray-500">
+            <p>&copy; 2025 Melanie Rau. All Rights Reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile menu toggle
+        const mobileMenuButton = document.getElementById('mobile-menu-button');
+        const mobileMenu = document.getElementById('mobile-menu');
+        mobileMenuButton.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+
+        // Change header background on scroll
+        const header = document.getElementById('header');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 50) {
+                header.classList.add('bg-opacity-70');
+            } else {
+                header.classList.remove('bg-opacity-70');
+            }
+        });
+
+        // Scroll-reveal animations
+        const sections = document.querySelectorAll('.section-fade-in');
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, {
+            threshold: 0.1
+        });
+        sections.forEach(section => {
+            observer.observe(section);
+        });
+
+        // FAQ Accordion
+        const faqItems = document.querySelectorAll('.faq-item');
+        faqItems.forEach(item => {
+            const question = item.querySelector('.faq-question');
+            question.addEventListener('click', () => {
+                const wasActive = item.classList.contains('active');
+                // Close all items
+                faqItems.forEach(otherItem => {
+                    otherItem.classList.remove('active');
+                });
+                // If it wasn't active, open it
+                if (!wasActive) {
+                    item.classList.add('active');
+                }
+            });
+        });
+        
+        // Mouse Follower Logic
+        const follower = document.getElementById('mouse-follower');
+        document.addEventListener('mousemove', (e) => {
+            follower.style.left = `${e.clientX}px`;
+            follower.style.top = `${e.clientY}px`;
+        });
+    </script>
+</body>
+</html>
