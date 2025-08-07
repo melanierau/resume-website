@@ -6,40 +6,47 @@
     <title>Melanie Rau | Strategic Cloud, Data & AI Leader</title>
     <meta name="description" content="Melanie Rau is a strategic technology leader specializing in Cloud, Data, and AI. Explore her portfolio, projects, and expertise in FinOps, Zero Trust, and multi-cloud architecture.">
     
+    <!-- Preconnect hints to speed up connection to critical origins -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preconnect" href="https://cdnjs.cloudflare.com">
+    <link rel="preconnect" href="https://raw.githubusercontent.com">
+
     <!-- Favicon Links -->
-    <link rel="apple-touch-icon" sizes="180x180" href="./apple-touch-icon.png">
-    <link rel="icon" type="image/png" sizes="32x32" href="./favicon-32x32.png">
-    <link rel="icon" type="image/png" sizes="16x16" href="./favicon-16x16.png">
-    <link rel="manifest" href="./site.webmanifest">
-    <link rel="icon" href="./favicon.ico" type="image/x-icon">
+    <link rel="apple-touch-icon" sizes="180x180" href="https://raw.githubusercontent.com/melanierau/resume-website/main/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="https://raw.githubusercontent.com/melanierau/resume-website/main/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="https://raw.githubusercontent.com/melanierau/resume-website/main/favicon-16x16.png">
+    <link rel="manifest" href="https://raw.githubusercontent.com/melanierau/resume-website/main/site.webmanifest">
+    <link rel="icon" href="https://raw.githubusercontent.com/melanierau/resume-website/main/favicon.ico" type="image/x-icon">
 
     <!-- Scripts -->
     <script src="https://cdn.tailwindcss.com"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <!-- Deferring three.js to prevent render-blocking -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js" defer></script>
 
-    <!-- Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <!-- Fonts - fetchpriority helps load fonts faster -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" fetchpriority="high">
     
     <style>
         :root {
             --bg-color: #0A0A0A;
             --text-color: #E2E2E2;
             --text-secondary-color: #9CA3AF;
+            --footer-text-color: #9CA3AF; /* Accessibility fix */
             --glass-bg: rgba(255, 255, 255, 0.05);
             --glass-border: rgba(255, 255, 255, 0.1);
             --header-text-color: #FFFFFF;
             --section-bg-color: rgba(0, 0, 0, 0.2);
             --timeline-border-color: #4c1d95;
             --timeline-dot-color: #A78BFA;
-            --logo-card-bg: #111827; /* Reverted to original darker background */
+            --logo-card-bg: #111827;
         }
 
         html.light-mode {
             --bg-color: #F9FAFB;
             --text-color: #1F2937;
             --text-secondary-color: #4B5563;
+            --footer-text-color: #4B5563; /* Accessibility fix */
             --glass-bg: rgba(255, 255, 255, 0.7);
             --glass-border: rgba(229, 231, 235, 1);
             --header-text-color: #111827;
@@ -125,7 +132,6 @@
             transition: filter 0.3s ease;
         }
         
-        /* New glow effect for logos in dark mode */
         body:not(.light-mode) .logo-card img {
              filter: drop-shadow(0 0 5px rgba(255, 255, 255, 0.3));
         }
@@ -133,15 +139,13 @@
              filter: drop-shadow(0 0 10px rgba(255, 255, 255, 0.5));
         }
 
-
-        /* Interactive Particle Background */
         #particle-canvas {
             position: absolute;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            z-index: -1; /* Place it behind the hero content */
+            z-index: -1;
         }
     </style>
 </head>
@@ -205,13 +209,13 @@
                     <div class="md:w-2/5 flex justify-center">
                          <div class="relative w-64 h-64 md:w-80 md:h-80">
                             <div class="absolute inset-0 rounded-full bg-gradient-to-br from-violet-500 to-pink-500 blur-2xl"></div>
-                            <img src="https://avatars.githubusercontent.com/u/104355910?v=4" alt="Melanie Rau, Strategic Cloud, Data & AI Technology Leader" class="relative w-full h-full rounded-full object-cover border-4 border-gray-800 shadow-2xl">
+                            <img src="https://avatars.githubusercontent.com/u/104355910?v=4" alt="Melanie Rau, Strategic Cloud, Data & AI Technology Leader" class="relative w-full h-full rounded-full object-cover border-4 border-gray-800 shadow-2xl" fetchpriority="high" width="460" height="460">
                         </div>
                     </div>
                 </div>
             </div>
             <!-- Scroll Down Indicator -->
-            <a href="#about" class="absolute bottom-10 left-1/2 -translate-x-1/2 animate-bounce z-10">
+            <a href="#about" class="absolute bottom-10 left-1/2 -translate-x-1/2 animate-bounce z-10" aria-label="Scroll to about section">
                 <div class="w-8 h-8" style="color: var(--text-secondary-color);">
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-full h-full">
                         <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 5.25l-7.5 7.5-7.5-7.5m15 6l-7.5 7.5-7.5-7.5" />
@@ -240,17 +244,17 @@
                 <div class="text-center max-w-5xl mx-auto">
                     <h3 class="text-lg font-semibold uppercase tracking-widest mb-12" style="color: var(--text-secondary-color);">Organisations I've Worked With</h3>
                     <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6 gap-6">
-                        <div class="logo-card"><img src="https://raw.githubusercontent.com/melanierau/resume-website/main/pwc.png" alt="PwC Logo"></div>
-                        <div class="logo-card"><img src="https://raw.githubusercontent.com/melanierau/resume-website/main/westminster-city-council.png" alt="Westminster City Council Logo"></div>
-                        <div class="logo-card"><img src="https://raw.githubusercontent.com/melanierau/resume-website/main/booking-com-logo.png" alt="Booking.com Logo"></div>
-                        <div class="logo-card"><img src="https://raw.githubusercontent.com/melanierau/resume-website/main/dentsu-aegis-network.png" alt="Dentsu Logo"></div>
-                        <div class="logo-card"><img src="https://raw.githubusercontent.com/melanierau/resume-website/main/gazprom-logo.jpg" alt="Gazprom Logo"></div>
-                        <div class="logo-card"><img src="https://raw.githubusercontent.com/melanierau/resume-website/main/Revolent.png" alt="Revolent Group Logo"></div>
-                        <div class="logo-card"><img src="https://raw.githubusercontent.com/melanierau/resume-website/main/NextGEN360.png" alt="NextGEN360 Logo"></div>
-                        <div class="logo-card"><img src="https://raw.githubusercontent.com/melanierau/resume-website/main/hologic-logo.png" alt="Hologic Logo"></div>
-                        <div class="logo-card"><img src="https://raw.githubusercontent.com/melanierau/resume-website/main/pca-logo.jpeg" alt="Phillips & Cohen Associates Logo"></div>
-                        <div class="logo-card"><img src="https://raw.githubusercontent.com/melanierau/resume-website/main/hotels-com-logo.png" alt="Hotels.com Logo"></div>
-                        <div class="logo-card"><img src="https://raw.githubusercontent.com/melanierau/resume-website/main/agaplesion-1.png" alt="Agaplesion Logo"></div>
+                        <div class="logo-card"><img src="https://raw.githubusercontent.com/melanierau/resume-website/main/pwc.png" alt="PwC Logo" width="128" height="35"></div>
+                        <div class="logo-card"><img src="https://raw.githubusercontent.com/melanierau/resume-website/main/westminster-city-council.png" alt="Westminster City Council Logo" width="128" height="40"></div>
+                        <div class="logo-card"><img src="https://raw.githubusercontent.com/melanierau/resume-website/main/booking-com-logo.png" alt="Booking.com Logo" width="128" height="20"></div>
+                        <div class="logo-card"><img src="https://raw.githubusercontent.com/melanierau/resume-website/main/dentsu-aegis-network.png" alt="Dentsu Logo" width="128" height="128"></div>
+                        <div class="logo-card"><img src="https://raw.githubusercontent.com/melanierau/resume-website/main/gazprom-logo.jpg" alt="Gazprom Logo" width="128" height="38"></div>
+                        <div class="logo-card"><img src="https://raw.githubusercontent.com/melanierau/resume-website/main/Revolent.png" alt="Revolent Group Logo" width="128" height="30"></div>
+                        <div class="logo-card"><img src="https://raw.githubusercontent.com/melanierau/resume-website/main/NextGEN360.png" alt="NextGEN360 Logo" width="120" height="120"></div>
+                        <div class="logo-card"><img src="https://raw.githubusercontent.com/melanierau/resume-website/main/hologic-logo.png" alt="Hologic Logo" width="128" height="25"></div>
+                        <div class="logo-card"><img src="https://raw.githubusercontent.com/melanierau/resume-website/main/pca-logo.jpeg" alt="Phillips & Cohen Associates Logo" width="200" height="200"></div>
+                        <div class="logo-card"><img src="https://raw.githubusercontent.com/melanierau/resume-website/main/hotels-com-logo.png" alt="Hotels.com Logo" width="128" height="64"></div>
+                        <div class="logo-card"><img src="https://raw.githubusercontent.com/melanierau/resume-website/main/agaplesion-1.png" alt="Agaplesion Logo" width="128" height="50"></div>
                     </div>
                 </div>
             </div>
@@ -301,7 +305,7 @@
                 </div>
                 <div class="space-y-12">
                     <div class="grid grid-cols-1 md:grid-cols-5 gap-8 items-center">
-                        <div class="md:col-span-2 glassmorphism rounded-2xl p-4 glow-effect"><img src="https://placehold.co/600x400/1e1b4b/a78bfa?text=FinOps+Strategy" alt="Abstract graphic representing FinOps Strategy" class="rounded-xl w-full h-full object-cover"></div>
+                        <div class="md:col-span-2 glassmorphism rounded-2xl p-4 glow-effect"><img src="https://placehold.co/600x400/1e1b4b/a78bfa?text=FinOps+Strategy" alt="Abstract graphic representing FinOps Strategy" class="rounded-xl w-full h-full object-cover" loading="lazy" width="600" height="400"></div>
                         <div class="md:col-span-3">
                             <h3 class="text-2xl font-bold mb-3" style="color: var(--header-text-color);">FinOps & Governance Board Creation</h3>
                             <p class="mb-4" style="color: var(--text-secondary-color);">Authored the business case for and pioneered the council's FinOps culture from the ground up. Established and now chair the Azure Governance Board, creating the central authority for overseeing all cloud spending, new projects, and architectural standards.</p><span class="text-violet-400 font-medium">Result: 15% reduction in annual cloud spend.</span>
@@ -312,10 +316,10 @@
                             <h3 class="text-2xl font-bold mb-3" style="color: var(--header-text-color);">Azure Tenancy Disaggregation</h3>
                             <p class="mb-4" style="color: var(--text-secondary-color);">Authored the Statement of Work for a complex project to separate our Azure tenancy from two other councils. This strategic move is designed to enhance security, provide licensing flexibility, and gain full control over our cloud environment.</p><span class="text-violet-400 font-medium">Role: Lead Technical Architect & Strategist.</span>
                         </div>
-                        <div class="md:col-span-2 md:order-1 glassmorphism rounded-2xl p-4 glow-effect"><img src="https://placehold.co/600x400/1e1b4b/f472b6?text=Azure+Disaggregation" alt="Abstract graphic representing Azure Tenancy Disaggregation" class="rounded-xl w-full h-full object-cover"></div>
+                        <div class="md:col-span-2 md:order-1 glassmorphism rounded-2xl p-4 glow-effect"><img src="https://placehold.co/600x400/1e1b4b/f472b6?text=Azure+Disaggregation" alt="Abstract graphic representing Azure Tenancy Disaggregation" class="rounded-xl w-full h-full object-cover" loading="lazy" width="600" height="400"></div>
                     </div>
                     <div class="grid grid-cols-1 md:grid-cols-5 gap-8 items-center">
-                        <div class="md:col-span-2 glassmorphism rounded-2xl p-4 glow-effect"><img src="https://placehold.co/600x400/1e1b4b/a78bfa?text=DDI+Strategy" alt="Abstract graphic representing DDI and Zero Trust Strategy" class="rounded-xl w-full h-full object-cover"></div>
+                        <div class="md:col-span-2 glassmorphism rounded-2xl p-4 glow-effect"><img src="https://placehold.co/600x400/1e1b4b/a78bfa?text=DDI+Strategy" alt="Abstract graphic representing DDI and Zero Trust Strategy" class="rounded-xl w-full h-full object-cover" loading="lazy" width="600" height="400"></div>
                         <div class="md:col-span-3">
                             <h3 class="text-2xl font-bold mb-3" style="color: var(--header-text-color);">DDI & Zero Trust Strategy Review</h3>
                             <p class="mb-4" style="color: var(--text-secondary-color);">Acting as the cloud lead for the DDI (DNS, DHCP, IPAM) Strategy Review. Defining the future architecture for Azure DNS to support disaggregation, enhance security through a Zero Trust model, and improve automation across the enterprise.</p><span class="text-violet-400 font-medium">Focus: Security, Automation, Scalability.</span>
@@ -452,7 +456,7 @@
                 <div class="max-w-3xl mx-auto space-y-4">
                     <div class="faq-item glassmorphism rounded-xl p-6">
                         <div class="faq-question flex justify-between items-center">
-                            <h4 class="font-semibold text-lg" style="color: var(--header-text-color);">Tell me about yourself.</h4>
+                            <h3 class="font-semibold text-lg" style="color: var(--header-text-color);">Tell me about yourself.</h3>
                             <svg class="faq-arrow w-6 h-6 text-violet-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
                         </div>
                         <div class="faq-answer pt-4" style="color: var(--text-secondary-color);">
@@ -461,7 +465,7 @@
                     </div>
                     <div class="faq-item glassmorphism rounded-xl p-6">
                         <div class="faq-question flex justify-between items-center">
-                            <h4 class="font-semibold text-lg" style="color: var(--header-text-color);">What makes you stand out?</h4>
+                            <h3 class="font-semibold text-lg" style="color: var(--header-text-color);">What makes you stand out?</h3>
                             <svg class="faq-arrow w-6 h-6 text-violet-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
                         </div>
                         <div class="faq-answer pt-4" style="color: var(--text-secondary-color);">
@@ -470,7 +474,7 @@
                     </div>
                     <div class="faq-item glassmorphism rounded-xl p-6">
                         <div class="faq-question flex justify-between items-center">
-                            <h4 class="font-semibold text-lg" style="color: var(--header-text-color);">Can you share a major professional achievement?</h4>
+                            <h3 class="font-semibold text-lg" style="color: var(--header-text-color);">Can you share a major professional achievement?</h3>
                             <svg class="faq-arrow w-6 h-6 text-violet-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
                         </div>
                         <div class="faq-answer pt-4" style="color: var(--text-secondary-color);">
@@ -479,7 +483,7 @@
                     </div>
                      <div class="faq-item glassmorphism rounded-xl p-6">
                         <div class="faq-question flex justify-between items-center">
-                            <h4 class="font-semibold text-lg" style="color: var(--header-text-color);">What are your key strengths and areas for improvement?</h4>
+                            <h3 class="font-semibold text-lg" style="color: var(--header-text-color);">What are your key strengths and areas for improvement?</h3>
                             <svg class="faq-arrow w-6 h-6 text-violet-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
                         </div>
                         <div class="faq-answer pt-4" style="color: var(--text-secondary-color);">
@@ -488,7 +492,7 @@
                     </div>
                      <div class="faq-item glassmorphism rounded-xl p-6">
                         <div class="faq-question flex justify-between items-center">
-                            <h4 class="font-semibold text-lg" style="color: var(--header-text-color);">What motivates you?</h4>
+                            <h3 class="font-semibold text-lg" style="color: var(--header-text-color);">What motivates you?</h3>
                             <svg class="faq-arrow w-6 h-6 text-violet-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
                         </div>
                         <div class="faq-answer pt-4" style="color: var(--text-secondary-color);">
@@ -497,7 +501,7 @@
                     </div>
                     <div class="faq-item glassmorphism rounded-xl p-6">
                         <div class="faq-question flex justify-between items-center">
-                            <h4 class="font-semibold text-lg" style="color: var(--header-text-color);">What is your notice period and location preference?</h4>
+                            <h3 class="font-semibold text-lg" style="color: var(--header-text-color);">What is your notice period and location preference?</h3>
                             <svg class="faq-arrow w-6 h-6 text-violet-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
                         </div>
                         <div class="faq-answer pt-4" style="color: var(--text-secondary-color);">
@@ -525,10 +529,10 @@
                         </a>
                     </div>
                      <div class="mt-12 flex justify-center space-x-6">
-                        <a href="https://www.linkedin.com/in/melanie-rau" target="_blank" rel="noopener noreferrer" class="text-gray-400 hover:text-violet-400 transition-colors">
+                        <a href="https://www.linkedin.com/in/melanie-rau" target="_blank" rel="noopener noreferrer" class="text-gray-400 hover:text-violet-400 transition-colors" aria-label="My LinkedIn Profile">
                             <svg class="w-8 h-8" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg>
                         </a>
-                        <a href="https://github.com/melanierau" target="_blank" rel="noopener noreferrer" class="text-gray-400 hover:text-violet-400 transition-colors">
+                        <a href="https://github.com/melanierau" target="_blank" rel="noopener noreferrer" class="text-gray-400 hover:text-violet-400 transition-colors" aria-label="My GitHub Profile">
                            <svg class="w-8 h-8" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
                         </a>
                     </div>
@@ -537,7 +541,7 @@
         </section>
 
         <!-- Back to Top Button -->
-        <a id="back-to-top" href="#hero" class="fixed bottom-8 right-8 p-3 rounded-full bg-violet-600 text-white shadow-lg hover:bg-violet-700 transition-all duration-300 opacity-0 pointer-events-none">
+        <a id="back-to-top" href="#hero" class="fixed bottom-8 right-8 p-3 rounded-full bg-violet-600 text-white shadow-lg hover:bg-violet-700 transition-all duration-300 opacity-0 pointer-events-none" aria-label="Back to top">
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor" class="w-6 h-6">
                 <path stroke-linecap="round" stroke-linejoin="round" d="M4.5 15.75l7.5-7.5 7.5 7.5" />
             </svg>
@@ -545,205 +549,222 @@
     </main>
 
     <footer class="border-t border-gray-800">
-        <div class="container mx-auto px-6 py-6 text-center text-gray-500">
+        <div class="container mx-auto px-6 py-6 text-center" style="color: var(--footer-text-color);">
             <p>&copy; 2025 Melanie Rau. All Rights Reserved.</p>
         </div>
     </footer>
 
     <script>
-        // Disable right-click
-        document.addEventListener('contextmenu', event => event.preventDefault());
+        document.addEventListener('DOMContentLoaded', function() {
+            // Disable right-click
+            document.addEventListener('contextmenu', event => event.preventDefault());
 
-        // Mobile menu toggle
-        const mobileMenuButton = document.getElementById('mobile-menu-button');
-        const mobileMenu = document.getElementById('mobile-menu');
-        mobileMenuButton.addEventListener('click', () => {
-            mobileMenu.classList.toggle('hidden');
-        });
+            // Mobile menu toggle
+            const mobileMenuButton = document.getElementById('mobile-menu-button');
+            const mobileMenu = document.getElementById('mobile-menu');
+            mobileMenuButton.addEventListener('click', () => {
+                mobileMenu.classList.toggle('hidden');
+            });
 
-        // Change header background on scroll
-        const header = document.getElementById('header');
-        const backToTopButton = document.getElementById('back-to-top');
-        window.addEventListener('scroll', () => {
-            if (window.scrollY > 50) {
-                header.classList.add('bg-opacity-70');
-                backToTopButton.classList.remove('opacity-0');
-                backToTopButton.classList.add('opacity-100');
-                backToTopButton.classList.remove('pointer-events-none');
-            } else {
-                header.classList.remove('bg-opacity-70');
-                backToTopButton.classList.add('opacity-0');
-                backToTopButton.classList.remove('opacity-100');
-                backToTopButton.classList.add('pointer-events-none');
-            }
-        });
-
-        // Scroll-reveal animations
-        const sections = document.querySelectorAll('.section-fade-in');
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('visible');
-                    observer.unobserve(entry.target);
+            // Change header background on scroll
+            const header = document.getElementById('header');
+            const backToTopButton = document.getElementById('back-to-top');
+            window.addEventListener('scroll', () => {
+                if (window.scrollY > 50) {
+                    header.classList.add('bg-opacity-70');
+                    backToTopButton.classList.remove('opacity-0');
+                    backToTopButton.classList.add('opacity-100');
+                    backToTopButton.classList.remove('pointer-events-none');
+                } else {
+                    header.classList.remove('bg-opacity-70');
+                    backToTopButton.classList.add('opacity-0');
+                    backToTopButton.classList.remove('opacity-100');
+                    backToTopButton.classList.add('pointer-events-none');
                 }
             });
-        }, {
-            threshold: 0.1
-        });
-        sections.forEach(section => {
-            observer.observe(section);
-        });
 
-        // FAQ Accordion
-        const faqItems = document.querySelectorAll('.faq-item');
-        faqItems.forEach(item => {
-            item.addEventListener('click', () => {
-                const wasActive = item.classList.contains('active');
-                faqItems.forEach(otherItem => {
-                    otherItem.classList.remove('active');
+            // Scroll-reveal animations
+            const sections = document.querySelectorAll('.section-fade-in');
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                        observer.unobserve(entry.target);
+                    }
                 });
-                if (!wasActive) {
-                    item.classList.add('active');
-                }
+            }, {
+                threshold: 0.1
             });
-        });
-        
-        // Mouse Follower Logic
-        const follower = document.getElementById('mouse-follower');
-        document.addEventListener('mousemove', (e) => {
-            follower.style.left = `${e.clientX}px`;
-            follower.style.top = `${e.clientY}px`;
-        });
-
-        // Close mobile menu on link click
-        const mobileMenuLinks = document.querySelectorAll('#mobile-menu a');
-        mobileMenuLinks.forEach(link => {
-            link.addEventListener('click', () => {
-                mobileMenu.classList.add('hidden');
+            sections.forEach(section => {
+                observer.observe(section);
             });
-        });
 
-        // Animated Metrics
-        const counters = document.querySelectorAll('[data-count]');
-        const counterObserver = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    const counter = entry.target;
-                    const target = +counter.getAttribute('data-count');
-                    let count = 0;
-                    const duration = 2000;
-                    const stepTime = Math.abs(Math.floor(duration / target));
-
-                    const timer = setInterval(() => {
-                        count += 1;
-                        counter.innerText = count;
-                        if (count === target) {
-                            clearInterval(timer);
-                        }
-                    }, stepTime);
-                    counterObserver.unobserve(counter);
-                }
+            // FAQ Accordion
+            const faqItems = document.querySelectorAll('.faq-item');
+            faqItems.forEach(item => {
+                item.addEventListener('click', () => {
+                    const wasActive = item.classList.contains('active');
+                    faqItems.forEach(otherItem => {
+                        otherItem.classList.remove('active');
+                    });
+                    if (!wasActive) {
+                        item.classList.add('active');
+                    }
+                });
             });
-        }, {
-            threshold: 0.7
-        });
-        counters.forEach(counter => {
-            counterObserver.observe(counter);
-        });
+            
+            // Mouse Follower Logic
+            const follower = document.getElementById('mouse-follower');
+            document.addEventListener('mousemove', (e) => {
+                follower.style.left = `${e.clientX}px`;
+                follower.style.top = `${e.clientY}px`;
+            });
 
-        // Light/Dark Mode Toggle
-        const themeToggleBtn = document.getElementById('theme-toggle');
-        const darkIcon = document.getElementById('theme-toggle-dark-icon');
-        const lightIcon = document.getElementById('theme-toggle-light-icon');
+            // Close mobile menu on link click
+            const mobileMenuLinks = document.querySelectorAll('#mobile-menu a');
+            mobileMenuLinks.forEach(link => {
+                link.addEventListener('click', () => {
+                    mobileMenu.classList.add('hidden');
+                });
+            });
 
-        // Interactive Particle Background Script
-        const scene = new THREE.Scene();
-        const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
-        const renderer = new THREE.WebGLRenderer({
-            canvas: document.querySelector('#particle-canvas'),
-            alpha: true
-        });
+            // Animated Metrics
+            const counters = document.querySelectorAll('[data-count]');
+            const counterObserver = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        const counter = entry.target;
+                        const target = +counter.getAttribute('data-count');
+                        let count = 0;
+                        const duration = 2000;
+                        const stepTime = Math.abs(Math.floor(duration / target));
 
-        renderer.setPixelRatio(window.devicePixelRatio);
-        renderer.setSize(window.innerWidth, window.innerHeight);
-        camera.position.setZ(50);
+                        const timer = setInterval(() => {
+                            count += 1;
+                            counter.innerText = count;
+                            if (count === target) {
+                                clearInterval(timer);
+                            }
+                        }, stepTime);
+                        counterObserver.unobserve(counter);
+                    }
+                });
+            }, {
+                threshold: 0.7
+            });
+            counters.forEach(counter => {
+                counterObserver.observe(counter);
+            });
 
-        const particleCount = 5000;
-        const positions = new Float32Array(particleCount * 3);
+            // Light/Dark Mode Toggle
+            const themeToggleBtn = document.getElementById('theme-toggle');
+            const darkIcon = document.getElementById('theme-toggle-dark-icon');
+            const lightIcon = document.getElementById('theme-toggle-light-icon');
 
-        for (let i = 0; i < particleCount * 3; i++) {
-            positions[i] = (Math.random() - 0.5) * 100;
-        }
+            // Interactive Particle Background Script
+            const scene = new THREE.Scene();
+            const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+            const renderer = new THREE.WebGLRenderer({
+                canvas: document.querySelector('#particle-canvas'),
+                alpha: true
+            });
 
-        const particlesGeometry = new THREE.BufferGeometry();
-        particlesGeometry.setAttribute('position', new THREE.BufferAttribute(positions, 3));
-        
-        const darkParticleColor = new THREE.Color(0x8A2BE2);
-        const lightParticleColor = new THREE.Color(0x1F2937);
+            renderer.setPixelRatio(window.devicePixelRatio);
+            renderer.setSize(window.innerWidth, window.innerHeight);
+            camera.position.setZ(50);
+            
+            // Function to create a circular texture for particles
+            function createStarTexture() {
+                const canvas = document.createElement('canvas');
+                canvas.width = 32;
+                canvas.height = 32;
+                const context = canvas.getContext('2d');
+                const gradient = context.createRadialGradient(16, 16, 0, 16, 16, 16);
+                gradient.addColorStop(0, 'rgba(255,255,255,1)');
+                gradient.addColorStop(0.2, 'rgba(255,255,255,0.8)');
+                gradient.addColorStop(1, 'rgba(255,255,255,0)');
+                context.fillStyle = gradient;
+                context.fillRect(0, 0, 32, 32);
+                return new THREE.CanvasTexture(canvas);
+            }
 
-        const particlesMaterial = new THREE.PointsMaterial({
-            size: 0.08,
-            color: darkParticleColor,
-            transparent: true,
-            opacity: 0.6,
-            blending: THREE.AdditiveBlending
-        });
+            const particleCount = 7000;
+            const positions = new Float32Array(particleCount * 3);
 
-        const particleSystem = new THREE.Points(particlesGeometry, particlesMaterial);
-        scene.add(particleSystem);
+            for (let i = 0; i < particleCount * 3; i++) {
+                positions[i] = (Math.random() - 0.5) * 100;
+            }
 
-        if (localStorage.getItem('color-theme') === 'light') {
-            document.documentElement.classList.add('light-mode');
-            lightIcon.classList.remove('hidden');
-            darkIcon.classList.add('hidden');
-            particleSystem.material.color.set(lightParticleColor);
-        } else {
-            document.documentElement.classList.remove('light-mode');
-            darkIcon.classList.remove('hidden');
-            lightIcon.classList.add('hidden');
-            particleSystem.material.color.set(darkParticleColor);
-        }
+            const particlesGeometry = new THREE.BufferGeometry();
+            particlesGeometry.setAttribute('position', new THREE.BufferAttribute(positions, 3));
+            
+            const darkParticleColor = new THREE.Color(0x8A2BE2);
+            const lightParticleColor = new THREE.Color(0x1F2937);
 
-        themeToggleBtn.addEventListener('click', function() {
-            darkIcon.classList.toggle('hidden');
-            lightIcon.classList.toggle('hidden');
-            document.documentElement.classList.toggle('light-mode');
+            const particlesMaterial = new THREE.PointsMaterial({
+                size: 0.15,
+                color: darkParticleColor,
+                map: createStarTexture(),
+                transparent: true,
+                opacity: 0.8,
+                blending: THREE.NormalBlending
+            });
 
-            if (document.documentElement.classList.contains('light-mode')) {
-                localStorage.setItem('color-theme', 'light');
+            const particleSystem = new THREE.Points(particlesGeometry, particlesMaterial);
+            scene.add(particleSystem);
+
+            if (localStorage.getItem('color-theme') === 'light') {
+                document.documentElement.classList.add('light-mode');
+                lightIcon.classList.remove('hidden');
+                darkIcon.classList.add('hidden');
                 particleSystem.material.color.set(lightParticleColor);
             } else {
-                localStorage.setItem('color-theme', 'dark');
+                document.documentElement.classList.remove('light-mode');
+                darkIcon.classList.remove('hidden');
+                lightIcon.classList.add('hidden');
                 particleSystem.material.color.set(darkParticleColor);
             }
+
+            themeToggleBtn.addEventListener('click', function() {
+                darkIcon.classList.toggle('hidden');
+                lightIcon.classList.toggle('hidden');
+                document.documentElement.classList.toggle('light-mode');
+
+                if (document.documentElement.classList.contains('light-mode')) {
+                    localStorage.setItem('color-theme', 'light');
+                    particleSystem.material.color.set(lightParticleColor);
+                } else {
+                    localStorage.setItem('color-theme', 'dark');
+                    particleSystem.material.color.set(darkParticleColor);
+                }
+            });
+
+            let mouseX = 0;
+            let mouseY = 0;
+
+            document.addEventListener('mousemove', (event) => {
+                mouseX = (event.clientX / window.innerWidth) * 2 - 1;
+                mouseY = -(event.clientY / window.innerHeight) * 2 + 1;
+            });
+
+            function animate() {
+                requestAnimationFrame(animate);
+
+                particleSystem.rotation.y = -mouseX * 0.2;
+                particleSystem.rotation.x = mouseY * 0.2;
+                particleSystem.rotation.y += 0.0001;
+
+                renderer.render(scene, camera);
+            }
+
+            animate();
+
+            window.addEventListener('resize', () => {
+                renderer.setSize(window.innerWidth, window.innerHeight);
+                camera.aspect = window.innerWidth / window.innerHeight;
+                camera.updateProjectionMatrix();
+            });
         });
-
-        let mouseX = 0;
-        let mouseY = 0;
-
-        document.addEventListener('mousemove', (event) => {
-            mouseX = (event.clientX / window.innerWidth) * 2 - 1;
-            mouseY = -(event.clientY / window.innerHeight) * 2 + 1;
-        });
-
-        function animate() {
-            requestAnimationFrame(animate);
-
-            particleSystem.rotation.y = -mouseX * 0.2;
-            particleSystem.rotation.x = mouseY * 0.2;
-            particleSystem.rotation.y += 0.0001;
-
-            renderer.render(scene, camera);
-        }
-
-        animate();
-
-        window.addEventListener('resize', () => {
-            renderer.setSize(window.innerWidth, window.innerHeight);
-            camera.aspect = window.innerWidth / window.innerHeight;
-            camera.updateProjectionMatrix();
-        });
-
     </script>
 </body>
 </html>
