@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title data-translate-key="meta_title">Melanie Rau | Strategic IT Leader</title>
+  <meta name="description" data-translate-key="meta_description" content="Cloud, Data, and AI leadership. FinOps, Zero Trust and multi-cloud architecture.">
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Additional head content if needed -->
+  <style>
+    /* Define CSS variables for dark/light modes */
+    :root {
+      --header-color: #FFFFFF;
+      --text-color: #EAEAEA;
+      --text-secondary: #A0A0A0;
+      --bg-color: #080808;
+    }
+    html.light-mode {
+      --header-color: #111827;
+      --text-color: #1F2937;
+      --text-secondary: #4B5563;
+      --bg-color: #F9FAFB;
+    }
+    body {
+      font-family: 'Inter', sans-serif;
+      background-color: var(--bg-color);
+      color: var(--text-color);
+    }
+    .gradient-text {
+      background: linear-gradient(90deg, #A78BFA, #F472B6);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+  </style>
+</head>
+<body class="antialiased">
+  <header class="px-6 py-4 flex justify-between items-center">
+    <a href="#hero" class="text-2xl font-bold" style="color:var(--header-color)">Melanie Rau</a>
+    <nav class="space-x-4">
+      <a href="#hero" data-translate-key="nav_home" class="hover:underline">Home</a>
+      <a href="#about" data-translate-key="nav_about" class="hover:underline">About</a>
+      <a href="#skills" data-translate-key="nav_skills" class="hover:underline">Skills</a>
+      <a href="#experience" data-translate-key="nav_experience" class="hover:underline">Experience</a>
+      <a href="#faq" data-translate-key="nav_faq" class="hover:underline">FAQ</a>
+      <a href="#contact" data-translate-key="nav_contact" class="hover:underline">Contact</a>
+      <a id="cv-link" href="/assets/docs/cv/Melanie-Rau-CV-EN.pdf" data-i18n-attrs="download:cv_download_name" data-translate-key="nav_cv" class="border px-3 py-2 rounded">Download CV</a>
+      <div id="language-switcher" class="inline-block relative">
+        <button id="language-toggle" class="p-2" aria-label="Toggle language" title="Language">🌐</button>
+        <div id="language-dropdown" class="hidden absolute right-0 bg-gray-800 text-white rounded mt-2">
+          <a href="/en/" class="block px-3 py-1">English</a>
+          <a href="/de/" class="block px-3 py-1">Deutsch</a>
+          <a href="/es/" class="block px-3 py-1">Español</a>
+          <a href="/fr/" class="block px-3 py-1">Français</a>
+          <a href="/ro/" class="block px-3 py-1">Română</a>
+        </div>
+      </div>
+    </nav>
+  </header>
+  <main>
+    <section id="hero" class="min-h-screen flex items-center justify-center flex-col text-center">
+      <h1 class="text-5xl font-extrabold mb-4" data-translate-key="hero_title">Strategic IT Leader</h1>
+      <p class="text-2xl mb-8" data-translate-key="hero_subtitle"><span class="gradient-text">Driving Business Value Through Technology</span></p>
+      <div class="flex space-x-4">
+        <a href="#case-studies" class="bg-purple-600 text-white py-3 px-6 rounded" data-translate-key="hero_cta1">View Case Studies</a>
+        <a href="#contact" class="bg-gray-700 text-white py-3 px-6 rounded" data-translate-key="hero_cta2">Get In Touch</a>
+      </div>
+    </section>
+    <section id="impact" class="py-20 text-center">
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+        <div>
+          <div class="text-5xl gradient-text"><b class="counter" data-target="15">0</b>%</div>
+          <p class="mt-2" data-translate-key="impact1_desc">Reduction in annual cloud spend</p>
+        </div>
+        <div>
+          <div class="text-5xl gradient-text"><b class="counter" data-target="35">0</b>%</div>
+          <p class="mt-2" data-translate-key="impact2_desc">Project backlog reduction</p>
+        </div>
+        <div>
+          <div class="text-5xl gradient-text"><b class="counter" data-target="65">0</b>%</div>
+          <p class="mt-2" data-translate-key="impact3_desc">Reduced service desk wait times</p>
+        </div>
+      </div>
+    </section>
+    <section id="about" class="py-20">
+      <h2 class="text-3xl font-bold mb-6 gradient-text" data-translate-key="about_title">My Journey: From Infrastructure to Strategy</h2>
+      <div class="max-w-3xl mx-auto space-y-4">
+        <p data-translate-key="about_p1">My IT career began as a Graduate IT Specialist in Application Development. ...</p>
+        <p data-translate-key="about_p2">Today, as a Cloud Architect and Engineering Manager, I focus on systems ...</p>
+      </div>
+    </section>
+    <section id="case-studies" class="py-20 bg-gray-900">
+      <h2 class="text-3xl font-bold mb-6" data-translate-key="projects_title">Case Studies: Strategy in Action</h2>
+      <p class="mb-8 max-w-2xl mx-auto" data-translate-key="projects_subtitle">I turn complex challenges into measurable outcomes.</p>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+        <div class="p-6 bg-gray-800 rounded">
+          <h3 class="text-2xl mb-4 gradient-text" data-translate-key="project1_heading_card">FinOps Strategy</h3>
+          <p data-translate-key="project1_box_title" class="font-semibold mb-2">FinOps & Governance Board Creation</p>
+          <p data-translate-key="project1_box_desc">Authored the business case and launched FinOps from the ground up. Now chair the Azure Governance Board to oversee spend, new projects, and standards.</p>
+          <p class="mt-2 text-purple-300" data-translate-key="project1_box_result">Result: 15% reduction in annual cloud spend.</p>
+        </div>
+        <div class="p-6 bg-gray-800 rounded">
+          <h3 class="text-2xl mb-4 gradient-text" data-translate-key="project2_heading_card">Zero Trust</h3>
+          <p data-translate-key="project2_box_title" class="font-semibold mb-2">Secure Tenant Disaggregation</p>
+          <p data-translate-key="project2_box_desc">Designed the future state, applied Zero Trust, and aligned leaders with clear diagrams and plans.</p>
+          <p class="mt-2 text-purple-300" data-translate-key="project2_box_result">Outcome: increased security, licensing flexibility, and total cloud control.</p>
+        </div>
+      </div>
+    </section>
+    <section id="skills" class="py-20">
+      <h2 class="text-3xl font-bold mb-6" data-translate-key="skills_title">Core Skills</h2>
+      <p class="mb-8 max-w-2xl mx-auto" data-translate-key="skills_subtitle">The capabilities I use to deliver strategic value.</p>
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div class="p-4 border rounded">
+          <h3 class="font-bold mb-2 gradient-text">FinOps & GreenOps</h3>
+          <p>Pioneering financial governance and sustainability in the cloud, cutting costs by <b>15</b>% and reducing carbon emissions.</p>
+        </div>
+        <div class="p-4 border rounded">
+          <h3 class="font-bold mb-2 gradient-text">Zero Trust Architecture</h3>
+          <p>Designing and implementing security models based on the principle of "never trust, always verify" to protect critical assets.</p>
+        </div>
+        <div class="p-4 border rounded">
+          <h3 class="font-bold mb-2 gradient-text">Cloud Frameworks (CAF & WAF)</h3>
+          <p>Applying Microsoft's Cloud Adoption and Well-Architected Frameworks to build secure, scalable, and resilient solutions.</p>
+        </div>
+      </div>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-12 mt-16">
+        <div>
+          <h3 class="font-bold mb-4 text-purple-300" data-translate-key="about_expertise_title">Core Expertise</h3>
+          <ul class="space-y-2">
+            <li data-translate-key="about_expertise1">FinOps & multi-cloud design</li>
+            <li data-translate-key="about_expertise2">Zero Trust architecture</li>
+            <li data-translate-key="about_expertise4">Agile delivery & team leadership</li>
+            <li data-translate-key="about_expertise5">Cloud monitoring (PagerDuty, etc.)</li>
+          </ul>
+        </div>
+        <div>
+          <h3 class="font-bold mb-4 text-purple-300" data-translate-key="about_skills_title">Key Technologies</h3>
+          <ul class="space-y-2">
+            <li data-translate-key="about_skills1">Azure, GCP</li>
+            <li data-translate-key="about_skills2">Power BI, Tableau</li>
+            <li data-translate-key="about_skills3">Terraform, Infrastructure as Code</li>
+            <li data-translate-key="about_skills5">CI/CD (GitHub Actions, YAML)</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+    <section id="experience" class="py-20 bg-gray-900">
+      <h2 class="text-3xl font-bold mb-6" data-translate-key="experience_title">Professional Experience</h2>
+      <p class="mb-8 max-w-2xl mx-auto" data-translate-key="experience_subtitle">My path in technology leadership.</p>
+      <div class="max-w-3xl mx-auto space-y-8">
+        <div>
+          <h3 class="font-bold text-xl mb-2">Cloud Engineering Manager</h3>
+          <p class="text-purple-300 mb-2" data-translate-key="exp_manager_dates">Oct 2024 – Present</p>
+          <ul class="list-disc list-inside space-y-1">
+            <li data-translate-key="exp_mgr_b1">Lead a five-person cloud squad and run Agile ceremonies.</li>
+            <li data-translate-key="exp_mgr_b2">Set delivery expectations and reduce scope churn.</li>
+            <li data-translate-key="exp_mgr_b3">Reduced project backlog by 35% through sharper triage.</li>
+            <li data-translate-key="exp_mgr_b4">Chair the Azure Governance Board.</li>
+          </ul>
+        </div>
+        <div>
+          <h3 class="font-bold text-xl mb-2">Technical Architect</h3>
+          <p class="text-purple-300 mb-2" data-translate-key="exp_arch_dates">Feb 2024 – Present</p>
+          <ul class="list-disc list-inside space-y-1">
+            <li data-translate-key="exp_arch_b1">Lead technical advisor on cloud architecture and strategy.</li>
+            <li data-translate-key="exp_arch_b2">Evaluate suppliers and author SOWs (G-Cloud).</li>
+            <li data-translate-key="exp_arch_b3">Design HLD/LLD for Azure and GCP using CAF/WAF.</li>
+            <li data-translate-key="exp_arch_b4">Introduced FinOps; cut bills by 15% in six months.</li>
+          </ul>
+        </div>
+        <div>
+          <h3 class="font-bold text-xl mb-2">Senior Associate</h3>
+          <p class="text-purple-300 mb-2" data-translate-key="exp_pwc_dates">Apr 2022 – Feb 2024</p>
+          <ul class="list-disc list-inside space-y-1">
+            <li data-translate-key="exp_pwc_b1">Built Azure/GCP landing zones with policy-as-code.</li>
+            <li data-translate-key="exp_pwc_b2">Introduced Microsoft Cloud for Sustainability.</li>
+            <li data-translate-key="exp_pwc_b3">Right-sizing analysis for 75 VMs saved >£100k/yr.</li>
+          </ul>
+        </div>
+        <div>
+          <h3 class="font-bold text-xl mb-2" data-translate-key="exp_earlier_title">Earlier roles</h3>
+          <p class="text-purple-300 mb-2" data-translate-key="exp_earlier_dates">2012 – 2022</p>
+          <ul class="list-disc list-inside space-y-1">
+            <li>Azure Cloud Consultant – Revolent Group</li>
+            <li>Senior IT Infrastructure Technician – NextGEN360</li>
+            <li>Senior IT Technician – Hologic, Inc.</li>
+            <li data-translate-key="exp_earlier_more">And many more...</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+    <section id="languages" class="py-20">
+      <h2 class="text-3xl font-bold mb-6" data-translate-key="languages_title">Languages</h2>
+      <p class="mb-8 max-w-2xl mx-auto" data-translate-key="languages_subtitle">Communicating across cultures.</p>
+      <div class="max-w-xl mx-auto space-y-6">
+        <div>
+          <div class="flex justify-between mb-2"><span class="font-semibold" data-translate-key="lang_de">German</span><span data-translate-key="lang_native">Native</span></div>
+          <div class="w-full h-2 bg-gray-700 rounded"><div class="h-2 bg-gradient-to-r from-purple-500 to-pink-500 rounded" style="width:100%"></div></div>
+        </div>
+        <div>
+          <div class="flex justify-between mb-2"><span class="font-semibold" data-translate-key="lang_en">English</span><span data-translate-key="lang_fluent">Fluent</span></div>
+          <div class="w-full h-2 bg-gray-700 rounded"><div class="h-2 bg-gradient-to-r from-purple-500 to-pink-500 rounded" style="width:95%"></div></div>
+        </div>
+        <div>
+          <div class="flex justify-between mb-2"><span class="font-semibold" data-translate-key="lang_ro">Romanian</span><span data-translate-key="lang_basic">Basic</span></div>
+          <div class="w-full h-2 bg-gray-700 rounded"><div class="h-2 bg-gradient-to-r from-purple-500 to-pink-500 rounded" style="width:30%"></div></div>
+        </div>
+        <div>
+          <div class="flex justify-between mb-2"><span class="font-semibold" data-translate-key="lang_es">Spanish</span><span data-translate-key="lang_basic">Basic</span></div>
+          <div class="w-full h-2 bg-gray-700 rounded"><div class="h-2 bg-gradient-to-r from-purple-500 to-pink-500 rounded" style="width:25%"></div></div>
+        </div>
+      </div>
+    </section>
+    <section id="faq" class="py-20 bg-gray-900">
+      <h2 class="text-3xl font-bold mb-6" data-translate-key="faq_title">Frequently Asked Questions</h2>
+      <p class="mb-8 max-w-2xl mx-auto" data-translate-key="faq_subtitle">Useful details for recruiters.</p>
+      <div class="max-w-3xl mx-auto space-y-4">
+        <div class="border rounded p-4">
+          <h3 class="font-semibold" data-translate-key="faq_q_about">Tell me about yourself.</h3>
+          <div class="mt-2 text-sm" data-translate-key="faq_a_about"><p>I'm a strategic technology leader ...</p></div>
+        </div>
+        <div class="border rounded p-4">
+          <h3 class="font-semibold" data-translate-key="faq_q_standout">What makes you stand out?</h3>
+          <div class="mt-2 text-sm" data-translate-key="faq_a_standout"><p>My ability to operate at both the 30,000-foot strategic level and the 3-foot delivery level.</p></div>
+        </div>
+        <div class="border rounded p-4">
+          <h3 class="font-semibold" data-translate-key="faq_q_strengths">What are your key strengths and areas for improvement?</h3>
+          <div class="mt-2 text-sm" data-translate-key="faq_a_strengths"><p>My key strength is strategic problem-solving— ...</p></div>
+        </div>
+        <div class="border rounded p-4">
+          <h3 class="font-semibold" data-translate-key="faq_q_motivates">What motivates you?</h3>
+          <div class="mt-2 text-sm" data-translate-key="faq_a_motivates"><p>I'm motivated by tangible impact. ...</p></div>
+        </div>
+        <div class="border rounded p-4">
+          <h3 class="font-semibold" data-translate-key="faq1_q">What are your salary expectations?</h3>
+          <div class="mt-2 text-sm" data-translate-key="faq1_a"><p>My compensation reflects a senior leadership role in London public sector. ...</p></div>
+        </div>
+        <div class="border rounded p-4">
+          <h3 class="font-semibold" data-translate-key="faq2_q">What is your notice period and location preference?</h3>
+          <div class="mt-2 text-sm" data-translate-key="faq2_a"><p>My notice period is three months. ...</p></div>
+        </div>
+        <div class="border rounded p-4">
+          <h3 class="font-semibold" data-translate-key="faq4_q">Why did the sysadmin cross the road?</h3>
+          <div class="mt-2 text-sm" data-translate-key="faq4_a"><p>To get to the other site. 😂</p></div>
+        </div>
+        <div class="border rounded p-4">
+          <h3 class="font-semibold" data-translate-key="faq3_q">Random fact?</h3>
+          <div class="mt-2 text-sm" data-translate-key="faq3_a"><p>The first recorded computer “bug” was a moth found in a relay of the Mark II in 1947. 🐛</p></div>
+        </div>
+      </div>
+    </section>
+    <section id="contact" class="py-20">
+      <h2 class="text-3xl font-bold mb-4" data-translate-key="contact_title">Let's Connect</h2>
+      <p class="mb-8 max-w-2xl mx-auto" data-translate-key="contact_subtitle">I’m open to new opportunities and collaborations. Reach out or download my CV.</p>
+      <form action="https://formspree.io/f/xldlozkz" method="POST" class="max-w-xl mx-auto space-y-4">
+        <div class="flex flex-col">
+          <label for="name" class="text-sm mb-1" data-translate-key="form_name_label">Your Name</label>
+          <input id="name" name="name" type="text" required class="p-2 border rounded"/>
+        </div>
+        <div class="flex flex-col">
+          <label for="email" class="text-sm mb-1" data-translate-key="form_email_label">Your Email</label>
+          <input id="email" name="email" type="email" required class="p-2 border rounded"/>
+        </div>
+        <div class="flex flex-col">
+          <label for="message" class="text-sm mb-1" data-translate-key="form_message_label">Message</label>
+          <textarea id="message" name="message" rows="4" required class="p-2 border rounded"></textarea>
+        </div>
+        <button type="submit" class="bg-purple-600 text-white py-2 px-4 rounded" data-translate-key="contact_send_button">Send message</button>
+      </form>
+    </section>
+  </main>
+  <footer class="text-center py-8 border-t border-gray-800">
+    <p class="text-sm">&copy; 2025 Melanie Rau. All rights reserved.</p>
+  </footer>
+  <script>
+    // Minimal translation handling
+    const translations = {};
+    function translatePage(lang) {
+      document.documentElement.lang = lang;
+      document.querySelectorAll('[data-translate-key]').forEach(el => {
+        const key = el.getAttribute('data-translate-key');
+        const t = (translations[lang] && translations[lang][key]) || (translations['en'] && translations['en'][key]);
+        if (t !== undefined) {
+          el.innerHTML = t;
+        }
+      });
+      document.querySelectorAll('[data-i18n-attrs]').forEach(el => {
+        const attrs = el.getAttribute('data-i18n-attrs').split(';');
+        attrs.forEach(pair => {
+          const parts = pair.split(':');
+          const attr = parts[0].trim();
+          const key = parts[1].trim();
+          const val = (translations[lang] && translations[lang][key]) || (translations['en'] && translations['en'][key]);
+          if (val !== undefined) {
+            el.setAttribute(attr, val);
+          }
+        });
+      });
+    }
+    window.addEventListener('DOMContentLoaded', () => {
+      const pathLang = location.pathname.split('/')[1] || 'en';
+      translatePage(pathLang);
+    });
+  </script>
+</body>
+</html>
