@@ -15,11 +15,21 @@ jobs:
     permissions:
       id-token: write
       contents: read
+
     steps:
       - uses: actions/checkout@v4
         with:
           submodules: false
           lfs: false
+
+      # Use the template in src/ as the site entrypoint without changing repo layout
+      - name: Prepare site (copy src/index.template.html to index.html)
+        run: |
+          if [ -f "src/index.template.html" ]; then
+            cp src/index.template.html index.html
+          else
+            echo "src/index.template.html not found" && exit 1
+          fi
 
       - name: Install OIDC Client from Core Package
         run: npm install @actions/core@1.6.0 @actions/http-client
@@ -36,12 +46,11 @@ jobs:
       - name: Build and Deploy
         uses: Azure/static-web-apps-deploy@v1
         with:
-          # Try generic secret first; fall back to the env-specific one that worked before
           azure_static_web_apps_api_token: ${{ secrets.AZURE_STATIC_WEB_APPS_API_TOKEN || secrets.AZURE_STATIC_WEB_APPS_API_TOKEN_LIVELY_COAST_082311003 }}
           action: upload
-          app_location: "/"
+          app_location: "/"        # keep root so assets/, i18n/, js/ are included
           api_location: ""
-          output_location: ""
+          output_location: ""      # skip build; upload what’s in the workspace
           skip_app_build: true
           github_id_token: ${{ steps.idtoken.outputs.result }}
 
