@@ -1,30 +1,34 @@
 <!DOCTYPE html>
 <html lang="en" class="scroll-smooth">
 <head>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-7MCTBXH1NC"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'G-7MCTBXH1NC');
+    </script>
+    
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Melanie Rau | Strategic Cloud, Data & AI Leader</title>
     <meta name="description" content="Melanie Rau is a strategic technology leader specializing in Cloud, Data, and AI. Explore her portfolio, projects, and expertise in FinOps, Zero Trust, and multi-cloud architecture.">
     
-    <!-- Preconnect hints to speed up connection to critical origins -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="preconnect" href="https://cdnjs.cloudflare.com">
     <link rel="preconnect" href="https://raw.githubusercontent.com">
 
-    <!-- Favicon Links -->
     <link rel="apple-touch-icon" sizes="180x180" href="https://raw.githubusercontent.com/melanierau/resume-website/main/apple-touch-icon.png">
     <link rel="icon" type="image/png" sizes="32x32" href="https://raw.githubusercontent.com/melanierau/resume-website/main/favicon-32x32.png">
     <link rel="icon" type="image/png" sizes="16x16" href="https://raw.githubusercontent.com/melanierau/resume-website/main/favicon-16x16.png">
     <link rel="manifest" href="https://raw.githubusercontent.com/melanierau/resume-website/main/site.webmanifest">
     <link rel="icon" href="https://raw.githubusercontent.com/melanierau/resume-website/main/favicon.ico" type="image/x-icon">
 
-    <!-- Scripts -->
     <script src="https://cdn.tailwindcss.com"></script>
-    <!-- Deferring three.js to prevent render-blocking -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js" defer></script>
 
-    <!-- Fonts - fetchpriority helps load fonts faster -->
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" fetchpriority="high">
     
     <style>
@@ -151,10 +155,8 @@
 </head>
 <body class="antialiased">
 
-    <!-- Mouse Follower Element -->
     <div id="mouse-follower"></div>
 
-    <!-- Header & Navigation -->
     <header id="header" class="fixed top-0 left-0 right-0 z-50 transition-all duration-300 glassmorphism">
         <div class="container mx-auto px-6 py-4 flex justify-between items-center">
             <a href="#" class="text-2xl font-bold tracking-tighter" style="color: var(--header-text-color);">Melanie Rau</a>
@@ -175,7 +177,6 @@
                 <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-4 6h4" /></svg>
             </button>
         </div>
-        <!-- Mobile Menu -->
         <div id="mobile-menu" class="hidden md:hidden px-6 pb-4">
             <a href="#hero" class="block py-2 hover:text-violet-300">Home</a>
             <a href="#about" class="block py-2 hover:text-violet-300">About</a>
@@ -189,7 +190,6 @@
     </header>
 
     <main>
-        <!-- Hero Section -->
         <section id="hero" class="min-h-screen flex items-center pt-32 pb-12 relative overflow-hidden">
             <canvas id="particle-canvas"></canvas>
             <div class="container mx-auto px-6 relative z-10">
@@ -214,7 +214,6 @@
                     </div>
                 </div>
             </div>
-            <!-- Scroll Down Indicator -->
             <a href="#about" class="absolute bottom-10 left-1/2 -translate-x-1/2 animate-bounce z-10" aria-label="Scroll to about section">
                 <div class="w-8 h-8" style="color: var(--text-secondary-color);">
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-full h-full">
@@ -224,7 +223,6 @@
             </a>
         </section>
 
-        <!-- About Section -->
         <section id="about" class="py-20 section-fade-in">
             <div class="container mx-auto px-6">
                 <div class="text-center max-w-3xl mx-auto">
@@ -238,7 +236,6 @@
             </div>
         </section>
 
-        <!-- Organisations Section -->
         <section id="social-proof" class="py-20 section-fade-in section-bg">
             <div class="container mx-auto px-6">
                 <div class="text-center max-w-5xl mx-auto">
@@ -260,7 +257,6 @@
             </div>
         </section>
 
-        <!-- Skills Section -->
         <section id="skills" class="py-20 section-fade-in">
             <div class="container mx-auto px-6">
                 <div class="text-center mb-12">
@@ -296,7 +292,6 @@
             </div>
         </section>
 
-        <!-- Key Projects Section -->
         <section id="projects" class="py-20 section-fade-in section-bg">
             <div class="container mx-auto px-6">
                 <div class="text-center mb-12">
@@ -329,7 +324,6 @@
             </div>
         </section>
 
-        <!-- Experience Section -->
         <section id="experience" class="py-20 section-fade-in">
             <div class="container mx-auto px-6">
                 <div class="text-center mb-12">
@@ -379,7 +373,6 @@
             </div>
         </section>
         
-        <!-- Certifications Section -->
         <section id="certifications" class="py-20 section-fade-in section-bg">
             <div class="container mx-auto px-6">
                 <div class="text-center mb-12">
@@ -418,7 +411,6 @@
             </div>
         </section>
         
-        <!-- Languages Section -->
         <section id="languages" class="py-20 section-fade-in">
             <div class="container mx-auto px-6">
                 <div class="text-center mb-12">
@@ -446,7 +438,6 @@
             </div>
         </section>
 
-        <!-- FAQ Section -->
         <section id="faq" class="py-20 section-fade-in section-bg">
             <div class="container mx-auto px-6">
                 <div class="text-center mb-12">
@@ -512,7 +503,6 @@
             </div>
         </section>
 
-        <!-- Contact Section -->
         <section id="contact" class="py-20 section-fade-in">
             <div class="container mx-auto px-6">
                 <div class="text-center max-w-3xl mx-auto">
@@ -540,7 +530,6 @@
             </div>
         </section>
 
-        <!-- Back to Top Button -->
         <a id="back-to-top" href="#hero" class="fixed bottom-8 right-8 p-3 rounded-full bg-violet-600 text-white shadow-lg hover:bg-violet-700 transition-all duration-300 opacity-0 pointer-events-none" aria-label="Back to top">
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor" class="w-6 h-6">
                 <path stroke-linecap="round" stroke-linejoin="round" d="M4.5 15.75l7.5-7.5 7.5 7.5" />
