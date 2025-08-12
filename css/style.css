@@ -5,27 +5,33 @@
    - This makes it super easy to change a color everywhere at once.
    ================================================================= */
 :root {
-  /* These are the colors for the default Dark Mode theme. */
+  /* These are the colors for the default Dark Mode theme from your original design. */
   --bg: #0b0a1a; /* The main background color of the page. */
   --text: #e5e7eb; /* The primary color for most of the text. */
   --text-secondary: #9ca3af; /* A lighter gray for less important text. */
   --header-text: #f3f4f6; /* The color for text inside the header. */
   --footer-text: #9ca3af; /* The color for text in the footer. */
-  --card-bg: rgba(255, 255, 255, 0.06); /* A slightly transparent white for the "glass" cards. */
+  --card-bg: rgba(255, 255, 255, 0.05); /* A slightly transparent white for the "glass" cards. */
   --card-border: rgba(255, 255, 255, 0.1); /* A subtle border for the "glass" cards. */
+  --timeline-border: #4c1d95;
+  --timeline-dot: #A78BFA;
+  --logo-card-bg: #111827;
   --violet: #8b5cf6; /* The main accent color. */
   --pink: #f472b6; /* The secondary accent color for gradients. */
 }
 
 .light-mode {
   /* When the <html> tag gets the 'light-mode' class, these colors will be used instead. */
-  --bg: #f7f7fb;
-  --text: #1f2937;
-  --text-secondary: #4b5563;
+  --bg: #F9FAFB;
+  --text: #1F2937;
+  --text-secondary: #4B5563;
   --header-text: #111827;
-  --footer-text: #6b7280;
-  --card-bg: rgba(0, 0, 0, 0.03);
-  --card-border: rgba(0, 0, 0, 0.08);
+  --footer-text: #4B5563;
+  --card-bg: rgba(255, 255, 255, 0.7);
+  --card-border: rgba(229, 231, 235, 1);
+  --timeline-border: #ddd6fe;
+  --timeline-dot: #8B5CF6;
+  --logo-card-bg: #FFFFFF;
 }
 
 body {
@@ -33,6 +39,7 @@ body {
   background: var(--bg); /* Uses the background color variable we defined above. */
   color: var(--text); /* Uses the text color variable. */
   transition: background-color 0.4s ease, color 0.4s ease; /* Makes the light/dark mode switch smooth. */
+  cursor: none; /* Hides the default cursor for the mouse follower effect */
 }
 
 .gradient-text {
@@ -43,129 +50,178 @@ body {
 
 /* =================================================================
    2. Language-Aware Typography & Layout Resilience
-   - These are clever styles to make sure the website still looks great
-     when the text changes to a different language with longer words.
    ================================================================= */
 
-/* This tells the browser to try and balance the lines of text in headings so you don't get one long line and one short word. */
 h1, h2, h3, .btn, .impact-number {
   text-wrap: balance;
 }
 
-/* If a word is too long to fit (like in German), this tells the browser it's okay to break it anywhere to prevent it from overflowing. */
 header nav a, .case-card h3, .case-study h3, .faq-item h3 button, label, button, .gallery-thumbs img + *, .impact-number {
   overflow-wrap: anywhere;
 }
 
-/* This tells the browser to automatically add hyphens to words when needed, but only for these specific languages. */
 html:lang(de), html:lang(fr), html:lang(ro), html:lang(es) {
   hyphens: auto;
 }
 
-/* This makes sure that numbers in the impact section line up nicely, like in a spreadsheet column. */
 .impact-number {
   font-variant-numeric: tabular-nums;
 }
 
-/* This rule is for desktop screens. It allows the navigation menu to wrap onto a second line if the links get too long. */
 @media (min-width: 768px) {
   header nav {
-    flex-wrap: wrap; /* Allow items to wrap. */
-    row-gap: 0.25rem; /* Adds a little space if it wraps to a second line. */
+    flex-wrap: wrap;
+    row-gap: 0.25rem;
   }
   header nav a {
-    white-space: nowrap; /* Prevents a single link from breaking onto two lines. */
+    white-space: nowrap;
     margin-right: 0.25rem;
   }
 }
 
 /* =================================================================
    3. Accessibility & Interaction Styles
-   - These styles are for user interactions like clicking, focusing, and scrolling.
    ================================================================= */
 
-/* This adds a clear purple outline to any button or link when a user navigates to it with the keyboard (like using the Tab key). */
 :focus-visible {
-  outline: 2px solid #a78bfa; /* violet-400 */
+  outline: 2px solid #a78bfa;
   outline-offset: 2px;
 }
 
-/* This is the starting state for sections that will fade in. They start invisible and slightly moved down. */
 .section-fade-in {
   opacity: 0;
-  transform: translateY(8px);
-  transition: opacity 0.35s ease, transform 0.35s ease;
-}
-/* When the 'visible' class is added by JavaScript, the section fades in and moves up into place. */
-.section-fade-in.visible {
-  opacity: 1;
-  transform: none;
+  transform: translateY(20px);
+  transition: opacity 0.6s ease-out, transform 0.6s ease-out;
 }
 
-/* This creates the "frosted glass" effect for cards and the header. */
+.section-fade-in.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
 .glassmorphism {
   background: var(--card-bg);
   border: 1px solid var(--card-border);
-  backdrop-filter: blur(10px); /* This is the property that creates the actual blur effect. */
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  transition: transform 0.3s ease-out, box-shadow 0.3s ease-out, background-color 0.3s ease;
 }
 
-/* This is the style for the link in the navigation that matches the section you're currently viewing. */
+.glassmorphism:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 25px rgba(167, 139, 250, 0.2), 0 5px 15px rgba(244, 114, 182, 0.15);
+}
+
 .active-link {
   color: var(--violet);
   font-weight: 600;
 }
 
-/* Styles for the interactive FAQ Accordion. */
 .faq-answer {
-  max-height: 0; /* The answer is hidden by default. */
-  overflow: hidden; /* Hides the content that overflows the 0 height. */
-  transition: max-height 0.5s ease-in-out; /* A smooth animation for opening/closing. */
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.5s ease-in-out;
 }
+
 .faq-item.active .faq-answer {
-  max-height: 500px; /* When active, the height expands to reveal the text. */
+  max-height: 500px;
   margin-top: 1rem;
 }
+
 .faq-item.active .faq-arrow {
-  transform: rotate(180deg); /* Flips the arrow icon upside down when open. */
+  transform: rotate(180deg);
+}
+
+/* Mouse Follower Styles */
+#mouse-follower {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(167, 139, 250, 0.5) 0%, rgba(244, 114, 182, 0.3) 100%);
+  filter: blur(15px);
+  z-index: 9999;
+  pointer-events: none;
+  transform: translate(-50%, -50%);
+  transition: width 0.2s ease-out, height 0.2s ease-out;
+  opacity: 0;
+}
+
+body:hover #mouse-follower {
+  opacity: 1;
+}
+
+a, button {
+  cursor: none;
 }
 
 /* =================================================================
    4. Component-Specific Styles
-   - These are styles for specific, unique components on the page.
    ================================================================= */
 
-/* Styles for the vertical line and dots in the Experience timeline. */
 .timeline-border { border-color: var(--timeline-border); }
-.timeline-dot { background: var(--timeline-dot); }
+.timeline-dot { background-color: var(--timeline-dot); }
 
-/* Styles for the custom bullet points in the "About Me" lists. */
 .dot-li { display: flex; gap: 0.6rem; align-items: flex-start; }
 .dot-li:before {
-  content: ""; /* This is required for pseudo-elements like ::before. */
+  content: "";
   margin-top: 0.5rem;
   display: inline-block;
   width: 0.5rem;
   height: 0.5rem;
-  border-radius: 9999px; /* This makes the square a perfect circle. */
+  border-radius: 9999px;
   background: linear-gradient(90deg, var(--violet), var(--pink));
 }
 
-/* A few tweaks for the gallery controls and thumbnails. */
 .gallery-slideshow .prev, .gallery-slideshow .next {
   padding: 0.25rem 0.5rem;
   border-radius: 0.5rem;
 }
+
 .gallery-thumbs .thumb.active {
-  outline: 2px solid #a78bfa; /* Adds a purple outline to the currently selected thumbnail. */
+  outline: 2px solid #a78bfa;
   outline-offset: 2px;
 }
 
-/* Sets the color for the text in the footer. */
 footer p {
   color: var(--footer-text);
 }
 
-/* A safety rule to make sure that when text is translated, it inherits the correct color from its parent. */
 [data-translate-key] {
   color: inherit;
+}
+
+/* Logo Card Styles from Original Design */
+.logo-card {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 110px;
+  padding: 1rem;
+  background-color: var(--logo-card-bg);
+  border-radius: 1rem;
+  transition: transform 0.3s ease-out, box-shadow 0.3s ease-out;
+}
+
+.logo-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 25px rgba(167, 139, 250, 0.2), 0 5px 15px rgba(244, 114, 182, 0.15);
+}
+
+.logo-card img {
+  max-height: 50px;
+  width: auto;
+  max-width: 100%;
+  object-fit: contain;
+  transition: filter 0.3s ease;
+}
+
+body:not(.light-mode) .logo-card img {
+  filter: drop-shadow(0 0 5px rgba(255, 255, 255, 0.3));
+}
+
+body:not(.light-mode) .logo-card:hover img {
+  filter: drop-shadow(0 0 10px rgba(255, 255, 255, 0.5));
 }
