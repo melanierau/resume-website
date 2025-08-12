@@ -1,116 +1,122 @@
 // This is the main JavaScript file for the entire website.
-// It's wrapped in a 'DOMContentLoaded' listener to ensure the HTML is fully loaded before the script runs.
+// We wrap everything in this 'DOMContentLoaded' listener, which is a safety net.
+// It makes sure the HTML page is fully loaded before we try to find and manipulate any elements on it.
 document.addEventListener('DOMContentLoaded', () => {
 
-  // --- 1. GRAB ALL THE ELEMENTS WE NEED ---
-  // Getting all our HTML elements at the start makes the code cleaner and a tiny bit faster.
+  // --- 1) GRAB ALL THE ELEMENTS WE'LL NEED ---
+  // It's a good practice to get all the HTML elements we're going to work with right at the top.
   const mobileMenuButton = document.getElementById('mobile-menu-button');
   const mobileMenu = document.getElementById('mobile-menu');
   const languageToggle = document.getElementById('language-toggle');
   const languageDropdown = document.getElementById('language-dropdown');
   const mobileLanguageSwitcher = document.getElementById('mobile-language-switcher');
-  const themeToggle = document.getElementById('theme-toggle'); // You'll need to add this button to your HTML
+  const themeToggle = document.getElementById('theme-toggle');
   const backToTopButton = document.getElementById('back-to-top');
-  const navLinks = document.querySelectorAll('header nav a[href^="#"]'); // Get all nav links that point to a section
-  const faqItems = document.querySelectorAll('.faq-item'); // Get all FAQ items for the accordion
+  const navLinks = document.querySelectorAll('header nav a[href^="#"]');
+  const faqItems = document.querySelectorAll('.faq-item');
 
-  // --- 2. CHECK FOR USER PREFERENCES ---
-  // This is a modern best practice for accessibility and a better user experience.
+  // --- 2) CHECK USER PREFERENCES ---
+  // This is a key accessibility feature. We check if the user's operating system
+  // is set to "reduce motion". If it is, we'll disable animations later on.
   const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-
-  // --- 3. UTILITY FUNCTIONS (PRO TECHNIQUE: DEBOUNCING) ---
-  // This is a performance-enhancing utility. It prevents a function from firing too often.
-  // For example, it stops the scroll event from running hundreds of times as you scroll.
+  // --- 3) UTILITY: DEBOUNCE ---
+  // This is a classic performance-enhancing function. It stops an event (like scrolling)
+  // from firing hundreds of times a second, and instead, waits for a brief pause.
   function debounce(func, delay = 100) {
     let timeoutId;
     return (...args) => {
       clearTimeout(timeoutId);
-      timeoutId = setTimeout(() => {
-        func.apply(this, args);
-      }, delay);
+      timeoutId = setTimeout(() => func.apply(this, args), delay);
     };
   }
 
-  // --- 4. CORE UI INTERACTIONS (WITH ACCESSIBILITY) ---
+  // --- 4) CORE UI INTERACTIONS ---
 
-  // --- Mobile Menu Toggle (with ARIA) ---
+  // --- Mobile menu toggle ---
+  // This makes the hamburger icon open and close the menu on phones.
   if (mobileMenuButton && mobileMenu) {
     mobileMenuButton.addEventListener('click', () => {
       const isHidden = mobileMenu.classList.toggle('hidden');
-      // PRO TECHNIQUE: Update ARIA attribute for screen readers.
+      // This part is for accessibility: it tells screen readers if the menu is open or closed.
       mobileMenuButton.setAttribute('aria-expanded', !isHidden);
     });
   }
 
-  // --- Desktop Language Dropdown ---
+  // --- Desktop language dropdown ---
+  // This handles the language dropdown on larger screens.
   if (languageToggle && languageDropdown) {
     languageToggle.addEventListener('click', (event) => {
-      event.stopPropagation(); // Prevents the click from closing the menu immediately
+      event.stopPropagation(); // This stops the window's click listener from immediately closing the menu.
       const isHidden = languageDropdown.style.display === 'block';
       languageDropdown.style.display = isHidden ? 'none' : 'block';
       languageToggle.setAttribute('aria-expanded', !isHidden);
     });
   }
 
-  // --- Close dropdowns when clicking elsewhere ---
+  // --- Close dropdowns on outside click ---
+  // If you click anywhere else on the page, the language menu will close.
   window.addEventListener('click', () => {
     if (languageDropdown && languageDropdown.style.display === 'block') {
       languageDropdown.style.display = 'none';
-      languageToggle.setAttribute('aria-expanded', 'false');
+      languageToggle?.setAttribute('aria-expanded', 'false'); // The '?' is a safety check.
     }
   });
 
-  // --- Back to Top Button Logic (with Debounce) ---
+  // --- Back-to-top button visibility ---
+  // This function checks how far the user has scrolled and decides whether to show the button.
   const handleScroll = () => {
-    if (backToTopButton) {
-      if (window.scrollY > 300) {
-        backToTopButton.classList.remove('opacity-0', 'pointer-events-none');
-      } else {
-        backToTopButton.classList.add('opacity-0', 'pointer-events-none');
-      }
+    if (!backToTopButton) return; // Safety check
+    if (window.scrollY > 300) { // If scrolled more than 300 pixels...
+      backToTopButton.classList.remove('opacity-0', 'pointer-events-none'); // ...make it visible and clickable.
+    } else {
+      backToTopButton.classList.add('opacity-0', 'pointer-events-none'); // ...otherwise, hide it.
     }
   };
+  // We wrap our scroll handler in the debounce function to improve performance.
   window.addEventListener('scroll', debounce(handleScroll, 150));
 
-
-  // --- 5. STATE MANAGEMENT & THEME SYSTEM (PRO TECHNIQUE: STATE MACHINE) ---
-
-  // A simple "state machine" for our theme. This gives us one central place to manage the theme.
+  // --- 5) THEME STATE MANAGEMENT ---
+  // This is a simple "state machine". It's a professional way to manage the theme (light/dark)
+  // from one central place, so all parts of the site can react to changes consistently.
   const themeState = {
-    _subscribers: [],
+    _subscribers: [], // A list of functions to call when the theme changes.
     _currentTheme: 'dark',
-    subscribe(callback) {
-      this._subscribers.push(callback);
-    },
-    notify() {
-      this._subscribers.forEach(callback => callback(this._currentTheme));
-    },
+    subscribe(callback) { this._subscribers.push(callback); },
+    notify() { this._subscribers.forEach(cb => cb(this._currentTheme)); },
     setTheme(theme) {
       this._currentTheme = theme;
-      localStorage.setItem('theme', theme);
-      this.notify();
+      localStorage.setItem('theme', theme); // Save the choice for the user's next visit.
+      this.notify(); // Tell all subscribers about the change.
     }
   };
 
-  // Subscribe our UI updates to the theme state.
+  // This variable will hold the currently active translation dictionary.
+  let currentTranslations = {};
+
+  // We "subscribe" a function to the theme state. Now, whenever the theme changes, this code will run.
   themeState.subscribe((theme) => {
+    // Toggle the 'light-mode' class on the main <html> element.
     document.documentElement.classList.toggle('light-mode', theme === 'light');
     if (themeToggle) {
-        themeToggle.setAttribute('aria-label', theme === 'light' ? 'Activate dark mode' : 'Activate light mode');
+      // Update the button's label for screen readers, using the current language.
+      const label = currentTranslations.theme_toggle_aria || 'Toggle light/dark mode';
+      themeToggle.setAttribute('aria-label', label);
+      themeToggle.setAttribute('title', label);
     }
   });
 
-  // The theme toggle button now just updates the central state.
+  // When the theme toggle button is clicked, it just tells the state machine to change the theme.
   if (themeToggle) {
     themeToggle.addEventListener('click', () => {
-      const newTheme = themeState._currentTheme === 'light' ? 'dark' : 'light';
-      themeState.setTheme(newTheme);
+      const nextTheme = themeState._currentTheme === 'light' ? 'dark' : 'light';
+      themeState.setTheme(nextTheme);
     });
   }
-  
-  // --- 6. TRANSLATION SYSTEM (WITH GRACEFUL ERROR HANDLING) ---
 
+  // --- 6) INTERNATIONALIZATION (I18N) ---
+
+  const supportedLanguages = ['en', 'de', 'es', 'fr', 'ro'];
   const cvFiles = {
     en: 'MelanieRau-CV.pdf',
     de: 'Melanie-Rau-Lebenslauf-DE.pdf',
@@ -118,75 +124,121 @@ document.addEventListener('DOMContentLoaded', () => {
     fr: 'Melanie-Rau-CV-FR.pdf',
     ro: 'Melanie-Rau-CV-RO.pdf'
   };
-  const translationCache = {};
+  const translationCache = {}; // Caching translations prevents re-downloading the same file.
 
+  // This is a smart function to figure out the best language for the user on their first visit.
+  function chooseAndPersistLanguage() {
+    const saved = localStorage.getItem('language');
+    if (saved && supportedLanguages.includes(saved)) return saved; // Use saved language if it exists.
+
+    // Look through all the user's browser languages to find the first one we support.
+    const prefs = [
+      ...(Array.isArray(navigator.languages) ? navigator.languages : []),
+      navigator.language
+    ].filter(Boolean);
+
+    const match = prefs
+      .map(l => l.toLowerCase().split('-')[0]) // 'en-US' becomes 'en'
+      .find(l => supportedLanguages.includes(l)) || 'en'; // Find the first match, or default to 'en'.
+
+    localStorage.setItem('language', match); // Save the detected language.
+    return match;
+  }
+
+  // This is the main function that fetches and applies the language translations.
   async function applyTranslations(lang) {
     lang = lang || 'en';
     try {
+      // Load English first as a fallback if it's not already in our cache.
       if (!translationCache.en) {
-        const response = await fetch('/i18n/en.json');
-        if (!response.ok) throw new Error('Could not load English translations!');
-        translationCache.en = await response.json();
+        const r = await fetch('/i18n/en.json');
+        if (!r.ok) throw new Error('Could not load English translations!');
+        translationCache.en = await r.json();
       }
+      // Load the target language if it's not English and not in our cache.
       if (lang !== 'en' && !translationCache[lang]) {
-        const response = await fetch(`/i18n/${lang}.json`);
-        // PRO TECHNIQUE: Graceful fallback. If a language file fails, we use an empty object and the site will just show English text.
-        translationCache[lang] = response.ok ? await response.json() : {};
+        const r = await fetch(`/i18n/${lang}.json`);
+        translationCache[lang] = r.ok ? await r.json() : {}; // Graceful fallback.
       }
-      const finalTranslations = { ...translationCache.en, ...translationCache[lang] };
 
+      // Merge the target language over English. This ensures no text is ever blank.
+      const dict = { ...translationCache.en, ...translationCache[lang] };
+      currentTranslations = dict; // Update our global variable.
+
+      // Update the page title and meta description for SEO.
+      if (dict.meta_title) document.title = dict.meta_title;
+      const md = document.querySelector('meta[name="description"]');
+      if (md && dict.meta_description) md.setAttribute('content', dict.meta_description);
+
+      // Go through every element with a 'data-translate-key' and update its content.
       document.querySelectorAll('[data-translate-key]').forEach(el => {
-        const key = el.getAttribute('data-translate-key');
-        if (finalTranslations[key]) el.innerHTML = finalTranslations[key];
+        const key = el.dataset.translateKey;
+        const val = dict[key];
+        if (!val) return;
+
+        // This allows translating attributes too, like 'aria-label' or 'title'.
+        const attrs = (el.dataset.translateAttr || '').split(',').map(s => s.trim()).filter(Boolean);
+        if (attrs.length) {
+          attrs.forEach(a => el.setAttribute(a, val));
+        } else {
+          el.innerHTML = val; // This allows translations to contain HTML like <span> tags.
+        }
       });
 
-      const cvFileName = cvFiles[lang] || cvFiles['en'];
+      // Update the download link for the correct language-specific CV.
+      const cvFileName = cvFiles[lang] || cvFiles.en;
       document.querySelectorAll('a[download]').forEach(link => {
         link.href = `assets/docs/cv/${cvFileName}`;
         link.download = cvFileName;
       });
 
+      // Update the main <html lang=""> attribute.
       document.documentElement.lang = lang;
-      localStorage.setItem('language', lang);
-      initCounters();
-    } catch (error) {
-      console.error("Translation Error:", error);
-      // You could add a user-facing error message here if you wanted.
+
+      // Tell the theme state to update its subscribers, like the theme toggle's ARIA label.
+      themeState.notify();
+    } catch (e) {
+      console.error('Translation Error:', e);
     }
   }
 
+  // This function handles clicks on any language link.
   const handleLanguageChange = (event) => {
     if (event.target.tagName === 'A' && event.target.dataset.lang) {
       event.preventDefault();
       const lang = event.target.dataset.lang;
+      localStorage.setItem('language', lang); // Save the user's manual choice.
       applyTranslations(lang);
     }
   };
-  if (languageDropdown) languageDropdown.addEventListener('click', handleLanguageChange);
-  if (mobileLanguageSwitcher) mobileLanguageSwitcher.addEventListener('click', handleLanguageChange);
+  languageDropdown?.addEventListener('click', handleLanguageChange);
+  mobileLanguageSwitcher?.addEventListener('click', handleLanguageChange);
 
+  // --- 7) DYNAMIC CONTENT & ANIMATIONS ---
 
-  // --- 7. DYNAMIC CONTENT & ANIMATIONS (MOTION-AWARE & ACCESSIBLE) ---
-
+  // --- Section fade-in ---
+  // If the user hasn't requested reduced motion, set up the fade-in animations.
   if (!prefersReducedMotion) {
     const sectionObserver = new IntersectionObserver((entries) => {
       entries.forEach(entry => {
         if (entry.isIntersecting) {
           entry.target.classList.add('visible');
-          sectionObserver.unobserve(entry.target);
+          sectionObserver.unobserve(entry.target); // Only animate once.
         }
       });
     }, { threshold: 0.1 });
     document.querySelectorAll('.section-fade-in').forEach(section => sectionObserver.observe(section));
   }
 
+  // --- Number Counters ---
   function initCounters() {
     document.querySelectorAll('.counter').forEach(counter => {
       const target = parseFloat(counter.getAttribute('data-target') || '0');
       if (prefersReducedMotion) {
-        counter.textContent = target;
+        counter.textContent = target; // If motion is off, just show the final number.
         return;
       }
+      // Otherwise, animate from 0 to the target number.
       let current = 0;
       const increment = target / 100;
       const updateCounter = () => {
@@ -201,76 +253,58 @@ document.addEventListener('DOMContentLoaded', () => {
       updateCounter();
     });
   }
-  
-  // --- FAQ Accordion (with ARIA) ---
+
+  // --- FAQ accordion ---
   if (faqItems) {
     faqItems.forEach(item => {
-      const button = item.querySelector('button'); // Assuming you change the h3 to a button for accessibility
-      if(button) {
-          button.setAttribute('aria-expanded', 'false');
-          button.addEventListener('click', () => {
-              const wasActive = item.classList.contains('active');
-              faqItems.forEach(other => {
-                  other.classList.remove('active');
-                  other.querySelector('button')?.setAttribute('aria-expanded', 'false');
-              });
-              if (!wasActive) {
-                  item.classList.add('active');
-                  button.setAttribute('aria-expanded', 'true');
-              }
-          });
-      }
+      const button = item.querySelector('button');
+      if (!button) return;
+      button.setAttribute('aria-expanded', 'false');
+      button.addEventListener('click', () => {
+        const wasActive = item.classList.contains('active');
+        // This part makes it so only one FAQ item can be open at a time.
+        faqItems.forEach(other => {
+          other.classList.remove('active');
+          other.querySelector('button')?.setAttribute('aria-expanded', 'false');
+        });
+        if (!wasActive) {
+          item.classList.add('active');
+          button.setAttribute('aria-expanded', 'true');
+        }
+      });
     });
   }
 
-  // --- Image Gallery Slideshow (Desktop Only) ---
+  // --- Gallery slideshow (desktop only) ---
   function initSlideshow() {
-    // Don't run this on mobile devices.
     if (window.innerWidth <= 768) return;
-
     const slideshow = document.querySelector('.gallery-slideshow');
-    // If there's no slideshow on the page, stop.
     if (!slideshow) return;
 
     let slideIndex = 1;
-    const slides = slideshow.getElementsByClassName("mySlides");
-    const thumbs = document.querySelector('.gallery-thumbs').getElementsByClassName("thumb");
+    const slides = slideshow.getElementsByClassName('mySlides');
+    const thumbsWrap = document.querySelector('.gallery-thumbs');
+    if (!thumbsWrap) return;
+    const thumbs = thumbsWrap.getElementsByClassName('thumb');
 
     function showSlides(n) {
-      // Handle looping back to the start or end.
-      if (n > slides.length) { slideIndex = 1; }
-      if (n < 1) { slideIndex = slides.length; }
-
-      // Hide all the main images.
-      for (let i = 0; i < slides.length; i++) {
-        slides[i].style.display = "none";
-      }
-      // Remove the "active" look from all thumbnails.
-      for (let i = 0; i < thumbs.length; i++) {
-        thumbs[i].classList.remove("active");
-      }
-
-      // Show the correct slide and highlight the correct thumbnail.
-      slides[slideIndex - 1].style.display = "block";
-      if (thumbs[slideIndex - 1]) {
-        thumbs[slideIndex - 1].classList.add("active");
-      }
+      if (n > slides.length) slideIndex = 1;
+      if (n < 1) slideIndex = slides.length;
+      for (let i = 0; i < slides.length; i++) slides[i].style.display = 'none';
+      for (let i = 0; i < thumbs.length; i++) thumbs[i].classList.remove('active');
+      slides[slideIndex - 1].style.display = 'block';
+      if (thumbs[slideIndex - 1]) thumbs[slideIndex - 1].classList.add('active');
     }
 
-    // Wire up the next/previous buttons.
-    slideshow.querySelector('.prev').addEventListener('click', () => showSlides(slideIndex += -1));
-    slideshow.querySelector('.next').addEventListener('click', () => showSlides(slideIndex += 1));
-    
-    // Wire up the thumbnail images.
+    slideshow.querySelector('.prev')?.addEventListener('click', () => showSlides(slideIndex += -1));
+    slideshow.querySelector('.next')?.addEventListener('click', () => showSlides(slideIndex += 1));
     for (let i = 0; i < thumbs.length; i++) {
-        thumbs[i].addEventListener('click', () => showSlides(slideIndex = i + 1));
+      thumbs[i].addEventListener('click', () => showSlides(slideIndex = i + 1));
     }
-
-    // Show the first slide to start.
     showSlides(slideIndex);
   }
 
-  // --- Active Navigation Link Highlighting ---
+  // --- Active nav link highlighting on scroll ---
   const navObserver = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
       if (entry.isIntersecting) {
@@ -282,11 +316,10 @@ document.addEventListener('DOMContentLoaded', () => {
         });
       }
     });
-  }, { rootMargin: "-50% 0px -50% 0px" });
+  }, { rootMargin: '-50% 0px -50% 0px' }); // This triggers when a section is in the middle of the screen.
   document.querySelectorAll('main section[id]').forEach(section => navObserver.observe(section));
 
-
-  // --- 8. 3D PARTICLE BACKGROUND (MOTION-AWARE & THEME-AWARE) ---
+  // --- 8) PARTICLE BACKGROUND ---
   if (!prefersReducedMotion && typeof THREE !== 'undefined' && window.matchMedia('(pointer:fine)').matches) {
     const canvas = document.getElementById('particle-canvas');
     if (canvas) {
@@ -304,18 +337,17 @@ document.addEventListener('DOMContentLoaded', () => {
         opacity: 0.6,
         blending: THREE.AdditiveBlending
       });
-      
+
       const particleCount = 4000;
       const positions = new Float32Array(particleCount * 3);
-      for (let i = 0; i < particleCount * 3; i++) {
-        positions[i] = (Math.random() - 0.5) * 100;
-      }
+      for (let i = 0; i < particleCount * 3; i++) positions[i] = (Math.random() - 0.5) * 100;
+
       const particlesGeometry = new THREE.BufferGeometry();
       particlesGeometry.setAttribute('position', new THREE.BufferAttribute(positions, 3));
       const particleSystem = new THREE.Points(particlesGeometry, particlesMaterial);
       scene.add(particleSystem);
-      
-      // Subscribe the particle color to our theme state machine!
+
+      // We subscribe the particle color to our theme state, so it changes automatically!
       themeState.subscribe((theme) => {
         const lightColor = new THREE.Color(0x1F2937);
         const darkColor = new THREE.Color(0x8A2BE2);
@@ -338,16 +370,16 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   }
 
-
-  // --- 9. INITIALIZATION ---
-  // Run all the necessary functions when the page first loads.
+  // --- 9) INITIALIZATION ---
+  // This is where we run all the functions for the first time when the page loads.
   const savedTheme = localStorage.getItem('theme');
   const systemPrefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
   themeState.setTheme(savedTheme || (systemPrefersDark ? 'dark' : 'light'));
-  
-  const initialLang = localStorage.getItem('language') || 'en';
+
+  const initialLang = chooseAndPersistLanguage();
   applyTranslations(initialLang);
-  
-  initSlideshow(); // Now we can safely call this.
+
+  initSlideshow();
+  initCounters();
 
 });
