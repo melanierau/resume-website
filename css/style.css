@@ -1,345 +1,171 @@
 /* =================================================================
    1. Root Variables & Base Styles
-   - This section defines the color palette and base styles for the entire site.
-   - Using CSS variables (e.g., --bg-color) makes it easy to manage themes.
+   - This section is like the control panel for the website's entire look and feel.
+   - We define all our colors here as "CSS variables" (the things with '--').
+   - This makes it super easy to change a color everywhere at once.
    ================================================================= */
 :root {
-  /* Default Dark Mode Theme Variables */
-  --bg-color: #080808;
-  --text-color: #EAEAEA;
-  --text-secondary: #A0A0A0; /* For less important text */
-  --footer-text: #A0A0A0;
-  --glass-bg: rgba(25, 25, 25, 0.4); /* Semi-transparent background for glass effect */
-  --glass-border: rgba(255, 255, 255, 0.1); /* Subtle border for glass effect */
-  --header-text: #FFFFFF;
-  --section-bg: rgba(0, 0, 0, 0.25); /* Slightly different background for some sections */
-  --timeline-border: #582ab8;
-  --timeline-dot: #A78BFA;
-  --logo-card-bg: #111827;
-  --violet: #8b5cf6;
-  --violet-2: #7c3aed;
-  --pink: #f472b6;
+  /* These are the colors for the default Dark Mode theme. */
+  --bg: #0b0a1a; /* The main background color of the page. */
+  --text: #e5e7eb; /* The primary color for most of the text. */
+  --text-secondary: #9ca3af; /* A lighter gray for less important text. */
+  --header-text: #f3f4f6; /* The color for text inside the header. */
+  --footer-text: #9ca3af; /* The color for text in the footer. */
+  --card-bg: rgba(255, 255, 255, 0.06); /* A slightly transparent white for the "glass" cards. */
+  --card-border: rgba(255, 255, 255, 0.1); /* A subtle border for the "glass" cards. */
+  --violet: #8b5cf6; /* The main accent color. */
+  --pink: #f472b6; /* The secondary accent color for gradients. */
 }
 
-/* Light Mode Theme Variables */
-/* When the <html> tag has the class "light-mode", these variables override the default dark ones. */
-html.light-mode {
-  --bg-color: #F9FAFB;
-  --text-color: #1F2937;
-  --text-secondary: #4B5563;
-  --footer-text: #4B5563;
-  --glass-bg: rgba(255, 255, 255, 0.65);
-  --glass-border: rgba(229, 231, 235, 1);
+.light-mode {
+  /* When the <html> tag gets the 'light-mode' class, these colors will be used instead. */
+  --bg: #f7f7fb;
+  --text: #1f2937;
+  --text-secondary: #4b5563;
   --header-text: #111827;
-  --section-bg: #F3F4F6;
-  --timeline-border: #ddd6fe;
-  --timeline-dot: #8B5CF6;
-  --logo-card-bg: #FFFFFF;
+  --footer-text: #6b7280;
+  --card-bg: rgba(0, 0, 0, 0.03);
+  --card-border: rgba(0, 0, 0, 0.08);
 }
 
-/* Base styles for the entire page */
 body {
-  font-family: 'Inter', sans-serif; /* Sets the default font */
-  background: var(--bg-color); /* Uses the background color variable */
-  color: var(--text-color); /* Uses the text color variable */
-  transition: background-color 0.4s ease, color 0.4s ease; /* Smooth transition for theme changes */
+  font-family: 'Inter', sans-serif; /* Sets the default font for the whole site. */
+  background: var(--bg); /* Uses the background color variable we defined above. */
+  color: var(--text); /* Uses the text color variable. */
+  transition: background-color 0.4s ease, color 0.4s ease; /* Makes the light/dark mode switch smooth. */
 }
 
-/* Creates a gradient text effect */
 .gradient-text {
-  background: linear-gradient(90deg, #A78BFA, #F472B6);
-  -webkit-background-clip: text; /* Clips the background to the text shape */
-  -webkit-text-fill-color: transparent; /* Makes the text color transparent to show the background */
+  background: linear-gradient(90deg, var(--violet), var(--pink)); /* Creates the purple-to-pink gradient. */
+  -webkit-background-clip: text; /* A special trick to clip the background to the shape of the text. */
+  -webkit-text-fill-color: transparent; /* This makes the actual text color invisible, so the gradient background shows through. */
 }
 
 /* =================================================================
-   2. Component & Layout Styles
-   - This section styles the reusable components and major layout blocks.
+   2. Language-Aware Typography & Layout Resilience
+   - These are clever styles to make sure the website still looks great
+     when the text changes to a different language with longer words.
    ================================================================= */
 
-/* The "glass" effect for cards and the header */
-.glassmorphism {
-  background: var(--glass-bg);
-  border: 1px solid var(--glass-border);
-  backdrop-filter: blur(16px); /* This creates the frosted glass blur */
-  -webkit-backdrop-filter: blur(16px); /* For Safari compatibility */
-  transition: background-color 0.3s ease;
+/* This tells the browser to try and balance the lines of text in headings so you don't get one long line and one short word. */
+h1, h2, h3, .btn, .impact-number {
+  text-wrap: balance;
 }
 
-/* Animation for sections fading in on scroll */
+/* If a word is too long to fit (like in German), this tells the browser it's okay to break it anywhere to prevent it from overflowing. */
+header nav a, .case-card h3, .case-study h3, .faq-item h3 button, label, button, .gallery-thumbs img + *, .impact-number {
+  overflow-wrap: anywhere;
+}
+
+/* This tells the browser to automatically add hyphens to words when needed, but only for these specific languages. */
+html:lang(de), html:lang(fr), html:lang(ro), html:lang(es) {
+  hyphens: auto;
+}
+
+/* This makes sure that numbers in the impact section line up nicely, like in a spreadsheet column. */
+.impact-number {
+  font-variant-numeric: tabular-nums;
+}
+
+/* This rule is for desktop screens. It allows the navigation menu to wrap onto a second line if the links get too long. */
+@media (min-width: 768px) {
+  header nav {
+    flex-wrap: wrap; /* Allow items to wrap. */
+    row-gap: 0.25rem; /* Adds a little space if it wraps to a second line. */
+  }
+  header nav a {
+    white-space: nowrap; /* Prevents a single link from breaking onto two lines. */
+    margin-right: 0.25rem;
+  }
+}
+
+/* =================================================================
+   3. Accessibility & Interaction Styles
+   - These styles are for user interactions like clicking, focusing, and scrolling.
+   ================================================================= */
+
+/* This adds a clear purple outline to any button or link when a user navigates to it with the keyboard (like using the Tab key). */
+:focus-visible {
+  outline: 2px solid #a78bfa; /* violet-400 */
+  outline-offset: 2px;
+}
+
+/* This is the starting state for sections that will fade in. They start invisible and slightly moved down. */
 .section-fade-in {
-  opacity: 0; /* Start invisible */
-  transform: translateY(24px); /* Start slightly lower */
-  transition: opacity 0.9s ease, transform 0.9s cubic-bezier(0.25, 0.8, 0.25, 1); /* Smooth animation */
+  opacity: 0;
+  transform: translateY(8px);
+  transition: opacity 0.35s ease, transform 0.35s ease;
 }
-
-/* The state when the section becomes visible */
+/* When the 'visible' class is added by JavaScript, the section fades in and moves up into place. */
 .section-fade-in.visible {
-  opacity: 1; /* Become fully visible */
-  transform: translateY(0); /* Move to its final position */
+  opacity: 1;
+  transform: none;
 }
 
-/* Accessibility: Adds a visible outline when interactive elements are focused (e.g., using Tab key) */
-a:focus,
-button:focus,
-input:focus,
-textarea:focus {
-  outline: 2px solid #A78BFA;
-  outline-offset: 4px;
-  border-radius: 4px;
+/* This creates the "frosted glass" effect for cards and the header. */
+.glassmorphism {
+  background: var(--card-bg);
+  border: 1px solid var(--card-border);
+  backdrop-filter: blur(10px); /* This is the property that creates the actual blur effect. */
 }
 
-/* Styles for sections with a slightly different background color */
-.section-bg {
-  background: var(--section-bg);
+/* This is the style for the link in the navigation that matches the section you're currently viewing. */
+.active-link {
+  color: var(--violet);
+  font-weight: 600;
 }
 
-/* Styles for the experience timeline */
-.timeline-border {
-  border-color: var(--timeline-border);
+/* Styles for the interactive FAQ Accordion. */
+.faq-answer {
+  max-height: 0; /* The answer is hidden by default. */
+  overflow: hidden; /* Hides the content that overflows the 0 height. */
+  transition: max-height 0.5s ease-in-out; /* A smooth animation for opening/closing. */
+}
+.faq-item.active .faq-answer {
+  max-height: 500px; /* When active, the height expands to reveal the text. */
+  margin-top: 1rem;
+}
+.faq-item.active .faq-arrow {
+  transform: rotate(180deg); /* Flips the arrow icon upside down when open. */
 }
 
-.timeline-dot {
-  background: var(--timeline-dot);
-}
+/* =================================================================
+   4. Component-Specific Styles
+   - These are styles for specific, unique components on the page.
+   ================================================================= */
 
-/* "Open Book" style for the About Section */
-.book-container {
-  position: relative;
-  border-radius: 1rem;
-  padding: 2rem;
-  background: #1a1a1a;
-  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4), 0 0 0 1px rgba(255, 255, 255, 0.08);
-}
+/* Styles for the vertical line and dots in the Experience timeline. */
+.timeline-border { border-color: var(--timeline-border); }
+.timeline-dot { background: var(--timeline-dot); }
 
-html.light-mode .book-container {
-  background: #e5e7eb;
-  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.08), 0 0 0 1px rgba(0, 0, 0, 0.05);
-}
-
-/* The line down the middle of the "book" */
-.book-spine {
-  position: absolute;
-  left: 50%;
-  top: 1rem;
-  bottom: 1rem;
-  width: 8px;
-  background: linear-gradient(to right, rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.3));
-  transform: translateX(-50%);
-}
-
-html.light-mode .book-spine {
-  background: linear-gradient(to right, rgba(0, 0, 0, 0.15), rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.15));
-}
-
-/* The two "pages" of the book */
-.book-pages {
-  display: grid;
-  grid-template-columns: 1fr 1fr; /* Two columns */
-  gap: 2rem;
-}
-
-@media (max-width: 768px) {
-  /* On mobile, stack the pages and hide the spine */
-  .book-pages {
-    grid-template-columns: 1fr;
-  }
-  .book-spine {
-    display: none;
-  }
-}
-
-/* Case Studies Section */
-.case-study {
-  display: flex;
-  flex-direction: column;
-  gap: 1.25rem;
-  padding: 1.5rem;
-  border-radius: 1rem;
-  background: #0d0a19;
-  box-shadow: 0 0 15px rgba(129, 90, 252, 0.15);
-}
-
-.case-card {
-  border-radius: 1rem;
-  background: linear-gradient(145deg, #131129, #1a1838 50%, #151233);
-}
-
-.case-card h3 {
-  font-weight: 800;
-  letter-spacing: -0.02em;
-}
-
-.case-text p {
-  color: var(--text-secondary);
-  line-height: 1.7;
-}
-
-/* Custom list items with a gradient dot instead of a standard bullet */
-.dot-li {
-  display: flex;
-  gap: 0.6rem;
-  align-items: flex-start;
-}
-
+/* Styles for the custom bullet points in the "About Me" lists. */
+.dot-li { display: flex; gap: 0.6rem; align-items: flex-start; }
 .dot-li:before {
-  content: ""; /* Required for pseudo-elements */
+  content: ""; /* This is required for pseudo-elements like ::before. */
   margin-top: 0.5rem;
   display: inline-block;
   width: 0.5rem;
   height: 0.5rem;
-  border-radius: 9999px; /* Makes it a circle */
+  border-radius: 9999px; /* This makes the square a perfect circle. */
   background: linear-gradient(90deg, var(--violet), var(--pink));
 }
 
-/* Companies Logo Strip Section */
-.logo-card {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 110px;
-  padding: 1rem;
-  background: var(--logo-card-bg);
-  border-radius: 1rem;
-}
-
-.logo-card img {
-  max-height: 50px;
-  width: auto;
-  max-width: 100%;
-  object-fit: contain; /* Ensures logos are scaled correctly without distortion */
-}
-
-body:not(.light-mode) .logo-card img {
-  filter: drop-shadow(0 0 5px rgba(255, 255, 255, 0.3)); /* Adds a glow to logos in dark mode */
-}
-
-/* Image Gallery Slideshow */
-.gallery-container {
-  max-width: 700px;
-  margin: 0 auto;
-}
-
-.gallery-slideshow {
-  position: relative;
-}
-
-.gallery-slideshow .mySlides {
-  display: none; /* Hide all slides by default */
-}
-
-.gallery-slideshow img {
-  width: 100%;
-  border-radius: 12px;
-}
-
-.gallery-slideshow .prev,
-.gallery-slideshow .next {
-  cursor: pointer;
-  position: absolute;
-  top: 45%;
-  padding: 12px;
-  font-weight: 700;
-  font-size: 18px;
-  color: #fff;
-  border-radius: 6px;
-  background: rgba(0, 0, 0, 0.35);
-  user-select: none; /* Prevents text selection on click */
-}
-
-.gallery-slideshow .next { right: 0; }
-.gallery-slideshow .prev { left: 0; }
-
-.gallery-slideshow .prev:hover,
-.gallery-slideshow .next:hover {
-  background: rgba(0, 0, 0, 0.6);
-}
-
-.gallery-thumbs {
-  display: grid;
-  grid-template-columns: repeat(6, 1fr);
-  gap: 0.5rem;
-  margin-top: 0.75rem;
-}
-
-.gallery-thumbs img {
-  opacity: 0.75;
-  border-radius: 8px;
-}
-
-.gallery-thumbs img.active,
-.gallery-thumbs img:hover {
-  opacity: 1; /* Highlight the active/hovered thumbnail */
-}
-
-@media (max-width: 768px) {
-  /* On mobile, hide the interactive slideshow and show a simple grid instead */
-  .gallery-slideshow,
-  .gallery-nav,
-  .gallery-thumbs {
-    display: none;
-  }
-  .gallery-mobile-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 0.5rem;
-  }
-  .gallery-mobile-grid img {
-    width: 100%;
-    border-radius: 10px;
-  }
-}
-
-/* Impact Counters Section */
-.impact-number {
-  font-size: 3rem;
-  font-weight: 800;
-}
-
-@media (min-width: 768px) {
-  .impact-number {
-    font-size: 3.75rem; /* Larger font on bigger screens */
-  }
-}
-
-/* =================================================================
-   3. Utility & Interaction Styles
-   - Miscellaneous styles for interactions and specific elements.
-   ================================================================= */
-
-/* Only apply hover effects on devices that support true hovering (not touchscreens) */
-@media (hover: hover) and (pointer: fine) {
-  .card-interactive:hover {
-    transform: translateY(-6px); /* Lifts the card up slightly */
-    transition: transform 0.2s ease, box-shadow 0.2s ease;
-  }
-}
-
-/* Positions the particle canvas behind all other content */
-#particle-canvas {
-  position: absolute;
-  inset: 0; /* A shorthand for top:0, right:0, bottom:0, left:0 */
-  z-index: -1; /* Puts it in the background */
-}
-
-/* Styles for the language selection dropdown menu */
-#language-dropdown {
-  display: none; /* Hidden by default */
-  position: absolute;
-  right: 0;
-  background: var(--glass-bg);
-  border: 1px solid var(--glass-border);
+/* A few tweaks for the gallery controls and thumbnails. */
+.gallery-slideshow .prev, .gallery-slideshow .next {
+  padding: 0.25rem 0.5rem;
   border-radius: 0.5rem;
-  min-width: 130px;
-  backdrop-filter: blur(10px);
+}
+.gallery-thumbs .thumb.active {
+  outline: 2px solid #a78bfa; /* Adds a purple outline to the currently selected thumbnail. */
+  outline-offset: 2px;
 }
 
-#language-dropdown a {
-  color: var(--text-color);
-  display: block;
-  padding: 0.6rem 0.75rem;
+/* Sets the color for the text in the footer. */
+footer p {
+  color: var(--footer-text);
 }
 
-#language-dropdown a:hover {
-  background: rgba(167, 139, 250, 0.2); /* Highlight on hover */
+/* A safety rule to make sure that when text is translated, it inherits the correct color from its parent. */
+[data-translate-key] {
+  color: inherit;
 }
