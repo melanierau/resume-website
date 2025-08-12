@@ -1,10 +1,7 @@
-import fs from 'node:fs';
-import path from 'node:path';
-import { JSDOM } from 'jsdom';
+// Client-side i18n loader + SEO tags + CV link switcher
 
 const SITE = 'https://www.melanie-rau.com';
-const LOCALES = ['en','de','es','fr','ro'];
-
+const LOCALES = ['en', 'de', 'es', 'fr', 'ro'];
 const CV_FILES = {
   en: 'MelanieRau-CV.pdf',
   de: 'Melanie-Rau-Lebenslauf-DE.pdf',
@@ -13,87 +10,86 @@ const CV_FILES = {
   ro: 'Melanie-Rau-CV-RO.pdf'
 };
 
-const tpl = fs.readFileSync('src/index.template.html', 'utf8');
-
-// ensure dist and asset directories
-if (!fs.existsSync('dist')) fs.mkdirSync('dist', { recursive: true });
-fs.mkdirSync('dist/assets/docs/cv', { recursive: true });
-fs.mkdirSync('dist/assets/img', { recursive: true });
-
-// copy images from img folder if exists
-if (fs.existsSync('img')) fs.cpSync('img', 'dist/assets/img', { recursive: true });
-
-// copy CV pdfs from repo root into dist/assets/docs/cv
-Object.values(CV_FILES).forEach(fileName => {
-  const srcPath = fileName;
-  const destPath = path.join('dist/assets/docs/cv', fileName);
-  if (fs.existsSync(srcPath)) fs.copyFileSync(srcPath, destPath);
-});
-
-for (const lang of LOCALES) {
-  const t = JSON.parse(fs.readFileSync(`i18n/${lang}.json`, 'utf8'));
-  const dom = new JSDOM(tpl);
-  const d = dom.window.document;
-
-  d.documentElement.setAttribute('lang', lang);
-
-  d.querySelectorAll('[data-translate-key]').forEach(el => {
-    const key = el.getAttribute('data-translate-key');
-    const val = t[key];
-    if (!val) return;
-    if (el.tagName === 'META' && el.hasAttribute('content')) {
-      el.setAttribute('content', val);
-    } else if (el.tagName === 'TITLE') {
-      el.textContent = val;
-    } else {
-      el.innerHTML = val;
-    }
-  });
-
-  d.querySelectorAll('[data-i18n-attrs]').forEach(el => {
-    const pairs = el.getAttribute('data-i18n-attrs').split(';').map(s => s.trim()).filter(Boolean);
-    for (const p of pairs) {
-      const [attr, key] = p.split(':').map(s => s.trim());
-      const val = t[key];
-      if (attr && val) el.setAttribute(attr, val);
-    }
-  });
-
-  // set CV link href and download attributes
-  const cvLink = d.getElementById('cv-link');
-  if (cvLink) {
-    const name = CV_FILES[lang];
-    cvLink.setAttribute('href', `/assets/docs/cv/${name}`);
-    cvLink.setAttribute('download', name);
-  }
-
-  // canonical
-  let canonical = d.querySelector('link[rel="canonical"]');
-  if (!canonical) {
-    canonical = d.createElement('link');
-    canonical.setAttribute('rel', 'canonical');
-    d.head.appendChild(canonical);
-  }
-  canonical.setAttribute('href', `${SITE}/${lang}/`);
-
-  // hreflang alternates
-  d.querySelectorAll('link[rel="alternate"][hreflang]').forEach(n => n.remove());
-  for (const l of LOCALES) {
-    const link = d.createElement('link');
-    link.setAttribute('rel','alternate');
-    link.setAttribute('hreflang', l);
-    link.setAttribute('href', `${SITE}/${l}/`);
-    d.head.appendChild(link);
-  }
-  const xdef = d.createElement('link');
-  xdef.setAttribute('rel','alternate');
-  xdef.setAttribute('hreflang','x-default');
-  xdef.setAttribute('href', `${SITE}/en/`);
-  d.head.appendChild(xdef);
-
-  const outDir = path.join('dist', lang);
-  fs.mkdirSync(outDir, { recursive: true });
-  fs.writeFileSync(path.join(outDir, 'index.html'), '<!DOCTYPE html>\n' + d.documentElement.outerHTML);
+// Infer language from first path segment; default to en
+function getPathLang() {
+  const seg = (location.pathname.split('/')[1] || '').toLowerCase();
+  return LOCALES.includes(seg) ? seg : 'en';
 }
 
-console.log('Localized pages built.');
+async function loadTranslations(lang) {
+  const res = await fetch(`/i18n/${lang}.json`, { cache: 'no-store' });
+  if (!res.ok) throw new Error(`Failed to load /i18n/${lang}.json`);
+  return res.json();
+}
+
+function applyTranslations(lang, t) {
+  document.documentElement.lang = lang;
+
+  // Elements with innerHTML/text content
+  document.querySelectorAll('[data-translate-key]').forEach(el => {
+    const key = el.getAttribute('data-translate-key');
+    const val = t[key];
+    if (val == null) return;
+    if (el.tagName === 'TITLE') el.textContent = val;
+    else if (el.tagName === 'META' && el.hasAttribute('content')) el.setAttribute('content', val);
+    else el.innerHTML = val;
+  });
+
+  // Attribute mappings
+  document.querySelectorAll('[data-i18n-attrs]').forEach(el => {
+    el.getAttribute('data-i18n-attrs')
+      .split(';')
+      .map(s => s.trim())
+      .filter(Boolean)
+      .forEach(pair => {
+        const [attr, key] = pair.split(':').map(s => s.trim());
+        const val = t[key];
+        if (attr && val != null) el.setAttribute(attr, val);
+      });
+  });
+
+  // CV link per locale
+  const cv = document.getElementById('cv-link');
+  if (cv) {
+    const file = CV_FILES[lang] || CV_FILES.en;
+    cv.setAttribute('href', `/assets/docs/cv/${file}`);
+    cv.setAttribute('download', file);
+  }
+}
+
+function ensureSeoLinks(lang) {
+  // canonical
+  let canonical = document.querySelector('link[rel="canonical"]');
+  if (!canonical) {
+    canonical = document.createElement('link');
+    canonical.rel = 'canonical';
+    document.head.appendChild(canonical);
+  }
+  canonical.href = `${SITE}/${lang}/`;
+
+  // hreflang alternates
+  document.querySelectorAll('link[rel="alternate"][hreflang]').forEach(n => n.remove());
+  LOCALES.forEach(l => {
+    const link = document.createElement('link');
+    link.rel = 'alternate';
+    link.hreflang = l;
+    link.href = `${SITE}/${l}/`;
+    document.head.appendChild(link);
+  });
+  const xdef = document.createElement('link');
+  xdef.rel = 'alternate';
+  xdef.hreflang = 'x-default';
+  xdef.href = `${SITE}/en/`;
+  document.head.appendChild(xdef);
+}
+
+(async () => {
+  const lang = getPathLang();
+  try {
+    const t = await loadTranslations(lang);
+    applyTranslations(lang, t);
+    ensureSeoLinks(lang);
+  } catch (e) {
+    console.error(e);
+  }
+})();
