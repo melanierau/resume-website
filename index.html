@@ -12,11 +12,11 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
   <link rel="preconnect" href="https://cdnjs.cloudflare.com"/>
 
-  <link rel="apple-touch-icon" sizes="180x180" href="https://raw.githubusercontent.com/melanierau/resume-website/main/apple-touch-icon.png">
-  <link rel="icon" type="image/png" sizes="32x32" href="https://raw.githubusercontent.com/melanierau/resume-website/main/favicon-32x32.png">
-  <link rel="icon" type="image/png" sizes="16x16" href="https://raw.githubusercontent.com/melanierau/resume-website/main/favicon-16x16.png">
-  <link rel="manifest" href="https://raw.githubusercontent.com/melanierau/resume-website/main/site.webmanifest">
-  <link rel="icon" href="https://raw.githubusercontent.com/melanierau/resume-website/main/favicon.ico" type="image/x-icon">
+  <link rel="apple-touch-icon" sizes="180x180" href="assets/images/icons/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="assets/images/icons/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="assets/images/icons/favicon-16x16.png">
+  <link rel="manifest" href="assets/site.webmanifest">
+  <link rel="icon" href="assets/images/icons/favicon.ico" type="image/x-icon">
 
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap&subset=latin,latin-ext" rel="stylesheet">
 
@@ -35,7 +35,8 @@
 </head>
 <body class="antialiased">
 
-  <!-- HEADER -->
+  <div id="mouse-follower"></div>
+
   <header id="header" class="fixed top-0 left-0 right-0 z-50 glassmorphism">
     <div class="container mx-auto px-6 py-4 flex justify-between items-center">
       <a href="#hero" class="text-2xl font-bold tracking-tighter" style="color:var(--header-text)">Melanie Rau</a>
@@ -53,38 +54,33 @@
            data-translate-key="nav_cv">Download CV</a>
 
        <div id="language-switcher" class="relative">
-  <button id="language-toggle"
-          class="p-2 rounded-lg flex items-center gap-2"
-          aria-haspopup="true" aria-expanded="false"
-          data-translate-key="language_menu_label"
-          data-translate-attr="aria-label,title">
-    <!-- globe icon -->
-    <svg class="w-5 h-5" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
-      <path d="M10 2a8 8 0 100 16 8 8 0 000-16zM2.03 8.25a7.5 7.5 0 0111.45-6.22 1 1 0 00.9-.99V1.5a1 1 0 00-1-1A9.5 9.5 0 00.5 10a1 1 0 001 1h.51a1 1 0 00.99-.9zM10 18a9.5 9.5 0 008.03-4.25 1 1 0 00-.9-.99h-.51a1 1 0 00-.99.9A7.5 7.5 0 014.52 13.5H5a1 1 0 001-1v-.51a1 1 0 00-.9-.99A9.5 9.5 0 0010 18z"></path>
-    </svg>
-    <!-- current language code -->
-    <span id="language-current" class="text-xs font-semibold tracking-widest">EN</span>
-  </button>
+          <button id="language-toggle"
+                  class="p-2 rounded-lg flex items-center gap-2"
+                  aria-haspopup="true" aria-expanded="false"
+                  data-translate-key="language_menu_label"
+                  data-translate-attr="aria-label,title">
+            <svg class="w-5 h-5" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+              <path d="M10 2a8 8 0 100 16 8 8 0 000-16zM2.03 8.25a7.5 7.5 0 0111.45-6.22 1 1 0 00.9-.99V1.5a1 1 0 00-1-1A9.5 9.5 0 00.5 10a1 1 0 001 1h.51a1 1 0 00.99-.9zM10 18a9.5 9.5 0 008.03-4.25 1 1 0 00-.9-.99h-.51a1 1 0 00-.99.9A7.5 7.5 0 014.52 13.5H5a1 1 0 001-1v-.51a1 1 0 00-.9-.99A9.5 9.5 0 0010 18z"></path>
+            </svg>
+            <span id="language-current" class="text-xs font-semibold tracking-widest">EN</span>
+          </button>
 
-  <!-- keep this hidden by default -->
-  <div id="language-dropdown"
-       class="hidden absolute right-0 mt-2 w-40 glassmorphism rounded-lg overflow-hidden">
-    <a href="#" data-lang="en" class="block px-3 py-2 hover:bg-white/10">English</a>
-    <a href="#" data-lang="de" class="block px-3 py-2 hover:bg-white/10">Deutsch</a>
-    <a href="#" data-lang="es" class="block px-3 py-2 hover:bg-white/10">Español</a>
-    <a href="#" data-lang="fr" class="block px-3 py-2 hover:bg-white/10">Français</a>
-    <a href="#" data-lang="ro" class="block px-3 py-2 hover:bg-white/10">Română</a>
-  </div>
-</div>
+          <div id="language-dropdown"
+              class="hidden absolute right-0 mt-2 w-40 glassmorphism rounded-lg overflow-hidden">
+            <a href="#" data-lang="en" class="block px-3 py-2 hover:bg-white/10">English</a>
+            <a href="#" data-lang="de" class="block px-3 py-2 hover:bg-white/10">Deutsch</a>
+            <a href="#" data-lang="es" class="block px-3 py-2 hover:bg-white/10">Español</a>
+            <a href="#" data-lang="fr" class="block px-3 py-2 hover:bg-white/10">Français</a>
+            <a href="#" data-lang="ro" class="block px-3 py-2 hover:bg-white/10">Română</a>
+          </div>
+        </div>
 
-        <!-- Theme -->
         <button id="theme-toggle" class="p-2 rounded-lg"
                 aria-label="Toggle theme"
                 data-translate-key="theme_toggle_aria"
                 data-translate-attr="aria-label,title">☀️/🌙</button>
       </nav>
 
-      <!-- Mobile Menu Button -->
       <button id="mobile-menu-button" class="md:hidden p-2"
               aria-expanded="false"
               aria-label="Open/close menu"
@@ -94,7 +90,6 @@
       </button>
     </div>
 
-    <!-- Mobile Menu Panel -->
     <div id="mobile-menu" class="hidden md:hidden px-6 pb-4">
       <a href="#hero" class="block py-2 hover:text-violet-300" data-translate-key="nav_home">Home</a>
       <a href="#about" class="block py-2 hover:text-violet-300" data-translate-key="nav_about">About</a>
@@ -119,7 +114,6 @@
   </header>
 
   <main>
-    <!-- HERO -->
     <section id="hero" class="min-h-screen flex items-center pt-32 pb-12 relative overflow-hidden">
       <canvas id="particle-canvas" class="absolute inset-0 z-0"></canvas>
       <div class="container mx-auto px-6 relative z-10">
@@ -139,7 +133,7 @@
           <div class="md:w-2/5 flex justify-center">
             <div class="relative w-64 h-64 md:w-80 md:h-80">
               <div class="absolute inset-0 rounded-full bg-gradient-to-br from-violet-500 to-pink-500 blur-3xl opacity-70"></div>
-              <img src="https://avatars.githubusercontent.com/u/104355910?v=4" width="460" height="460" alt="Melanie Rau"
+              <img src="assets/images/photos/linkedin-photo.jpeg" width="460" height="460" alt="Melanie Rau"
                    class="relative w-full h-full rounded-full object-cover border-4 border-gray-800 shadow-2xl" fetchpriority="high"
                    data-translate-key="hero_headshot_alt" data-translate-attr="alt">
             </div>
@@ -154,27 +148,25 @@
       </a>
     </section>
 
-    <!-- IMPACT -->
     <section id="impact" class="py-24 section-bg section-fade-in">
-      <div class="container mx-auto px-6">
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-10 text-center">
-          <div>
-            <div class="impact-number gradient-text"><span class="counter" data-target="15">0</span>%</div>
-            <p class="text-lg font-medium" style="color:var(--text-secondary)" data-translate-key="impact1_desc">Reduction in annual cloud spend</p>
-          </div>
-          <div>
-            <div class="impact-number gradient-text"><span class="counter" data-target="35">0</span>%</div>
-            <p class="text-lg font-medium" style="color:var(--text-secondary)" data-translate-key="impact2_desc">Project backlog reduction</p>
-          </div>
-          <div>
-            <div class="impact-number gradient-text"><span class="counter" data-target="65">0</span>%</div>
-            <p class="text-lg font-medium" style="color:var(--text-secondary)" data-translate-key="impact3_desc">Reduced service desk wait times</p>
-          </div>
+        <div class="container mx-auto px-6">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-10 text-center">
+                <div>
+                    <div class="impact-number gradient-text text-6xl font-extrabold"><span class="counter" data-target="15">0</span>%</div>
+                    <p class="text-lg font-medium mt-2" style="color:var(--text-secondary)" data-translate-key="impact1_desc">Reduction in annual cloud spend</p>
+                </div>
+                <div>
+                    <div class="impact-number gradient-text text-6xl font-extrabold"><span class="counter" data-target="35">0</span>%</div>
+                    <p class="text-lg font-medium mt-2" style="color:var(--text-secondary)" data-translate-key="impact2_desc">Project backlog reduction</p>
+                </div>
+                <div>
+                    <div class="impact-number gradient-text text-6xl font-extrabold"><span class="counter" data-target="65">0</span>%</div>
+                    <p class="text-lg font-medium mt-2" style="color:var(--text-secondary)" data-translate-key="impact3_desc">Reduced service desk wait times</p>
+                </div>
+            </div>
         </div>
-      </div>
     </section>
 
-    <!-- ABOUT -->
     <section id="about" class="py-28 section-fade-in">
       <div class="container mx-auto px-6">
         <h2 class="text-3xl md:text-4xl font-bold mb-10 gradient-text text-left"
@@ -219,101 +211,103 @@
       </div>
     </section>
 
-    <!-- GALLERY -->
     <section id="gallery" class="py-28 section-fade-in">
-      <div class="container mx-auto px-6">
-        <div class="text-center mb-10">
-          <h2 class="text-3xl md:text-4xl font-bold mb-2" style="color:var(--header-text)" data-translate-key="gallery_title">Moments at Work</h2>
-          <p class="max-w-2xl mx-auto font-light" style="color:var(--text-secondary)" data-translate-key="gallery_subtitle">Snapshots from conferences, hackathons, and team days.</p>
-        </div>
+        <div class="container mx-auto px-6">
+            <div class="text-center mb-10">
+                <h2 class="text-3xl md:text-4xl font-bold mb-2" style="color:var(--header-text)" data-translate-key="gallery_title">Moments at Work</h2>
+                <p class="max-w-2xl mx-auto font-light" style="color:var(--text-secondary)" data-translate-key="gallery_subtitle">Snapshots from conferences, hackathons, and team days.</p>
+            </div>
 
-        <!-- Mobile grid -->
-        <div class="gallery-mobile-grid">
-          <img src="https://raw.githubusercontent.com/melanierau/resume-website/main/AgentCon.jpeg" alt="AgentCon" data-translate-key="gallery_img_agentcon" data-translate-attr="alt">
-          <img src="https://raw.githubusercontent.com/melanierau/resume-website/main/Away-Day-Westminster.jpeg" alt="Away Day Westminster" data-translate-key="gallery_img_away_day" data-translate-attr="alt">
-          <img src="https://raw.githubusercontent.com/melanierau/resume-website/main/CDG.jpeg" alt="CDG" data-translate-key="gallery_img_cdg" data-translate-attr="alt">
-          <img src="https://raw.githubusercontent.com/melanierau/resume-website/main/Google-Cloud-Summit-1.jpeg" alt="Google Cloud Summit 1" data-translate-key="gallery_img_gcs1" data-translate-attr="alt">
-          <img src="https://raw.githubusercontent.com/melanierau/resume-website/main/Google-Cloud-Summit.jpeg" alt="Google Cloud Summit" data-translate-key="gallery_img_gcs" data-translate-attr="alt">
-          <img src="https://raw.githubusercontent.com/melanierau/resume-website/main/Pagerduty-Mascot.jpeg" alt="PagerDuty Mascot" data-translate-key="gallery_img_pagerduty_mascot" data-translate-attr="alt">
-        </div>
+            <div class="gallery-mobile-grid">
+                <img src="assets/images/photos/AgentCon.jpeg" alt="AgentCon" data-translate-key="gallery_img_agentcon" data-translate-attr="alt">
+                <img src="assets/images/photos/Westminster-Awayday-BT.jpeg" alt="Away Day Westminster" data-translate-key="gallery_img_away_day" data-translate-attr="alt">
+                <img src="assets/images/photos/CDG.jpeg" alt="CDG" data-translate-key="gallery_img_cdg" data-translate-attr="alt">
+                <img src="assets/images/photos/Google-Cloud-Summit-1.jpeg" alt="Google Cloud Summit 1" data-translate-key="gallery_img_gcs1" data-translate-attr="alt">
+                <img src="assets/images/photos/Google-Cloud-Summit.jpeg" alt="Google Cloud Summit" data-translate-key="gallery_img_gcs" data-translate-attr="alt">
+                <img src="assets/images/photos/Pagerduty-Mascot.jpeg" alt="PagerDuty Mascot" data-translate-key="gallery_img_pagerduty_mascot" data-translate-attr="alt">
+            </div>
 
-        <!-- Desktop slideshow -->
-        <div class="gallery-container">
-          <div class="gallery-slideshow" data-translate-skip>
-            <div class="mySlides"><img src="https://raw.githubusercontent.com/melanierau/resume-website/main/AgentCon.jpeg" alt="AgentCon" data-translate-key="gallery_img_agentcon" data-translate-attr="alt"></div>
-            <div class="mySlides"><img src="https://raw.githubusercontent.com/melanierau/resume-website/main/Away-Day-Westminster.jpeg" alt="Away Day Westminster" data-translate-key="gallery_img_away_day" data-translate-attr="alt"></div>
-            <div class="mySlides"><img src="https://raw.githubusercontent.com/melanierau/resume-website/main/CDG.jpeg" alt="CDG" data-translate-key="gallery_img_cdg" data-translate-attr="alt"></div>
-            <div class="mySlides"><img src="https://raw.githubusercontent.com/melanierau/resume-website/main/Google-Cloud-Summit-1.jpeg" alt="Google Cloud Summit 1" data-translate-key="gallery_img_gcs1" data-translate-attr="alt"></div>
-            <div class="mySlides"><img src="https://raw.githubusercontent.com/melanierau/resume-website/main/Google-Cloud-Summit.jpeg" alt="Google Cloud Summit" data-translate-key="gallery_img_gcs" data-translate-attr="alt"></div>
-            <div class="mySlides"><img src="https://raw.githubusercontent.com/melanierau/resume-website/main/Pagerduty-Mascot.jpeg" alt="PagerDuty Mascot" data-translate-key="gallery_img_pagerduty_mascot" data-translate-attr="alt"></div>
-            <a class="prev" aria-label="Previous image" data-translate-key="aria_prev_photo" data-translate-attr="aria-label">❮</a>
-            <a class="next" aria-label="Next image" data-translate-key="aria_next_photo" data-translate-attr="aria-label">❯</a>
-          </div>
-          <div class="gallery-thumbs" data-translate-skip>
-            <img class="thumb" src="https://raw.githubusercontent.com/melanierau/resume-website/main/AgentCon.jpeg" alt="AgentCon thumbnail" data-translate-key="gallery_img_agentcon" data-translate-attr="alt">
-            <img class="thumb" src="https://raw.githubusercontent.com/melanierau/resume-website/main/Away-Day-Westminster.jpeg" alt="Away Day Westminster thumbnail" data-translate-key="gallery_img_away_day" data-translate-attr="alt">
-            <img class="thumb" src="https://raw.githubusercontent.com/melanierau/resume-website/main/CDG.jpeg" alt="CDG thumbnail" data-translate-key="gallery_img_cdg" data-translate-attr="alt">
-            <img class="thumb" src="https://raw.githubusercontent.com/melanierau/resume-website/main/Google-Cloud-Summit-1.jpeg" alt="Google Cloud Summit 1 thumbnail" data-translate-key="gallery_img_gcs1" data-translate-attr="alt">
-            <img class="thumb" src="https://raw.githubusercontent.com/melanierau/resume-website/main/Google-Cloud-Summit.jpeg" alt="Google Cloud Summit thumbnail" data-translate-key="gallery_img_gcs" data-translate-attr="alt">
-            <img class="thumb" src="https://raw.githubusercontent.com/melanierau/resume-website/main/Pagerduty-Mascot.jpeg" alt="PagerDuty Mascot thumbnail" data-translate-key="gallery_img_pagerduty_mascot" data-translate-attr="alt">
-          </div>
+            <div class="gallery-container">
+                <div class="gallery-slideshow" data-translate-skip>
+                    <div class="mySlides"><img src="assets/images/photos/AgentCon.jpeg" alt="AgentCon" data-translate-key="gallery_img_agentcon" data-translate-attr="alt"></div>
+                    <div class="mySlides"><img src="assets/images/photos/Westminster-Awayday-BT.jpeg" alt="Away Day Westminster" data-translate-key="gallery_img_away_day" data-translate-attr="alt"></div>
+                    <div class="mySlides"><img src="assets/images/photos/CDG.jpeg" alt="CDG" data-translate-key="gallery_img_cdg" data-translate-attr="alt"></div>
+                    <div class="mySlides"><img src="assets/images/photos/Google-Cloud-Summit-1.jpeg" alt="Google Cloud Summit 1" data-translate-key="gallery_img_gcs1" data-translate-attr="alt"></div>
+                    <div class="mySlides"><img src="assets/images/photos/Google-Cloud-Summit.jpeg" alt="Google Cloud Summit" data-translate-key="gallery_img_gcs" data-translate-attr="alt"></div>
+                    <div class="mySlides"><img src="assets/images/photos/Pagerduty-Mascot.jpeg" alt="PagerDuty Mascot" data-translate-key="gallery_img_pagerduty_mascot" data-translate-attr="alt"></div>
+                    <a class="prev" aria-label="Previous image" data-translate-key="aria_prev_photo" data-translate-attr="aria-label">❮</a>
+                    <a class="next" aria-label="Next image" data-translate-key="aria_next_photo" data-translate-attr="aria-label">❯</a>
+                </div>
+                <div class="gallery-thumbs" data-translate-skip>
+                    <img class="thumb" src="assets/images/photos/AgentCon.jpeg" alt="AgentCon thumbnail" data-translate-key="gallery_img_agentcon" data-translate-attr="alt">
+                    <img class="thumb" src="assets/images/photos/Westminster-Awayday-BT.jpeg" alt="Away Day Westminster thumbnail" data-translate-key="gallery_img_away_day" data-translate-attr="alt">
+                    <img class="thumb" src="assets/images/photos/CDG.jpeg" alt="CDG thumbnail" data-translate-key="gallery_img_cdg" data-translate-attr="alt">
+                    <img class="thumb" src="assets/images/photos/Google-Cloud-Summit-1.jpeg" alt="Google Cloud Summit 1 thumbnail" data-translate-key="gallery_img_gcs1" data-translate-attr="alt">
+                    <img class="thumb" src="assets/images/photos/Google-Cloud-Summit.jpeg" alt="Google Cloud Summit thumbnail" data-translate-key="gallery_img_gcs" data-translate-attr="alt">
+                    <img class="thumb" src="assets/images/photos/Pagerduty-Mascot.jpeg" alt="PagerDuty Mascot thumbnail" data-translate-key="gallery_img_pagerduty_mascot" data-translate-attr="alt">
+                </div>
+            </div>
         </div>
-      </div>
     </section>
 
-    <!-- CASE STUDIES -->
     <section id="case-studies" class="py-28 section-bg section-fade-in">
-      <div class="container mx-auto px-6">
-        <div class="text-center mb-12">
-          <h2 class="text-3xl md:text-4xl font-bold mb-3" style="color:var(--header-text)" data-translate-key="projects_title">Case Studies: Strategy in Action</h2>
-          <p class="max-w-3xl mx-auto font-light" style="color:var(--text-secondary)" data-translate-key="projects_subtitle">I turn complex challenges into measurable outcomes.</p>
-        </div>
-
-        <!-- Case Study 1 -->
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-12">
-          <div class="case-card p-10">
-            <h3 class="text-3xl mb-8 gradient-text" data-translate-key="project1_heading_card">FinOps Strategy</h3>
-            <div class="rounded-xl bg-[#161338] h-56 flex items-center justify-center shadow-inner">
-              <span class="text-2xl md:text-3xl font-semibold" style="color:#c7b7ff" data-translate-key="project1_heading_card">FinOps Strategy</span>
+        <div class="container mx-auto px-6">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl md:text-4xl font-bold mb-3" style="color:var(--header-text)" data-translate-key="projects_title">Case Studies: Strategy in Action</h2>
+                <p class="max-w-3xl mx-auto font-light" style="color:var(--text-secondary)" data-translate-key="projects_subtitle">I turn complex challenges into measurable outcomes.</p>
             </div>
-          </div>
-          <div class="case-study case-text">
-            <h3 class="text-2xl font-bold mb-2" style="color:var(--header-text)" data-translate-key="project1_box_title">FinOps & Governance Board Creation</h3>
-            <p data-translate-key="project1_box_desc">Authored the business case and launched FinOps from the ground up. Now chair the Azure Governance Board to oversee spend, new projects, and standards.</p>
-            <p class="mt-4 text-violet-300" data-translate-key="project1_box_result">Result: <span class="counter" data-target="15">0</span>% reduction in annual cloud spend.</p>
-          </div>
-        </div>
 
-        <!-- Case Study 2 -->
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-          <div class="case-study case-text md:order-2">
-            <h3 class="text-2xl font-bold mb-2" style="color:var(--header-text)" data-translate-key="project2_box_title">Secure Tenant Disaggregation</h3>
-            <p data-translate-key="project2_box_desc">Designed the future state, applied Zero Trust, and aligned leaders with clear diagrams and plans.</p>
-            <p class="mt-4 text-violet-300" data-translate-key="project2_box_result">Outcome: increased security, licensing flexibility, and total cloud control.</p>
-          </div>
-          <div class="case-card p-10 md:order-1">
-            <h3 class="text-3xl mb-8 gradient-text" data-translate-key="project2_heading_card">Zero Trust</h3>
-            <div class="rounded-xl bg-[#161338] h-56 flex items-center justify-center shadow-inner">
-              <span class="text-2xl md:text-3xl font-semibold" style="color:#c7b7ff" data-translate-key="project2_card_badge">Secure Separation</span>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-12">
+                <div class="case-card p-10">
+                    <h3 class="text-3xl mb-8 gradient-text" data-translate-key="project1_heading_card">FinOps Strategy</h3>
+                    <div class="rounded-xl bg-[#161338] h-56 flex items-center justify-center shadow-inner">
+                        <span class="text-2xl md:text-3xl font-semibold" style="color:#c7b7ff" data-translate-key="project1_heading_card">FinOps Strategy</span>
+                    </div>
+                </div>
+                <div class="case-study case-text">
+                    <h3 class="text-2xl font-bold mb-2" style="color:var(--header-text)" data-translate-key="project1_box_title">FinOps & Governance Board Creation</h3>
+                    <p data-translate-key="project1_box_desc">Authored the business case and launched FinOps from the ground up. Now chair the Azure Governance Board to oversee spend, new projects, and standards.</p>
+                    <p class="mt-4 text-violet-300" data-translate-key="project1_box_result">Result: <span class="counter" data-target="15">0</span>% reduction in annual cloud spend.</p>
+                </div>
             </div>
-          </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <div class="case-study case-text md:order-2">
+                    <h3 class="text-2xl font-bold mb-2" style="color:var(--header-text)" data-translate-key="project2_box_title">Secure Tenant Disaggregation</h3>
+                    <p data-translate-key="project2_box_desc">Designed the future state, applied Zero Trust, and aligned leaders with clear diagrams and plans.</p>
+                    <p class="mt-4 text-violet-300" data-translate-key="project2_box_result">Outcome: increased security, licensing flexibility, and total cloud control.</p>
+                </div>
+                <div class="case-card p-10 md:order-1">
+                    <h3 class="text-3xl mb-8 gradient-text" data-translate-key="project2_heading_card">Zero Trust</h3>
+                    <div class="rounded-xl bg-[#161338] h-56 flex items-center justify-center shadow-inner">
+                        <span class="text-2xl md:text-3xl font-semibold" style="color:#c7b7ff" data-translate-key="project2_card_badge">Secure Separation</span>
+                    </div>
+                </div>
+            </div>
         </div>
-      </div>
     </section>
 
-    <!-- COMPANIES -->
-    <section id="companies" class="py-20 section-fade-in">
-      <div class="container mx-auto px-6">
-        <div class="grid grid-cols-2 md:grid-cols-4 gap-6">
-          <div class="logo-card"><img src="https://raw.githubusercontent.com/melanierau/resume-website/main/westminster-city-council.png" alt="Westminster City Council logo"></div>
-          <div class="logo-card"><img src="https://raw.githubusercontent.com/melanierau/resume-website/main/pwc.png" alt="PwC logo"></div>
-          <div class="logo-card"><span class="text-sm opacity-80">Hologic, Inc.</span></div>
-          <div class="logo-card"><span class="text-sm opacity-80">NextGEN360</span></div>
+    <section id="companies" class="py-20 section-fade-in section-bg">
+        <div class="container mx-auto px-6">
+            <div class="text-center max-w-5xl mx-auto">
+                <h3 class="text-lg font-semibold uppercase tracking-widest mb-12" style="color: var(--text-secondary-color);" data-translate-key="orgs_title">Organisations I've Worked With</h3>
+                <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6 gap-6">
+                    <div class="logo-card"><img src="assets/images/logos/pwc.png" alt="PwC Logo"></div>
+                    <div class="logo-card"><img src="assets/images/logos/westminster-city-council.png" alt="Westminster City Council Logo"></div>
+                    <div class="logo-card"><img src="assets/images/logos/booking-com-logo.png" alt="Booking.com Logo"></div>
+                    <div class="logo-card"><img src="assets/images/logos/dentsu-aegis-network.png" alt="Dentsu Logo"></div>
+                    <div class="logo-card"><img src="assets/images/logos/gazprom-logo.jpg" alt="Gazprom Logo"></div>
+                    <div class="logo-card"><img src="assets/images/logos/Revolent.png" alt="Revolent Group Logo"></div>
+                    <div class="logo-card"><img src="assets/images/logos/NextGEN360.png" alt="NextGEN360 Logo"></div>
+                    <div class="logo-card"><img src="assets/images/logos/hologic-logo.png" alt="Hologic Logo"></div>
+                    <div class="logo-card"><img src="assets/images/logos/pca-logo.jpeg" alt="Phillips & Cohen Associates Logo"></div>
+                    <div class="logo-card"><img src="assets/images/logos/hotels-com-logo.png" alt="Hotels.com Logo"></div>
+                    <div class="logo-card"><img src="assets/images/logos/agaplesion-1.png" alt="Agaplesion Logo"></div>
+                </div>
+            </div>
         </div>
-      </div>
     </section>
 
-    <!-- EXPERIENCE -->
     <section id="experience" class="py-28 section-fade-in">
       <div class="container mx-auto px-6">
         <div class="text-center mb-12">
@@ -322,7 +316,6 @@
         </div>
 
         <div class="max-w-3xl mx-auto relative border-l-2 timeline-border space-y-12 pl-8">
-          <!-- Role 1 -->
           <div class="relative">
             <div class="absolute -left-10 top-1 h-4 w-4 rounded-full timeline-dot"></div>
             <h3 class="text-xl font-bold" style="color:var(--header-text)" data-translate-key="exp_mgr_title">Cloud Engineering Manager</h3>
@@ -337,7 +330,6 @@
             </ul>
           </div>
 
-          <!-- Role 2 -->
           <div class="relative">
             <div class="absolute -left-10 top-1 h-4 w-4 rounded-full timeline-dot"></div>
             <h3 class="text-xl font-bold" style="color:var(--header-text)" data-translate-key="exp_arch_title">Technical Architect</h3>
@@ -352,7 +344,6 @@
             </ul>
           </div>
 
-          <!-- Role 3 -->
           <div class="relative">
             <div class="absolute -left-10 top-1 h-4 w-4 rounded-full timeline-dot"></div>
             <h3 class="text-xl font-bold" style="color:var(--header-text)" data-translate-key="exp_pwc_title">Senior Associate</h3>
@@ -366,7 +357,6 @@
             </ul>
           </div>
 
-          <!-- Earlier roles -->
           <div class="relative">
             <div class="absolute -left-10 top-1 h-4 w-4 rounded-full timeline-dot"></div>
             <h3 class="text-xl font-bold" style="color:var(--header-text)" data-translate-key="exp_earlier_title">Earlier roles</h3>
@@ -384,7 +374,6 @@
       </div>
     </section>
 
-    <!-- CERTIFICATIONS -->
     <section id="certifications" class="py-28 section-bg section-fade-in">
       <div class="container mx-auto px-6">
         <div class="text-center mb-12">
@@ -392,7 +381,7 @@
         <p class="max-w-3xl mx-auto font-light" style="color:var(--text-secondary)" data-translate-key="certs_subtitle">Formal training and continuous learning.</p>
         </div>
         <div class="max-w-5xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-8">
-          <a href="https://raw.githubusercontent.com/melanierau/resume-website/main/IHK.pdf" target="_blank" rel="noopener" class="glassmorphism p-8 rounded-2xl block card-interactive">
+          <a href="assets/docs/certificates/IHK.pdf" target="_blank" rel="noopener" class="glassmorphism p-8 rounded-2xl block card-interactive">
             <h3 class="text-xl font-bold mb-2" style="color:var(--header-text)" data-translate-key="education_qualification">IT Specialist for Application Development (IHK Germany)</h3>
             <p class="text-violet-300 mb-2" data-translate-key="education_institution">Chamber of Commerce and Industry (IHK), Germany</p>
             <p class="font-light" style="color:var(--text-secondary)" data-translate-key="education_grade">Grade: 1.3 (Sehr Gut / Excellent)</p>
@@ -426,7 +415,6 @@
       </div>
     </section>
 
-    <!-- FAQ -->
     <section id="faq" class="py-28 section-bg section-fade-in">
       <div class="container mx-auto px-6">
         <div class="text-center mb-12">
@@ -434,7 +422,6 @@
           <p class="font-light" style="color:var(--text-secondary)" data-translate-key="faq_subtitle">Useful details for recruiters.</p>
         </div>
         <div class="max-w-3xl mx-auto space-y-4">
-          <!-- Item 1 -->
           <div class="faq-item glassmorphism rounded-xl p-6">
             <h3 class="font-semibold text-lg" style="color:var(--header-text)">
               <button class="w-full text-left flex justify-between items-center">
@@ -446,7 +433,6 @@
               I'm a strategic technology leader who gets results by bridging the gap between technical possibilities and business goals. I thrive on making complex technology simple and delivering measurable value, whether that's through financial governance, robust security architecture, or building empowered, high-performing teams.
             </div>
           </div>
-          <!-- Item 2 -->
           <div class="faq-item glassmorphism rounded-xl p-6">
             <h3 class="font-semibold text-lg" style="color:var(--header-text)">
               <button class="w-full text-left flex justify-between items-center">
@@ -458,7 +444,6 @@
               My ability to operate at both the 30,000-foot strategic level and the 3-foot delivery level. I can architect a multi-year Zero Trust strategy and, in the same day, work with my engineering team to unblock a critical Terraform script. This blend of executive vision and deep technical credibility allows me to lead effectively and earn the trust of both the boardroom and the server room.
             </div>
           </div>
-          <!-- Item 3 -->
           <div class="faq-item glassmorphism rounded-xl p-6">
             <h3 class="font-semibold text-lg" style="color:var(--header-text)">
               <button class="w-full text-left flex justify-between items-center">
@@ -470,7 +455,6 @@
               <strong>Situation:</strong> When I joined the council, cloud spending was reactive and lacked centralized oversight, leading to budget overruns and inconsistent security practices. <br><strong>Task:</strong> My goal was to establish a culture of financial accountability and strategic governance for our entire cloud estate. <br><strong>Action:</strong> I researched, proposed, and pioneered the adoption of a FinOps methodology. This involved creating clear Power BI reports for finance, establishing a cross-departmental Azure Governance Board which I now chair, and embedding cost-awareness into our project lifecycle. <br><strong>Result:</strong> We cut our annual cloud bill by 15% within six months, eliminated surprise costs, and now make all cloud investment decisions based on clear data and business alignment.
             </div>
           </div>
-          <!-- Item 4 -->
           <div class="faq-item glassmorphism rounded-xl p-6">
             <h3 class="font-semibold text-lg" style="color:var(--header-text)">
               <button class="w-full text-left flex justify-between items-center">
@@ -482,7 +466,6 @@
               My key strength is strategic problem-solving—I excel at untangling complex technical and business challenges and creating a clear, actionable path forward. An area I'm actively focused on improving is delegation; with my hands-on background, my instinct is often to jump in and help solve a problem directly. I'm consciously working on stepping back more, empowering my team to find the solution, and focusing my energy on the higher-level strategic blockers only I can solve.
             </div>
           </div>
-          <!-- Item 5 -->
           <div class="faq-item glassmorphism rounded-xl p-6">
             <h3 class="font-semibold text-lg" style="color:var(--header-text)">
               <button class="w-full text-left flex justify-between items-center">
@@ -498,7 +481,6 @@
       </div>
     </section>
 
-    <!-- CONTACT -->
     <section id="contact" class="py-28 section-fade-in">
       <div class="container mx-auto px-6">
         <div class="text-center max-w-3xl mx-auto">
@@ -547,14 +529,12 @@
     </section>
   </main>
 
-  <!-- FOOTER -->
   <footer class="border-t border-gray-800">
     <div class="container mx-auto px-6 py-8 text-center" style="color:var(--footer-text)">
       <p data-translate-key="footer_rights">© 2025 Melanie Rau. All rights reserved.</p>
     </div>
   </footer>
 
-  <!-- Back to Top -->
   <a id="back-to-top" href="#hero"
      class="fixed bottom-8 right-8 p-3 rounded-full bg-violet-600 text-white shadow-lg hover:bg-violet-700 transition-opacity duration-300 opacity-0 pointer-events-none"
      aria-label="Back to top"
