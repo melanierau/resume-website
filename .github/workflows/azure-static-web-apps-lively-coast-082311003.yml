@@ -11,6 +11,7 @@ jobs:
   build_and_deploy_job:
     if: github.event_name == 'push' || (github.event_name == 'pull_request' && github.event.action != 'closed')
     runs-on: ubuntu-latest
+    name: Build and Deploy Job
     permissions:
       id-token: write
       contents: read
@@ -19,24 +20,39 @@ jobs:
         with:
           submodules: false
           lfs: false
+
+      - name: Install OIDC Client from Core Package
+        run: npm install @actions/core@1.6.0 @actions/http-client
+
+      - name: Get Id Token
+        id: idtoken
+        uses: actions/github-script@v6
+        with:
+          script: |
+            const coredemo = require('@actions/core')
+            return await coredemo.getIDToken()
+          result-encoding: string
+
       - name: Build and Deploy
         uses: Azure/static-web-apps-deploy@v1
         with:
-          azure_static_web_apps_api_token: ${{ secrets.AZURE_STATIC_WEB_APPS_API_TOKEN }}
+          # Try generic secret first; fall back to the env-specific one that worked before
+          azure_static_web_apps_api_token: ${{ secrets.AZURE_STATIC_WEB_APPS_API_TOKEN || secrets.AZURE_STATIC_WEB_APPS_API_TOKEN_LIVELY_COAST_082311003 }}
           action: upload
           app_location: "/"
           api_location: ""
-          output_location: ""     # keep empty since skip_app_build=true
+          output_location: ""
           skip_app_build: true
+          github_id_token: ${{ steps.idtoken.outputs.result }}
 
   close_pull_request_job:
     if: github.event_name == 'pull_request' && github.event.action == 'closed'
     runs-on: ubuntu-latest
+    name: Close Pull Request Job
     steps:
       - name: Close Pull Request
         uses: Azure/static-web-apps-deploy@v1
         with:
           action: close
-          azure_static_web_apps_api_token: ${{ secrets.AZURE_STATIC_WEB_APPS_API_TOKEN }}
-          # Optional: avoids failures if secret isn't available (e.g., forks)
+          azure_static_web_apps_api_token: ${{ secrets.AZURE_STATIC_WEB_APPS_API_TOKEN || secrets.AZURE_STATIC_WEB_APPS_API_TOKEN_LIVELY_COAST_082311003 }}
           skip_deploy_on_missing_secrets: true
