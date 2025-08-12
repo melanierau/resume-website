@@ -5,37 +5,29 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title data-translate-key="meta_title">Melanie Rau | Strategic IT Leader</title>
   <meta name="description" data-translate-key="meta_description" content="Cloud, Data, and AI leadership. FinOps, Zero Trust and multi-cloud architecture.">
+
   <link rel="preconnect" href="https://fonts.googleapis.com"/>
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
   <script src="https://cdn.tailwindcss.com"></script>
-  <!-- A  dditional head content if needed
-  -->
+
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-7MCTBXH1NC"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-7MCTBXH1NC');
+  </script>
+
   <style>
-    /* Define CSS variables for dark/light modes */
-    :root {
-      --header-color: #FFFFFF;
-      --text-color: #EAEAEA;
-      --text-secondary: #A0A0A0;
-      --bg-color: #080808;
-    }
-    html.light-mode {
-      --header-color: #111827;
-      --text-color: #1F2937;
-      --text-secondary: #4B5563;
-      --bg-color: #F9FAFB;
-    }
-    body {
-      font-family: 'Inter', sans-serif;
-      background-color: var(--bg-color);
-      color: var(--text-color);
-    }
-    .gradient-text {
-      background: linear-gradient(90deg, #A78BFA, #F472B6);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-    }
+    :root { --header-color:#FFFFFF; --text-color:#EAEAEA; --text-secondary:#A0A0A0; --bg-color:#080808; }
+    html.light-mode { --header-color:#111827; --text-color:#1F2937; --text-secondary:#4B5563; --bg-color:#F9FAFB; }
+    body { font-family:'Inter',sans-serif; background-color:var(--bg-color); color:var(--text-color); }
+    .gradient-text { background:linear-gradient(90deg,#A78BFA,#F472B6); -webkit-background-clip:text; -webkit-text-fill-color:transparent; }
   </style>
+
+  <!-- Canonical & hreflang will be set by localize.mjs at runtime -->
 </head>
 <body class="antialiased">
   <header class="px-6 py-4 flex justify-between items-center">
@@ -47,7 +39,11 @@
       <a href="#experience" data-translate-key="nav_experience" class="hover:underline">Experience</a>
       <a href="#faq" data-translate-key="nav_faq" class="hover:underline">FAQ</a>
       <a href="#contact" data-translate-key="nav_contact" class="hover:underline">Contact</a>
-      <a id="cv-link" href="/assets/docs/cv/Melanie-Rau-CV-EN.pdf" data-i18n-attrs="download:cv_download_name" data-translate-key="nav_cv" class="border px-3 py-2 rounded">Download CV</a>
+      <a id="cv-link" href="/assets/docs/cv/MelanieRau-CV.pdf"
+         data-i18n-attrs="download:cv_download_name"
+         data-translate-key="nav_cv"
+         class="border px-3 py-2 rounded">Download CV</a>
+
       <div id="language-switcher" class="inline-block relative">
         <button id="language-toggle" class="p-2" aria-label="Toggle language" title="Language">🌐</button>
         <div id="language-dropdown" class="hidden absolute right-0 bg-gray-800 text-white rounded mt-2">
@@ -60,6 +56,7 @@
       </div>
     </nav>
   </header>
+
   <main>
     <section id="hero" class="min-h-screen flex items-center justify-center flex-col text-center">
       <h1 class="text-5xl font-extrabold mb-4" data-translate-key="hero_title">Strategic IT Leader</h1>
@@ -69,6 +66,7 @@
         <a href="#contact" class="bg-gray-700 text-white py-3 px-6 rounded" data-translate-key="hero_cta2">Get In Touch</a>
       </div>
     </section>
+
     <section id="impact" class="py-20 text-center">
       <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
         <div>
@@ -85,6 +83,7 @@
         </div>
       </div>
     </section>
+
     <section id="about" class="py-20">
       <h2 class="text-3xl font-bold mb-6 gradient-text" data-translate-key="about_title">My Journey: From Infrastructure to Strategy</h2>
       <div class="max-w-3xl mx-auto space-y-4">
@@ -92,6 +91,7 @@
         <p data-translate-key="about_p2">Today, as a Cloud Architect and Engineering Manager, I focus on systems ...</p>
       </div>
     </section>
+
     <section id="case-studies" class="py-20 bg-gray-900">
       <h2 class="text-3xl font-bold mb-6" data-translate-key="projects_title">Case Studies: Strategy in Action</h2>
       <p class="mb-8 max-w-2xl mx-auto" data-translate-key="projects_subtitle">I turn complex challenges into measurable outcomes.</p>
@@ -110,6 +110,7 @@
         </div>
       </div>
     </section>
+
     <section id="skills" class="py-20">
       <h2 class="text-3xl font-bold mb-6" data-translate-key="skills_title">Core Skills</h2>
       <p class="mb-8 max-w-2xl mx-auto" data-translate-key="skills_subtitle">The capabilities I use to deliver strategic value.</p>
@@ -127,6 +128,7 @@
           <p>Applying Microsoft's Cloud Adoption and Well-Architected Frameworks to build secure, scalable, and resilient solutions.</p>
         </div>
       </div>
+
       <div class="grid grid-cols-1 md:grid-cols-2 gap-12 mt-16">
         <div>
           <h3 class="font-bold mb-4 text-purple-300" data-translate-key="about_expertise_title">Core Expertise</h3>
@@ -148,6 +150,7 @@
         </div>
       </div>
     </section>
+
     <section id="experience" class="py-20 bg-gray-900">
       <h2 class="text-3xl font-bold mb-6" data-translate-key="experience_title">Professional Experience</h2>
       <p class="mb-8 max-w-2xl mx-auto" data-translate-key="experience_subtitle">My path in technology leadership.</p>
@@ -193,6 +196,7 @@
         </div>
       </div>
     </section>
+
     <section id="languages" class="py-20">
       <h2 class="text-3xl font-bold mb-6" data-translate-key="languages_title">Languages</h2>
       <p class="mb-8 max-w-2xl mx-auto" data-translate-key="languages_subtitle">Communicating across cultures.</p>
@@ -215,6 +219,7 @@
         </div>
       </div>
     </section>
+
     <section id="faq" class="py-20 bg-gray-900">
       <h2 class="text-3xl font-bold mb-6" data-translate-key="faq_title">Frequently Asked Questions</h2>
       <p class="mb-8 max-w-2xl mx-auto" data-translate-key="faq_subtitle">Useful details for recruiters.</p>
@@ -253,6 +258,7 @@
         </div>
       </div>
     </section>
+
     <section id="contact" class="py-20">
       <h2 class="text-3xl font-bold mb-4" data-translate-key="contact_title">Let's Connect</h2>
       <p class="mb-8 max-w-2xl mx-auto" data-translate-key="contact_subtitle">I’m open to new opportunities and collaborations. Reach out or download my CV.</p>
@@ -273,38 +279,13 @@
       </form>
     </section>
   </main>
+
   <footer class="text-center py-8 border-t border-gray-800">
     <p class="text-sm">&copy; 2025 Melanie Rau. All rights reserved.</p>
   </footer>
-  <script>
-    // Minimal translation handling
-    const translations = {};
-    function translatePage(lang) {
-      document.documentElement.lang = lang;
-      document.querySelectorAll('[data-translate-key]').forEach(el => {
-        const key = el.getAttribute('data-translate-key');
-        const t = (translations[lang] && translations[lang][key]) || (translations['en'] && translations['en'][key]);
-        if (t !== undefined) {
-          el.innerHTML = t;
-        }
-      });
-      document.querySelectorAll('[data-i18n-attrs]').forEach(el => {
-        const attrs = el.getAttribute('data-i18n-attrs').split(';');
-        attrs.forEach(pair => {
-          const parts = pair.split(':');
-          const attr = parts[0].trim();
-          const key = parts[1].trim();
-          const val = (translations[lang] && translations[lang][key]) || (translations['en'] && translations['en'][key]);
-          if (val !== undefined) {
-            el.setAttribute(attr, val);
-          }
-        });
-      });
-    }
-    window.addEventListener('DOMContentLoaded', () => {
-      const pathLang = location.pathname.split('/')[1] || 'en';
-      translatePage(pathLang);
-    });
-  </script>
+
+  <!-- Client scripts -->
+  <script src="/js/scripts.js"></script>
+  <script type="module" src="/scripts/localize.mjs"></script>
 </body>
 </html>
