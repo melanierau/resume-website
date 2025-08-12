@@ -52,22 +52,30 @@
            class="border border-violet-400 text-violet-300 hover:bg-violet-400 hover:text-gray-900 font-medium py-2 px-4 rounded-lg transition-all"
            data-translate-key="nav_cv">Download CV</a>
 
-        <!-- Language -->
-        <div id="language-switcher" class="relative">
-          <button id="language-toggle" class="p-2 rounded-lg"
-                  data-translate-key="language_menu_label"
-                  data-translate-attr="aria-label,title"
-                  aria-label="Language" title="Language">
-            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"><path d="M10 2a8 8 0 100 16 8 8 0 000-16zM2.03 8.25a7.5 7.5 0 0111.45-6.22 1 1 0 00.9-.99V1.5a1 1 0 00-1-1A9.5 9.5 0 00.5 10a1 1 0 001 1h.51a1 1 0 00.99-.9zM10 18a9.5 9.5 0 008.03-4.25 1 1 0 00-.9-.99h-.51a1 1 0 00-.99.9A7.5 7.5 0 014.52 13.5H5a1 1 0 001-1v-.51a1 1 0 00-.9-.99A9.5 9.5 0 0010 18z"></path></svg>
-          </button>
-          <div id="language-dropdown" class="glassmorphism">
-            <a href="#" data-lang="en">English</a>
-            <a href="#" data-lang="de">Deutsch</a>
-            <a href="#" data-lang="es">Español</a>
-            <a href="#" data-lang="fr">Français</a>
-            <a href="#" data-lang="ro">Română</a>
-          </div>
-        </div>
+       <div id="language-switcher" class="relative">
+  <button id="language-toggle"
+          class="p-2 rounded-lg flex items-center gap-2"
+          aria-haspopup="true" aria-expanded="false"
+          data-translate-key="language_menu_label"
+          data-translate-attr="aria-label,title">
+    <!-- globe icon -->
+    <svg class="w-5 h-5" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+      <path d="M10 2a8 8 0 100 16 8 8 0 000-16zM2.03 8.25a7.5 7.5 0 0111.45-6.22 1 1 0 00.9-.99V1.5a1 1 0 00-1-1A9.5 9.5 0 00.5 10a1 1 0 001 1h.51a1 1 0 00.99-.9zM10 18a9.5 9.5 0 008.03-4.25 1 1 0 00-.9-.99h-.51a1 1 0 00-.99.9A7.5 7.5 0 014.52 13.5H5a1 1 0 001-1v-.51a1 1 0 00-.9-.99A9.5 9.5 0 0010 18z"></path>
+    </svg>
+    <!-- current language code -->
+    <span id="language-current" class="text-xs font-semibold tracking-widest">EN</span>
+  </button>
+
+  <!-- keep this hidden by default -->
+  <div id="language-dropdown"
+       class="hidden absolute right-0 mt-2 w-40 glassmorphism rounded-lg overflow-hidden">
+    <a href="#" data-lang="en" class="block px-3 py-2 hover:bg-white/10">English</a>
+    <a href="#" data-lang="de" class="block px-3 py-2 hover:bg-white/10">Deutsch</a>
+    <a href="#" data-lang="es" class="block px-3 py-2 hover:bg-white/10">Español</a>
+    <a href="#" data-lang="fr" class="block px-3 py-2 hover:bg-white/10">Français</a>
+    <a href="#" data-lang="ro" class="block px-3 py-2 hover:bg-white/10">Română</a>
+  </div>
+</div>
 
         <!-- Theme -->
         <button id="theme-toggle" class="p-2 rounded-lg"
