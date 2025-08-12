@@ -1,43 +1,30 @@
 <!DOCTYPE html>
-<!-- Hey browser, this is an HTML5 page. -->
 <html lang="en" class="scroll-smooth">
-<!-- This is where our whole website lives. 'lang="en"' tells browsers and search engines the site is in English. 'scroll-smooth' makes jumping between sections look nice and smooth. -->
 <head>
-  <!-- This 'head' section is like the brain of the page. It's full of info for the browser, but you won't see it on the page itself. -->
   <meta charset="UTF-8" />
-  <!-- This makes sure all the text and emojis show up correctly. -->
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <!-- This line is super important! It makes the website look good on phones, tablets, and desktops. -->
-  <title data-translate-key="meta_title">Melanie Rau | Strategic IT Leader</title>
-  <!-- This is the text you see in the browser tab. It's also what Google shows as the title of your page. -->
-  <meta name="description" data-translate-key="meta_description" content="Melanie Rau is a strategic IT leader specializing in Cloud, Data, and AI. Explore her portfolio, projects, and expertise in FinOps, Zero Trust, and multi-cloud architecture." />
-  <!-- This is the little summary that shows up under the title in Google search results. -->
 
-  <!-- A little performance trick: this tells the browser to get ready to download things from these websites, which can make the page load faster. -->
+  <title data-translate-key="meta_title">Melanie Rau | Strategic IT Leader</title>
+  <meta name="description" data-translate-key="meta_description"
+        content="Melanie Rau is a strategic IT leader specializing in Cloud, Data, and AI. Explore her portfolio, projects, and expertise in FinOps, Zero Trust, and multi-cloud architecture." />
+
   <link rel="preconnect" href="https://fonts.googleapis.com"/>
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
   <link rel="preconnect" href="https://cdnjs.cloudflare.com"/>
 
-  <!-- These are all the little icons for the browser tab, bookmarks, and when you save the site to your phone's home screen. -->
   <link rel="apple-touch-icon" sizes="180x180" href="https://raw.githubusercontent.com/melanierau/resume-website/main/apple-touch-icon.png">
   <link rel="icon" type="image/png" sizes="32x32" href="https://raw.githubusercontent.com/melanierau/resume-website/main/favicon-32x32.png">
   <link rel="icon" type="image/png" sizes="16x16" href="https://raw.githubusercontent.com/melanierau/resume-website/main/favicon-16x16.png">
   <link rel="manifest" href="https://raw.githubusercontent.com/melanierau/resume-website/main/site.webmanifest">
   <link rel="icon" href="https://raw.githubusercontent.com/melanierau/resume-website/main/favicon.ico" type="image/x-icon">
 
-  <!-- This pulls in the 'Inter' font and adds the 'latin-ext' subset for better character support in more languages. -->
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap&subset=latin,latin-ext" rel="stylesheet">
 
-  <!-- This connects our page to the CSS file, which is like the website's wardrobe – it handles all the colors, spacing, and layout. -->
   <link rel="stylesheet" href="css/style.css">
 
-  <!-- We're using Tailwind CSS, a cool toolkit that lets us style things quickly with classes right in the HTML. -->
   <script src="https://cdn.tailwindcss.com"></script>
-
-  <!-- This brings in the magic for the animated particle background. 'defer' tells it to load in the background so the page doesn't have to wait for it. -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js" defer></script>
 
-  <!-- This is the script for Google Analytics, which helps me see how many people visit the site. -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-7MCTBXH1NC"></script>
   <script>
     window.dataLayer = window.dataLayer || [];
@@ -45,19 +32,14 @@
     gtag('js', new Date());
     gtag('config', 'G-7MCTBXH1NC');
   </script>
-
 </head>
 <body class="antialiased">
-  <!-- Okay, this is the 'body' – everything you actually see on the page goes in here. 'antialiased' makes the text look a bit smoother. -->
 
-  <!-- HEADER: This is the header that sticks to the top of the page. -->
+  <!-- HEADER -->
   <header id="header" class="fixed top-0 left-0 right-0 z-50 glassmorphism">
-    <!-- 'fixed' makes it stay put when you scroll. 'z-50' makes sure it sits on top of everything else. -->
     <div class="container mx-auto px-6 py-4 flex justify-between items-center">
-      <!-- This container keeps everything nicely centered and adds some space on the sides. -->
       <a href="#hero" class="text-2xl font-bold tracking-tighter" style="color:var(--header-text)">Melanie Rau</a>
 
-      <!-- Desktop Navigation: This is the main menu for bigger screens (like desktops). It's hidden on phones. -->
       <nav class="hidden md:flex items-center space-x-5">
         <a href="#hero" class="hover:text-violet-300" data-translate-key="nav_home">Home</a>
         <a href="#about" class="hover:text-violet-300" data-translate-key="nav_about">About</a>
@@ -65,11 +47,17 @@
         <a href="#certifications" class="hover:text-violet-300" data-translate-key="nav_certs">Certifications</a>
         <a href="#faq" class="hover:text-violet-300" data-translate-key="nav_faq">FAQ</a>
         <a href="#contact" class="hover:text-violet-300" data-translate-key="nav_contact">Contact</a>
-        <a href="assets/docs/cv/MelanieRau-CV.pdf" download="MelanieRau-CV.pdf" class="border border-violet-400 text-violet-300 hover:bg-violet-400 hover:text-gray-900 font-medium py-2 px-4 rounded-lg transition-all" data-translate-key="nav_cv">Download CV</a>
+        <a href="assets/docs/cv/MelanieRau-CV.pdf"
+           download="MelanieRau-CV.pdf"
+           class="border border-violet-400 text-violet-300 hover:bg-violet-400 hover:text-gray-900 font-medium py-2 px-4 rounded-lg transition-all"
+           data-translate-key="nav_cv">Download CV</a>
 
-        <!-- The button and dropdown menu for changing the language. -->
+        <!-- Language -->
         <div id="language-switcher" class="relative">
-          <button id="language-toggle" class="p-2 rounded-lg" data-translate-key="language_menu_label" data-translate-attr="aria-label,title" aria-label="Language" title="Language">
+          <button id="language-toggle" class="p-2 rounded-lg"
+                  data-translate-key="language_menu_label"
+                  data-translate-attr="aria-label,title"
+                  aria-label="Language" title="Language">
             <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"><path d="M10 2a8 8 0 100 16 8 8 0 000-16zM2.03 8.25a7.5 7.5 0 0111.45-6.22 1 1 0 00.9-.99V1.5a1 1 0 00-1-1A9.5 9.5 0 00.5 10a1 1 0 001 1h.51a1 1 0 00.99-.9zM10 18a9.5 9.5 0 008.03-4.25 1 1 0 00-.9-.99h-.51a1 1 0 00-.99.9A7.5 7.5 0 014.52 13.5H5a1 1 0 001-1v-.51a1 1 0 00-.9-.99A9.5 9.5 0 0010 18z"></path></svg>
           </button>
           <div id="language-dropdown" class="glassmorphism">
@@ -80,20 +68,25 @@
             <a href="#" data-lang="ro">Română</a>
           </div>
         </div>
-        
-        <!-- Theme Toggle Button -->
-        <button id="theme-toggle" class="p-2 rounded-lg" aria-label="Toggle theme" data-translate-key="theme_toggle_aria" data-translate-attr="aria-label,title">
-          ☀️/🌙
-        </button>
+
+        <!-- Theme -->
+        <button id="theme-toggle" class="p-2 rounded-lg"
+                aria-label="Toggle theme"
+                data-translate-key="theme_toggle_aria"
+                data-translate-attr="aria-label,title">☀️/🌙</button>
       </nav>
 
-      <!-- Mobile Menu Button: The "hamburger" button for opening the menu on phones. It's hidden on desktops. -->
-      <button id="mobile-menu-button" class="md:hidden p-2" aria-label="Toggle menu" aria-expanded="false">
+      <!-- Mobile Menu Button -->
+      <button id="mobile-menu-button" class="md:hidden p-2"
+              aria-expanded="false"
+              aria-label="Open/close menu"
+              data-translate-key="nav_toggle"
+              data-translate-attr="aria-label">
         <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-4 6h4"/></svg>
       </button>
     </div>
 
-    <!-- Mobile Menu Panel: This is the menu that slides out on phones when you tap the hamburger button. -->
+    <!-- Mobile Menu Panel -->
     <div id="mobile-menu" class="hidden md:hidden px-6 pb-4">
       <a href="#hero" class="block py-2 hover:text-violet-300" data-translate-key="nav_home">Home</a>
       <a href="#about" class="block py-2 hover:text-violet-300" data-translate-key="nav_about">About</a>
@@ -101,12 +94,12 @@
       <a href="#certifications" class="block py-2 hover:text-violet-300" data-translate-key="nav_certs">Certifications</a>
       <a href="#faq" class="block py-2 hover:text-violet-300" data-translate-key="nav_faq">FAQ</a>
       <a href="#contact" class="block py-2 hover:text-violet-300" data-translate-key="nav_contact">Contact</a>
-      <a href="assets/docs/cv/MelanieRau-CV.pdf" download class="block mt-2 border border-violet-400 text-violet-300 font-medium py-2 px-4 rounded-lg text-center" data-translate-key="nav_cv">Download CV</a>
-      
-      <!-- Separator Line -->
+      <a href="assets/docs/cv/MelanieRau-CV.pdf" download
+         class="block mt-2 border border-violet-400 text-violet-300 font-medium py-2 px-4 rounded-lg text-center"
+         data-translate-key="nav_cv">Download CV</a>
+
       <hr class="border-gray-700 my-4">
 
-      <!-- Mobile Language Switcher -->
       <div id="mobile-language-switcher" class="flex justify-center items-center space-x-4 py-2">
         <a href="#" data-lang="en" class="text-sm font-medium hover:text-violet-300">EN</a>
         <a href="#" data-lang="de" class="text-sm font-medium hover:text-violet-300">DE</a>
@@ -118,38 +111,42 @@
   </header>
 
   <main>
-    <!-- All the main sections of the website start here. -->
-
-    <!-- HERO SECTION: This is the big welcome area at the top of the page. -->
+    <!-- HERO -->
     <section id="hero" class="min-h-screen flex items-center pt-32 pb-12 relative overflow-hidden">
-      <canvas id="particle-canvas"></canvas> <!-- This is where the cool, animated particle background will be drawn. -->
-      <div class="container mx-auto px-6 relative z-10"> <!-- 'z-10' makes sure this text and picture appear on top of the particle background. -->
+      <canvas id="particle-canvas" class="absolute inset-0 z-0"></canvas>
+      <div class="container mx-auto px-6 relative z-10">
         <div class="flex flex-col md:flex-row items-center justify-between gap-12">
-          <!-- Left Column: Text Content -->
           <div class="md:w-3/5 text-center md:text-left">
-            <h1 class="text-4xl md:text-6xl lg:text-7xl font-extrabold tracking-tighter mb-4 leading-tight" style="color:var(--header-text)" data-translate-key="hero_title">Strategic IT Leader</h1>
-            <p class="text-2xl md:text-3xl mb-8 max-w-2xl mx-auto md:mx-0 font-medium" data-translate-key="hero_subtitle"><span class="gradient-text">Driving Business Value Through Technology</span></p>
+            <h1 class="text-4xl md:text-6xl lg:text-7xl font-extrabold tracking-tighter mb-4 leading-tight"
+                style="color:var(--header-text)" data-translate-key="hero_title">Strategic IT Leader</h1>
+            <p class="text-2xl md:text-3xl mb-8 max-w-2xl mx-auto md:mx-0 font-medium"
+               data-translate-key="hero_subtitle"><span class="gradient-text">Driving Business Value Through Technology</span></p>
             <div class="flex justify-center md:justify-start gap-4">
-              <a href="#case-studies" class="bg-violet-600 hover:bg-violet-700 text-white font-bold py-3 px-8 rounded-lg" data-translate-key="hero_cta1">View Case Studies</a>
-              <a href="#contact" class="bg-gray-700 hover:bg-gray-600 text-white font-bold py-3 px-8 rounded-lg" data-translate-key="hero_cta2">Get In Touch</a>
+              <a href="#case-studies" class="bg-violet-600 hover:bg-violet-700 text-white font-bold py-3 px-8 rounded-lg"
+                 data-translate-key="hero_cta1">View Case Studies</a>
+              <a href="#contact" class="bg-gray-700 hover:bg-gray-600 text-white font-bold py-3 px-8 rounded-lg"
+                 data-translate-key="hero_cta2">Get In Touch</a>
             </div>
           </div>
-          <!-- Right Column: Profile Image -->
           <div class="md:w-2/5 flex justify-center">
             <div class="relative w-64 h-64 md:w-80 md:h-80">
-              <div class="absolute inset-0 rounded-full bg-gradient-to-br from-violet-500 to-pink-500 blur-3xl opacity-70"></div> <!-- Just a nice, glowing circle behind my picture to make it pop. -->
-              <img src="https://avatars.githubusercontent.com/u/104355910?v=4" width="460" height="460" alt="Melanie Rau" class="relative w-full h-full rounded-full object-cover border-4 border-gray-800 shadow-2xl" fetchpriority="high" data-translate-key="hero_headshot_alt" data-translate-attr="alt">
+              <div class="absolute inset-0 rounded-full bg-gradient-to-br from-violet-500 to-pink-500 blur-3xl opacity-70"></div>
+              <img src="https://avatars.githubusercontent.com/u/104355910?v=4" width="460" height="460" alt="Melanie Rau"
+                   class="relative w-full h-full rounded-full object-cover border-4 border-gray-800 shadow-2xl" fetchpriority="high"
+                   data-translate-key="hero_headshot_alt" data-translate-attr="alt">
             </div>
           </div>
         </div>
       </div>
-      <!-- A little bouncing arrow to encourage people to scroll down. -->
-      <a href="#impact" class="absolute bottom-10 left-1/2 -translate-x-1/2 animate-bounce z-10" aria-label="Scroll to next section" data-translate-key="scroll_aria" data-translate-attr="aria-label">
+      <a href="#impact"
+         class="absolute bottom-10 left-1/2 -translate-x-1/2 animate-bounce z-10"
+         aria-label="Scroll to next section"
+         data-translate-key="scroll_aria" data-translate-attr="aria-label">
         <svg xmlns="http://www.w3.org/2000/svg" class="w-8 h-8" style="color:var(--text-secondary)" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M19.5 5.25l-7.5 7.5-7.5-7.5m15 6l-7.5 7.5-7.5-7.5"/></svg>
       </a>
     </section>
 
-    <!-- IMPACT METRICS SECTION: This section shows off some key numbers and stats. -->
+    <!-- IMPACT -->
     <section id="impact" class="py-24 section-bg section-fade-in">
       <div class="container mx-auto px-6">
         <div class="grid grid-cols-1 md:grid-cols-3 gap-10 text-center">
@@ -169,23 +166,28 @@
       </div>
     </section>
 
-    <!-- ABOUT SECTION: A little bit about me and my skills. -->
+    <!-- ABOUT -->
     <section id="about" class="py-28 section-fade-in">
       <div class="container mx-auto px-6">
-        <h2 class="text-3xl md:text-4xl font-bold mb-10 gradient-text text-left" data-translate-key="about_title">My Journey: From Infrastructure to Strategy</h2>
-        <!-- A cool "open book" design for my story. -->
+        <h2 class="text-3xl md:text-4xl font-bold mb-10 gradient-text text-left"
+            data-translate-key="about_title">My Journey: From Infrastructure to Strategy</h2>
+
         <div class="book-container mb-12">
           <div class="book-spine"></div>
           <div class="book-pages">
             <div>
-              <p class="text-lg leading-relaxed" data-translate-key="about_p1">My IT career began as a Graduate IT Specialist in Application Development. I spent many years in IT Support and Infrastructure, learning hardware, networks, and real user problems. This end-to-end view now shapes my cloud work.</p>
+              <p class="text-lg leading-relaxed" data-translate-key="about_p1">
+                My IT career began as a Graduate IT Specialist in Application Development. I spent many years in IT Support and Infrastructure, learning hardware, networks, and real user problems. This end-to-end view now shapes my cloud work.
+              </p>
             </div>
             <div>
-              <p class="text-lg leading-relaxed" style="color:var(--text-secondary)" data-translate-key="about_p2">Today, as a Cloud Architect and Engineering Manager, I focus on systems, people, and processes. I build clear, data-driven solutions that remove friction, help stakeholders decide with confidence, and deliver real value. I lead calm, collaborative teams and care about inclusive environments.</p>
+              <p class="text-lg leading-relaxed" style="color:var(--text-secondary)" data-translate-key="about_p2">
+                Today, as a Cloud Architect and Engineering Manager, I focus on systems, people, and processes. I build clear, data-driven solutions that remove friction, help stakeholders decide with confidence, and deliver real value. I lead calm, collaborative teams and care about inclusive environments.
+              </p>
             </div>
           </div>
         </div>
-        <!-- Lists of what I'm good at. -->
+
         <div class="grid grid-cols-1 md:grid-cols-2 gap-12 text-lg">
           <div>
             <h3 class="font-bold mb-4 text-violet-300" data-translate-key="about_expertise_title">Core Expertise</h3>
@@ -209,14 +211,15 @@
       </div>
     </section>
 
-    <!-- GALLERY SECTION: Some photos from work events and conferences. -->
+    <!-- GALLERY -->
     <section id="gallery" class="py-28 section-fade-in">
       <div class="container mx-auto px-6">
         <div class="text-center mb-10">
           <h2 class="text-3xl md:text-4xl font-bold mb-2" style="color:var(--header-text)" data-translate-key="gallery_title">Moments at Work</h2>
           <p class="max-w-2xl mx-auto font-light" style="color:var(--text-secondary)" data-translate-key="gallery_subtitle">Snapshots from conferences, hackathons, and team days.</p>
         </div>
-        <!-- On phones, this shows up as a simple grid of pictures. -->
+
+        <!-- Mobile grid -->
         <div class="gallery-mobile-grid">
           <img src="https://raw.githubusercontent.com/melanierau/resume-website/main/AgentCon.jpeg" alt="AgentCon" data-translate-key="gallery_img_agentcon" data-translate-attr="alt">
           <img src="https://raw.githubusercontent.com/melanierau/resume-website/main/Away-Day-Westminster.jpeg" alt="Away Day Westminster" data-translate-key="gallery_img_away_day" data-translate-attr="alt">
@@ -225,9 +228,10 @@
           <img src="https://raw.githubusercontent.com/melanierau/resume-website/main/Google-Cloud-Summit.jpeg" alt="Google Cloud Summit" data-translate-key="gallery_img_gcs" data-translate-attr="alt">
           <img src="https://raw.githubusercontent.com/melanierau/resume-website/main/Pagerduty-Mascot.jpeg" alt="PagerDuty Mascot" data-translate-key="gallery_img_pagerduty_mascot" data-translate-attr="alt">
         </div>
-        <!-- On desktops, this turns into a clickable slideshow. -->
+
+        <!-- Desktop slideshow -->
         <div class="gallery-container">
-          <div class="gallery-slideshow">
+          <div class="gallery-slideshow" data-translate-skip>
             <div class="mySlides"><img src="https://raw.githubusercontent.com/melanierau/resume-website/main/AgentCon.jpeg" alt="AgentCon" data-translate-key="gallery_img_agentcon" data-translate-attr="alt"></div>
             <div class="mySlides"><img src="https://raw.githubusercontent.com/melanierau/resume-website/main/Away-Day-Westminster.jpeg" alt="Away Day Westminster" data-translate-key="gallery_img_away_day" data-translate-attr="alt"></div>
             <div class="mySlides"><img src="https://raw.githubusercontent.com/melanierau/resume-website/main/CDG.jpeg" alt="CDG" data-translate-key="gallery_img_cdg" data-translate-attr="alt"></div>
@@ -237,7 +241,7 @@
             <a class="prev" aria-label="Previous image" data-translate-key="aria_prev_photo" data-translate-attr="aria-label">❮</a>
             <a class="next" aria-label="Next image" data-translate-key="aria_next_photo" data-translate-attr="aria-label">❯</a>
           </div>
-          <div class="gallery-thumbs">
+          <div class="gallery-thumbs" data-translate-skip>
             <img class="thumb" src="https://raw.githubusercontent.com/melanierau/resume-website/main/AgentCon.jpeg" alt="AgentCon thumbnail" data-translate-key="gallery_img_agentcon" data-translate-attr="alt">
             <img class="thumb" src="https://raw.githubusercontent.com/melanierau/resume-website/main/Away-Day-Westminster.jpeg" alt="Away Day Westminster thumbnail" data-translate-key="gallery_img_away_day" data-translate-attr="alt">
             <img class="thumb" src="https://raw.githubusercontent.com/melanierau/resume-website/main/CDG.jpeg" alt="CDG thumbnail" data-translate-key="gallery_img_cdg" data-translate-attr="alt">
@@ -249,13 +253,14 @@
       </div>
     </section>
 
-    <!-- CASE STUDIES SECTION: Here are a couple of projects I'm proud of. -->
+    <!-- CASE STUDIES -->
     <section id="case-studies" class="py-28 section-bg section-fade-in">
       <div class="container mx-auto px-6">
         <div class="text-center mb-12">
           <h2 class="text-3xl md:text-4xl font-bold mb-3" style="color:var(--header-text)" data-translate-key="projects_title">Case Studies: Strategy in Action</h2>
           <p class="max-w-3xl mx-auto font-light" style="color:var(--text-secondary)" data-translate-key="projects_subtitle">I turn complex challenges into measurable outcomes.</p>
         </div>
+
         <!-- Case Study 1 -->
         <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-12">
           <div class="case-card p-10">
@@ -270,6 +275,7 @@
             <p class="mt-4 text-violet-300" data-translate-key="project1_box_result">Result: <span class="counter" data-target="15">0</span>% reduction in annual cloud spend.</p>
           </div>
         </div>
+
         <!-- Case Study 2 -->
         <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
           <div class="case-study case-text md:order-2">
@@ -287,7 +293,7 @@
       </div>
     </section>
 
-    <!-- COMPANIES LOGO SECTION: A few of the great companies I've had the chance to work with. -->
+    <!-- COMPANIES -->
     <section id="companies" class="py-20 section-fade-in">
       <div class="container mx-auto px-6">
         <div class="grid grid-cols-2 md:grid-cols-4 gap-6">
@@ -299,19 +305,22 @@
       </div>
     </section>
 
-    <!-- EXPERIENCE SECTION: My work history, shown as a timeline. -->
+    <!-- EXPERIENCE -->
     <section id="experience" class="py-28 section-fade-in">
       <div class="container mx-auto px-6">
         <div class="text-center mb-12">
           <h2 class="text-3xl md:text-4xl font-bold mb-3" style="color:var(--header-text)" data-translate-key="experience_title">Professional Experience</h2>
           <p class="font-light" style="color:var(--text-secondary)" data-translate-key="experience_subtitle">My path in technology leadership.</p>
         </div>
+
         <div class="max-w-3xl mx-auto relative border-l-2 timeline-border space-y-12 pl-8">
-          <!-- Each 'relative' div is one stop on the timeline. -->
+          <!-- Role 1 -->
           <div class="relative">
             <div class="absolute -left-10 top-1 h-4 w-4 rounded-full timeline-dot"></div>
             <h3 class="text-xl font-bold" style="color:var(--header-text)" data-translate-key="exp_mgr_title">Cloud Engineering Manager</h3>
-            <p class="text-violet-300 mb-2" data-translate-key="exp_manager_dates">Westminster City Council | Oct 2024 – Present</p>
+            <p class="text-violet-300 mb-2">
+              Westminster City Council | <span data-translate-key="exp_manager_dates">Oct 2024 – Present</span>
+            </p>
             <ul class="list-disc list-inside space-y-1" style="color:var(--text-secondary)">
               <li data-translate-key="exp_mgr_b1">Lead a five-person cloud squad and run Agile ceremonies.</li>
               <li data-translate-key="exp_mgr_b2">Set delivery expectations and reduce scope churn.</li>
@@ -319,10 +328,14 @@
               <li data-translate-key="exp_mgr_b4">Chair the Azure Governance Board.</li>
             </ul>
           </div>
+
+          <!-- Role 2 -->
           <div class="relative">
             <div class="absolute -left-10 top-1 h-4 w-4 rounded-full timeline-dot"></div>
             <h3 class="text-xl font-bold" style="color:var(--header-text)" data-translate-key="exp_arch_title">Technical Architect</h3>
-            <p class="text-violet-300 mb-2" data-translate-key="exp_arch_dates">Westminster City Council | Feb 2024 – Present</p>
+            <p class="text-violet-300 mb-2">
+              Westminster City Council | <span data-translate-key="exp_arch_dates">Feb 2024 – Present</span>
+            </p>
             <ul class="list-disc list-inside space-y-1" style="color:var(--text-secondary)">
               <li data-translate-key="exp_arch_b1">Lead technical advisor on cloud architecture and strategy.</li>
               <li data-translate-key="exp_arch_b2">Evaluate suppliers and author SOWs (G-Cloud).</li>
@@ -330,16 +343,22 @@
               <li data-translate-key="exp_arch_b4">Introduced FinOps; cut bills by 15% in six months.</li>
             </ul>
           </div>
+
+          <!-- Role 3 -->
           <div class="relative">
             <div class="absolute -left-10 top-1 h-4 w-4 rounded-full timeline-dot"></div>
             <h3 class="text-xl font-bold" style="color:var(--header-text)" data-translate-key="exp_pwc_title">Senior Associate</h3>
-            <p class="text-violet-300 mb-2" data-translate-key="exp_pwc_dates">PwC UK | Apr 2022 – Feb 2024</p>
+            <p class="text-violet-300 mb-2">
+              PwC UK | <span data-translate-key="exp_pwc_dates">Apr 2022 – Feb 2024</span>
+            </p>
             <ul class="list-disc list-inside space-y-1" style="color:var(--text-secondary)">
               <li data-translate-key="exp_pwc_b1">Built Azure/GCP landing zones with policy-as-code.</li>
               <li data-translate-key="exp_pwc_b2">Introduced Microsoft Cloud for Sustainability.</li>
               <li data-translate-key="exp_pwc_b3">Right-sizing analysis for 75 VMs saved >£100k/yr.</li>
             </ul>
           </div>
+
+          <!-- Earlier roles -->
           <div class="relative">
             <div class="absolute -left-10 top-1 h-4 w-4 rounded-full timeline-dot"></div>
             <h3 class="text-xl font-bold" style="color:var(--header-text)" data-translate-key="exp_earlier_title">Earlier roles</h3>
@@ -357,12 +376,12 @@
       </div>
     </section>
 
-    <!-- CERTIFICATIONS SECTION: My education and official certifications. -->
+    <!-- CERTIFICATIONS -->
     <section id="certifications" class="py-28 section-bg section-fade-in">
       <div class="container mx-auto px-6">
         <div class="text-center mb-12">
           <h2 class="text-3xl md:text-4xl font-bold mb-3" style="color:var(--header-text)" data-translate-key="certs_title">Education & Certifications</h2>
-          <p class="max-w-3xl mx-auto font-light" style="color:var(--text-secondary)" data-translate-key="certs_subtitle">Formal training and continuous learning.</p>
+        <p class="max-w-3xl mx-auto font-light" style="color:var(--text-secondary)" data-translate-key="certs_subtitle">Formal training and continuous learning.</p>
         </div>
         <div class="max-w-5xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-8">
           <a href="https://raw.githubusercontent.com/melanierau/resume-website/main/IHK.pdf" target="_blank" rel="noopener" class="glassmorphism p-8 rounded-2xl block card-interactive">
@@ -399,7 +418,7 @@
       </div>
     </section>
 
-    <!-- FAQ SECTION: Answering some common questions people might have. -->
+    <!-- FAQ -->
     <section id="faq" class="py-28 section-bg section-fade-in">
       <div class="container mx-auto px-6">
         <div class="text-center mb-12">
@@ -407,11 +426,11 @@
           <p class="font-light" style="color:var(--text-secondary)" data-translate-key="faq_subtitle">Useful details for recruiters.</p>
         </div>
         <div class="max-w-3xl mx-auto space-y-4">
-          <!-- FAQ Item 1 -->
+          <!-- Item 1 -->
           <div class="faq-item glassmorphism rounded-xl p-6">
             <h3 class="font-semibold text-lg" style="color:var(--header-text)">
-              <button class="w-full text-left flex justify-between items-center" data-translate-key="faq_q_about">
-                Tell me about yourself.
+              <button class="w-full text-left flex justify-between items-center">
+                <span data-translate-key="faq_q_about">Tell me about yourself.</span>
                 <span class="faq-arrow text-xl transition-transform duration-300">▼</span>
               </button>
             </h3>
@@ -419,11 +438,11 @@
               I'm a strategic technology leader who gets results by bridging the gap between technical possibilities and business goals. I thrive on making complex technology simple and delivering measurable value, whether that's through financial governance, robust security architecture, or building empowered, high-performing teams.
             </div>
           </div>
-          <!-- FAQ Item 2 -->
+          <!-- Item 2 -->
           <div class="faq-item glassmorphism rounded-xl p-6">
             <h3 class="font-semibold text-lg" style="color:var(--header-text)">
-              <button class="w-full text-left flex justify-between items-center" data-translate-key="faq_q_standout">
-                What makes you stand out?
+              <button class="w-full text-left flex justify-between items-center">
+                <span data-translate-key="faq_q_standout">What makes you stand out?</span>
                 <span class="faq-arrow text-xl transition-transform duration-300">▼</span>
               </button>
             </h3>
@@ -431,11 +450,11 @@
               My ability to operate at both the 30,000-foot strategic level and the 3-foot delivery level. I can architect a multi-year Zero Trust strategy and, in the same day, work with my engineering team to unblock a critical Terraform script. This blend of executive vision and deep technical credibility allows me to lead effectively and earn the trust of both the boardroom and the server room.
             </div>
           </div>
-          <!-- FAQ Item 3 -->
+          <!-- Item 3 -->
           <div class="faq-item glassmorphism rounded-xl p-6">
             <h3 class="font-semibold text-lg" style="color:var(--header-text)">
-              <button class="w-full text-left flex justify-between items-center" data-translate-key="faq_q_achievement">
-                Can you share a major professional achievement?
+              <button class="w-full text-left flex justify-between items-center">
+                <span data-translate-key="faq_q_achievement">Can you share a major professional achievement?</span>
                 <span class="faq-arrow text-xl transition-transform duration-300">▼</span>
               </button>
             </h3>
@@ -443,11 +462,11 @@
               <strong>Situation:</strong> When I joined the council, cloud spending was reactive and lacked centralized oversight, leading to budget overruns and inconsistent security practices. <br><strong>Task:</strong> My goal was to establish a culture of financial accountability and strategic governance for our entire cloud estate. <br><strong>Action:</strong> I researched, proposed, and pioneered the adoption of a FinOps methodology. This involved creating clear Power BI reports for finance, establishing a cross-departmental Azure Governance Board which I now chair, and embedding cost-awareness into our project lifecycle. <br><strong>Result:</strong> We cut our annual cloud bill by 15% within six months, eliminated surprise costs, and now make all cloud investment decisions based on clear data and business alignment.
             </div>
           </div>
-          <!-- FAQ Item 4 -->
+          <!-- Item 4 -->
           <div class="faq-item glassmorphism rounded-xl p-6">
             <h3 class="font-semibold text-lg" style="color:var(--header-text)">
-              <button class="w-full text-left flex justify-between items-center" data-translate-key="faq_q_strengths">
-                What are your key strengths and areas for improvement?
+              <button class="w-full text-left flex justify-between items-center">
+                <span data-translate-key="faq_q_strengths">What are your key strengths and areas for improvement?</span>
                 <span class="faq-arrow text-xl transition-transform duration-300">▼</span>
               </button>
             </h3>
@@ -455,11 +474,11 @@
               My key strength is strategic problem-solving—I excel at untangling complex technical and business challenges and creating a clear, actionable path forward. An area I'm actively focused on improving is delegation; with my hands-on background, my instinct is often to jump in and help solve a problem directly. I'm consciously working on stepping back more, empowering my team to find the solution, and focusing my energy on the higher-level strategic blockers only I can solve.
             </div>
           </div>
-          <!-- FAQ Item 5 -->
+          <!-- Item 5 -->
           <div class="faq-item glassmorphism rounded-xl p-6">
             <h3 class="font-semibold text-lg" style="color:var(--header-text)">
-              <button class="w-full text-left flex justify-between items-center" data-translate-key="faq_q_motivates">
-                What motivates you?
+              <button class="w-full text-left flex justify-between items-center">
+                <span data-translate-key="faq_q_motivates">What motivates you?</span>
                 <span class="faq-arrow text-xl transition-transform duration-300">▼</span>
               </button>
             </h3>
@@ -471,13 +490,13 @@
       </div>
     </section>
 
-    <!-- CONTACT SECTION: How to get in touch with me. -->
+    <!-- CONTACT -->
     <section id="contact" class="py-28 section-fade-in">
       <div class="container mx-auto px-6">
         <div class="text-center max-w-3xl mx-auto">
           <h2 class="text-3xl md:text-4xl font-bold mb-4" style="color:var(--header-text)" data-translate-key="contact_title">Let's Connect</h2>
           <p class="mb-10 font-light" style="color:var(--text-secondary)" data-translate-key="contact_subtitle">I’m open to new opportunities and collaborations. Reach out or download my CV.</p>
-          <!-- This form uses a free service called Formspree to send me emails. No server needed! -->
+
           <form action="https://formspree.io/f/xldlozkz" method="POST" class="max-w-xl mx-auto space-y-6 text-left">
             <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
               <div>
@@ -500,12 +519,18 @@
               </button>
             </div>
           </form>
-          <!-- Links to my LinkedIn and GitHub profiles. -->
+
           <div class="mt-12 flex justify-center gap-8">
-            <a href="https://www.linkedin.com/in/melanie-rau" target="_blank" rel="noopener" class="text-gray-400 hover:text-violet-400" aria-label="LinkedIn Profile" data-translate-key="aria_linkedin" data-translate-attr="aria-label">
+            <a href="https://www.linkedin.com/in/melanie-rau" target="_blank" rel="noopener"
+               class="text-gray-400 hover:text-violet-400"
+               aria-label="LinkedIn Profile"
+               data-translate-key="aria_linkedin" data-translate-attr="aria-label">
               <svg class="w-8 h-8" fill="currentColor" viewBox="0 0 24 24"><path d="M19 0h-14C2.239 0 0 2.239 0 5v14c0 2.761 2.239 5 5 5h14c2.761 0 5-2.239 5-5V5c0-2.761-2.239-5-5-5zM8 19H5V8h3v11zM6.5 6.732c-.966 0-1.75-.79-1.75-1.764S5.534 3.204 6.5 3.204s1.75.79 1.75 1.764-.784 1.764-1.75 1.764zM20 19h-3v-5.604c0-3.368-4-3.113-4 0V19h-3V8h3v1.765c1.396-2.586 7-2.777 7 2.476V19z"/></svg>
             </a>
-            <a href="https://github.com/melanierau" target="_blank" rel="noopener" class="text-gray-400 hover:text-violet-400" aria-label="GitHub Profile" data-translate-key="aria_github" data-translate-attr="aria-label">
+            <a href="https://github.com/melanierau" target="_blank" rel="noopener"
+               class="text-gray-400 hover:text-violet-400"
+               aria-label="GitHub Profile"
+               data-translate-key="aria_github" data-translate-attr="aria-label">
               <svg class="w-8 h-8" fill="currentColor" viewBox="0 0 24 24"><path d="M12 0C5.373 0 0 5.373 0 12c0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234C5.662 20.302 4.967 18.16 4.967 18.16c-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576C20.562 21.8 24 17.303 24 12c0-6.627-5.373-12-12-12z"/></svg>
             </a>
           </div>
@@ -514,22 +539,23 @@
     </section>
   </main>
 
-  <!-- FOOTER: The very bottom of the page. -->
+  <!-- FOOTER -->
   <footer class="border-t border-gray-800">
     <div class="container mx-auto px-6 py-8 text-center" style="color:var(--footer-text)">
-      <p>&copy; 2025 Melanie Rau. All rights reserved.</p>
+      <p data-translate-key="footer_rights">© 2025 Melanie Rau. All rights reserved.</p>
     </div>
   </footer>
 
-  <!-- Back to Top Button -->
-  <a id="back-to-top" href="#hero" class="fixed bottom-8 right-8 p-3 rounded-full bg-violet-600 text-white shadow-lg hover:bg-violet-700 transition-opacity duration-300 opacity-0 pointer-events-none" aria-label="Back to top" data-translate-key="aria_back_to_top" data-translate-attr="aria-label">
+  <!-- Back to Top -->
+  <a id="back-to-top" href="#hero"
+     class="fixed bottom-8 right-8 p-3 rounded-full bg-violet-600 text-white shadow-lg hover:bg-violet-700 transition-opacity duration-300 opacity-0 pointer-events-none"
+     aria-label="Back to top"
+     data-translate-key="aria_back_to_top" data-translate-attr="aria-label">
     <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor">
       <path stroke-linecap="round" stroke-linejoin="round" d="M4.5 15.75l7.5-7.5 7.5 7.5" />
     </svg>
   </a>
 
-  <!-- This is where we link to our one and only JavaScript file. It handles all the cool interactive stuff. -->
   <script src="js/main.js" defer></script>
-
 </body>
 </html>
