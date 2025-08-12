@@ -25,10 +25,10 @@ jobs:
       # Use the template in src/ as the site entrypoint without changing repo layout
       - name: Prepare site (copy src/index.template.html to index.html)
         run: |
-          if [ -f "src/index.template.html" ]; then
-            cp src/index.template.html index.html
+          if [ -f "src/index.html" ]; then
+            cp src/index.html index.html
           else
-            echo "src/index.template.html not found" && exit 1
+            echo "src/index.html not found" && exit 1
           fi
 
       - name: Install OIDC Client from Core Package
@@ -65,3 +65,4 @@ jobs:
           action: close
           azure_static_web_apps_api_token: ${{ secrets.AZURE_STATIC_WEB_APPS_API_TOKEN || secrets.AZURE_STATIC_WEB_APPS_API_TOKEN_LIVELY_COAST_082311003 }}
           skip_deploy_on_missing_secrets: true
+
