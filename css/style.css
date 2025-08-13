@@ -35,11 +35,13 @@
 }
 
 body {
-  font-family: 'Inter', sans-serif; /* Sets the default font for the whole site. */
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; /* UPDATED: Added system fonts for better compatibility */
   background: var(--bg); /* Uses the background color variable we defined above. */
   color: var(--text); /* Uses the text color variable. */
   transition: background-color 0.4s ease, color 0.4s ease; /* Makes the light/dark mode switch smooth. */
   cursor: none; /* Hides the default cursor because we have a custom mouse follower effect. */
+  -webkit-font-smoothing: antialiased; /* Smoother text rendering */
+  -moz-osx-font-smoothing: grayscale;
 }
 
 .gradient-text {
@@ -92,8 +94,9 @@ html:lang(de), html:lang(fr), html:lang(ro), html:lang(es) {
 
 .section-fade-in {
   opacity: 0;
-  transform: translateY(20px);
-  transition: opacity 0.6s ease-out, transform 0.6s ease-out; /* Creates a smooth fade-in effect for sections as you scroll. */
+  transform: translateY(30px);
+  /* UPDATED: Switched to a cubic-bezier for a more professional, smoother animation */
+  transition: opacity 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94), transform 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
 }
 
 .section-fade-in.visible {
@@ -110,8 +113,9 @@ html:lang(de), html:lang(fr), html:lang(ro), html:lang(es) {
 }
 
 .glassmorphism:hover {
-  transform: translateY(-5px); /* Lifts the card slightly on hover. */
-  box-shadow: 0 10px 25px rgba(167, 139, 250, 0.2), 0 5px 15px rgba(244, 114, 182, 0.15); /* Adds a colorful glow on hover. */
+  /* UPDATED: Lifts the card more and adds a subtle scaling effect for a more dynamic feel */
+  transform: translateY(-8px) scale(1.02); 
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
 }
 
 .active-link {
@@ -178,95 +182,40 @@ a, button {
   background: linear-gradient(90deg, var(--violet), var(--pink)); /* Creates the gradient bullet points. */
 }
 
-/* --- CORRECTED GALLERY STYLES START HERE --- */
-
-/* This hides the mobile-only grid which is no longer needed */
-.gallery-mobile-grid {
-    display: none;
-}
-
-.gallery-container {
-  display: block; /* Ensures the main container is always visible */
-  max-width: 900px; /* Sets a maximum width for the gallery on very large screens */
-  margin: auto; /* Centers the gallery horizontally */
-}
-
-.gallery-slideshow {
-  position: relative; /* Needed for positioning the prev/next arrows */
-  margin-bottom: 1rem;
-}
-
-.gallery-slideshow .mySlides {
-  display: none; /* All slides are hidden by default; JavaScript will show the active one */
-}
-
-.gallery-slideshow .mySlides img {
-  width: 100%; /* Makes the image take up the full width of its container, making it responsive */
-  height: auto; /* Height adjusts automatically to maintain aspect ratio */
-  max-height: 500px; /* Sets a fixed max height to prevent it from being too tall on desktops. */
-  object-fit: contain; /* Ensures the whole image is visible without being cropped or stretched */
-  margin: 0 auto; /* Centers the image horizontally if it's not filling the width */
-  display: block; /* Ensures margin auto works correctly */
-  border-radius: 0.75rem; /* Adds rounded corners to the main image */
-}
-
-/* Styles for the Previous and Next arrow buttons */
-.gallery-slideshow .prev, 
-.gallery-slideshow .next {
-  cursor: pointer;
-  position: absolute; /* Positions the arrows on top of the image */
-  top: 50%; /* Centers the arrows vertically */
-  width: auto;
-  padding: 16px;
-  margin-top: -22px; /* Fine-tunes the vertical centering */
-  color: white;
-  font-weight: bold;
-  font-size: 20px;
-  transition: 0.6s ease;
-  border-radius: 0 3px 3px 0;
-  user-select: none; /* Prevents text selection when clicking the arrows */
-  background-color: rgba(0,0,0,0.3); /* Semi-transparent background */
-}
-
-/* Positions the "next" button on the right side */
-.gallery-slideshow .next {
-  right: 0;
-  border-radius: 3px 0 0 3px;
-}
-
-/* Darkens the arrow background on hover for better feedback */
-.gallery-slideshow .prev:hover, 
-.gallery-slideshow .next:hover {
-  background-color: rgba(0,0,0,0.8);
-}
-
-/* Container for the thumbnail images */
-.gallery-thumbs {
+/* --- NEW: Image Grid Styles --- */
+.row {
   display: flex;
-  flex-wrap: wrap; /* Allows thumbnails to wrap to the next line on small screens */
-  gap: 0.5rem; /* Space between thumbnails */
-  justify-content: center; /* Centers the thumbnails */
+  flex-wrap: wrap;
+  padding: 0 4px;
 }
 
-/* Individual thumbnail image styles */
-.gallery-thumbs .thumb {
-  width: 15%; /* Each thumbnail takes up 15% of the container width */
-  min-width: 80px; /* Ensures thumbnails don't become too small to see or click */
-  opacity: 0.6; /* Makes inactive thumbnails slightly transparent */
-  cursor: pointer;
-  transition: opacity 0.3s ease;
-  border-radius: 0.5rem;
+.column {
+  flex: 25%;
+  max-width: 25%;
+  padding: 0 4px;
 }
 
-/* Styles for a thumbnail when it's hovered over or is the active slide */
-.gallery-thumbs .thumb:hover,
-.gallery-thumbs .thumb.active {
-  opacity: 1; /* Makes the thumbnail fully opaque */
-  outline: 2px solid #a78bfa; /* Adds the purple highlight */
-  outline-offset: 2px;
+.column img {
+  margin-top: 8px;
+  vertical-align: middle;
+  width: 100%;
+  border-radius: 0.5rem; /* Added rounded corners */
 }
 
-/* --- CORRECTED GALLERY STYLES END HERE --- */
+@media screen and (max-width: 800px) {
+  .column {
+    flex: 50%;
+    max-width: 50%;
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .column {
+    flex: 100%;
+    max-width: 100%;
+  }
+}
+/* --- End Image Grid Styles --- */
 
 footer p {
   color: var(--footer-text);
