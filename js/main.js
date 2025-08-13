@@ -120,7 +120,7 @@ document.addEventListener('DOMContentLoaded', () => {
   };
   const translationCache = {};
 
-  // **NEW**: This function fetches all language files in the background when the page loads.
+  // This function fetches all language files in the background.
   async function preloadTranslations() {
     // We use Promise.all to fetch all files at the same time for efficiency.
     await Promise.all(supportedLanguages.map(async (lang) => {
@@ -421,6 +421,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
   initSlideshow();
   
-  // **NEW**: Call the preloading function after the initial page setup is done.
-  preloadTranslations();
+  // **OPTIMIZATION**: Wait until the entire window (including images) is loaded before
+  // starting the background preloading of other language files.
+  window.addEventListener('load', () => {
+    preloadTranslations();
+  });
 });
