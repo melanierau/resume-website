@@ -185,12 +185,23 @@ a, button {
   outline-offset: 2px;
 }
 
-footer p {
-  color: var(--footer-text);
+/* This hides the mobile-only grid of images. */
+.gallery-mobile-grid {
+    display: none;
 }
 
-[data-translate-key] {
-  color: inherit;
+/* This makes the slideshow images responsive. */
+.gallery-slideshow .mySlides img {
+  width: 100%;
+  height: auto;
+  max-height: 70vh;
+  object-fit: contain;
+}
+
+/* --- Newly Added Code Ends Here --- */
+
+footer p {
+  color: var(--footer-text);
 }
 
 /* Logo Card Styles from Original Design */
