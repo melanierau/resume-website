@@ -19,6 +19,8 @@ document.addEventListener('DOMContentLoaded', () => {
   const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
   // --- 3) UTILITY: DEBOUNCE ---
+  // This function prevents another function from running too frequently.
+  // It's used on the scroll event to improve performance.
   function debounce(func, delay = 100) {
     let timeoutId;
     return (...args) => {
@@ -162,6 +164,8 @@ document.addEventListener('DOMContentLoaded', () => {
       });
       document.documentElement.lang = lang;
       themeState.notify();
+      // After translations are applied, highlight the keywords.
+      highlightKeywords();
     } catch (e) {
       console.error('Translation Error:', e);
     }
@@ -180,41 +184,108 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // --- 7) DYNAMIC CONTENT & ANIMATIONS ---
 
-  // --- Section fade-in ---
+  // --- Section fade-in and Counter Animation Trigger ---
+  // This observer watches for sections to scroll into view.
   if (!prefersReducedMotion) {
-    const sectionObserver = new IntersectionObserver((entries) => {
+    const animationObserver = new IntersectionObserver((entries, observer) => {
       entries.forEach(entry => {
+        // When an observed element is intersecting the viewport...
         if (entry.isIntersecting) {
+          // Add the 'visible' class to trigger the CSS fade-in animation.
           entry.target.classList.add('visible');
-          sectionObserver.unobserve(entry.target);
+
+          // If the element that just became visible is the 'impact' or 'case-studies' section,
+          // we call the function to start the number counters within it.
+          if (entry.target.id === 'impact' || entry.target.id === 'case-studies') {
+            initCounters(entry.target);
+          }
+          
+          // We stop observing the element after it has animated once to save resources.
+          observer.unobserve(entry.target);
         }
       });
-    }, { threshold: 0.1 });
-    document.querySelectorAll('.section-fade-in').forEach(section => sectionObserver.observe(section));
-  }
+    }, { threshold: 0.2 }); // Trigger when 20% of the element is visible.
 
-  // --- Number Counters ---
-  function initCounters() {
-    document.querySelectorAll('.counter').forEach(counter => {
-      const target = parseFloat(counter.getAttribute('data-target') || '0');
-      if (prefersReducedMotion) {
-        counter.textContent = target;
-        return;
-      }
-      let current = 0;
-      const increment = target / 100;
-      const updateCounter = () => {
-        if (current < target) {
-          current += increment;
-          counter.textContent = Math.ceil(current);
-          requestAnimationFrame(updateCounter);
-        } else {
-          counter.textContent = target;
-        }
-      };
-      updateCounter();
+    // Tell the observer to watch all sections with the 'section-fade-in' class.
+    document.querySelectorAll('.section-fade-in').forEach(section => {
+      animationObserver.observe(section);
     });
   }
+
+
+  // --- Number Counters (Sequential & Slower) ---
+  // This function is 'async' which allows us to use 'await' to pause execution.
+  async function initCounters(section) {
+    // Find counters only within the section that just became visible.
+    const counters = section.querySelectorAll('.counter');
+    if (counters.length === 0) return;
+
+    const duration = 2000; // Duration for each number to count up (in ms). 2000ms = 2 seconds.
+    const delayBetweenCounters = 500; // Delay before the next counter starts (in ms). 500ms = 0.5 seconds.
+
+    // This is a helper function that animates a single number.
+    // It returns a Promise, which is like a notification for when it's finished.
+    const animateCounter = (counter) => {
+      return new Promise(resolve => {
+        const target = parseFloat(counter.getAttribute('data-target') || '0');
+        
+        // If the user prefers reduced motion, just set the final number and finish immediately.
+        if (prefersReducedMotion) {
+          counter.textContent = target;
+          resolve();
+          return;
+        }
+
+        let startTimestamp = null;
+        const step = (timestamp) => {
+          if (!startTimestamp) startTimestamp = timestamp;
+          const progress = Math.min((timestamp - startTimestamp) / duration, 1);
+          counter.textContent = Math.floor(progress * target);
+
+          if (progress < 1) {
+            // If the animation isn't done, request the next frame to continue.
+            requestAnimationFrame(step);
+          } else {
+            // If it is done, set the final number and 'resolve' the promise to signal completion.
+            counter.textContent = target;
+            resolve();
+          }
+        };
+        // Start the animation loop.
+        requestAnimationFrame(step);
+      });
+    };
+
+    // Loop through each counter element one by one.
+    for (const counter of counters) {
+      // 'await' tells the code to wait here until the current counter's animation is finished.
+      await animateCounter(counter);
+      // 'await' this to create a pause before the next counter starts.
+      await new Promise(resolve => setTimeout(resolve, delayBetweenCounters));
+    }
+  }
+
+  // --- Keyword Highlighting ---
+  function highlightKeywords() {
+      const keywords = ["FinOps", "Zero Trust", "Azure", "GCP", "Terraform", "Power BI", "Agile", "CI/CD", "Cloud"];
+      const elementsToScan = document.querySelectorAll('p, li, h3'); // Scan paragraphs, list items, and headings
+
+      // Create a regular expression from the keywords array.
+      // The 'gi' flags mean global (don't stop after the first match) and case-insensitive.
+      // The '\\b' ensures we match whole words only (e.g., it won't match "agile" inside "fragile").
+      const regex = new RegExp(`\\b(${keywords.join('|')})\\b`, 'gi');
+
+      elementsToScan.forEach(el => {
+          // We only want to modify text nodes, not the HTML structure itself.
+          if (el.children.length === 0) {
+              el.innerHTML = el.innerHTML.replace(regex, (match) => {
+                  // Wrap every match in a span with the 'highlight-keyword' class.
+                  return `<span class="highlight-keyword">${match}</span>`;
+              });
+          }
+      });
+  }
+
 
   // --- FAQ accordion ---
   if (faqItems) {
@@ -236,7 +307,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  // --- Gallery slideshow (for all screen sizes) ---
+  // --- Gallery slideshow ---
   function initSlideshow() {
     const slideshow = document.querySelector('.gallery-slideshow');
     if (!slideshow) return;
@@ -356,5 +427,4 @@ document.addEventListener('DOMContentLoaded', () => {
   applyTranslations(initialLang);
 
   initSlideshow();
-  initCounters();
 });
