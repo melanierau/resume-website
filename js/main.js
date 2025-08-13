@@ -236,9 +236,9 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  // --- Gallery slideshow (desktop only) ---
+ // --- Gallery slideshow (now for all screen sizes) ---
   function initSlideshow() {
-    if (window.innerWidth <= 768) return;
+    // The line "if (window.innerWidth <= 768) return;" has been removed.
     const slideshow = document.querySelector('.gallery-slideshow');
     if (!slideshow) return;
     let slideIndex = 1;
