@@ -178,6 +178,13 @@ a, button {
   background: linear-gradient(90deg, var(--violet), var(--pink)); /* Creates the gradient bullet points. */
 }
 
+/* --- **NEW**: Keyword Highlighting Style --- */
+.highlight-keyword {
+    color: #c4b5fd; /* A lighter violet color to make it stand out. */
+    font-weight: 500; /* Makes the text slightly bolder. */
+    text-shadow: 0 0 8px rgba(167, 139, 250, 0.3); /* Adds a subtle glow effect. */
+}
+
 /* --- CORRECTED GALLERY STYLES START HERE --- */
 
 /* This hides the mobile-only grid which is no longer needed */
@@ -203,7 +210,7 @@ a, button {
 .gallery-slideshow .mySlides img {
   width: 100%; /* Makes the image take up the full width of its container, making it responsive */
   height: auto; /* Height adjusts automatically to maintain aspect ratio */
-  max-height: 500px; /* **CHANGE**: Reduced from 70vh to a fixed 500px to make it shorter on desktops. */
+  max-height: 500px; /* Sets a fixed max height to prevent it from being too tall on desktops. */
   object-fit: contain; /* Ensures the whole image is visible without being cropped or stretched */
   margin: 0 auto; /* Centers the image horizontally if it's not filling the width */
   display: block; /* Ensures margin auto works correctly */
