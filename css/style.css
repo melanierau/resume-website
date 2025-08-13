@@ -5,7 +5,7 @@
    - This makes it super easy to change a color everywhere at once.
    ================================================================= */
 :root {
-  /* These are the colors for the default Dark Mode theme from your original design. */
+  /* These are the colors for the default Dark Mode theme. */
   --bg: #0b0a1a; /* The main background color of the page. */
   --text: #e5e7eb; /* The primary color for most of the text. */
   --text-secondary: #9ca3af; /* A lighter gray for less important text. */
@@ -13,9 +13,9 @@
   --footer-text: #9ca3af; /* The color for text in the footer. */
   --card-bg: rgba(255, 255, 255, 0.05); /* A slightly transparent white for the "glass" cards. */
   --card-border: rgba(255, 255, 255, 0.1); /* A subtle border for the "glass" cards. */
-  --timeline-border: #4c1d95;
-  --timeline-dot: #A78BFA;
-  --logo-card-bg: #111827;
+  --timeline-border: #4c1d95; /* Color for the vertical line in the experience timeline. */
+  --timeline-dot: #A78BFA; /* Color for the dots on the experience timeline. */
+  --logo-card-bg: #111827; /* Background for the company logo cards. */
   --violet: #8b5cf6; /* The main accent color. */
   --pink: #f472b6; /* The secondary accent color for gradients. */
 }
@@ -39,7 +39,7 @@ body {
   background: var(--bg); /* Uses the background color variable we defined above. */
   color: var(--text); /* Uses the text color variable. */
   transition: background-color 0.4s ease, color 0.4s ease; /* Makes the light/dark mode switch smooth. */
-  cursor: none; /* Hides the default cursor for the mouse follower effect */
+  cursor: none; /* Hides the default cursor because we have a custom mouse follower effect. */
 }
 
 .gradient-text {
@@ -50,48 +50,50 @@ body {
 
 /* =================================================================
    2. Language-Aware Typography & Layout Resilience
+   - Styles to make sure text looks good even when it's in different languages, which can have different lengths.
    ================================================================= */
 
 h1, h2, h3, .btn, .impact-number {
-  text-wrap: balance;
+  text-wrap: balance; /* Prevents single "orphan" words on the last line of a heading. */
 }
 
 header nav a, .case-card h3, .case-study h3, .faq-item h3 button, label, button, .gallery-thumbs img + *, .impact-number {
-  overflow-wrap: anywhere;
+  overflow-wrap: anywhere; /* Allows long words to break if they would otherwise overflow their container. */
 }
 
 html:lang(de), html:lang(fr), html:lang(ro), html:lang(es) {
-  hyphens: auto;
+  hyphens: auto; /* Automatically adds hyphens to words in these languages to help with line breaks. */
 }
 
 .impact-number {
-  font-variant-numeric: tabular-nums;
+  font-variant-numeric: tabular-nums; /* Ensures numbers have the same width, so they don't jump around when counting up. */
 }
 
 @media (min-width: 768px) {
   header nav {
-    flex-wrap: wrap;
+    flex-wrap: wrap; /* Allows nav items to wrap to the next line if there isn't enough space. */
     row-gap: 0.25rem;
   }
   header nav a {
-    white-space: nowrap;
+    white-space: nowrap; /* Prevents the text inside a nav link from breaking into two lines. */
     margin-right: 0.25rem;
   }
 }
 
 /* =================================================================
    3. Accessibility & Interaction Styles
+   - General styles for user interaction, animations, and accessibility.
    ================================================================= */
 
 :focus-visible {
-  outline: 2px solid #a78bfa;
+  outline: 2px solid #a78bfa; /* Adds a clear purple outline for keyboard navigation. */
   outline-offset: 2px;
 }
 
 .section-fade-in {
   opacity: 0;
   transform: translateY(20px);
-  transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+  transition: opacity 0.6s ease-out, transform 0.6s ease-out; /* Creates a smooth fade-in effect for sections as you scroll. */
 }
 
 .section-fade-in.visible {
@@ -102,34 +104,34 @@ html:lang(de), html:lang(fr), html:lang(ro), html:lang(es) {
 .glassmorphism {
   background: var(--card-bg);
   border: 1px solid var(--card-border);
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: blur(10px); /* This creates the frosted glass effect. */
+  -webkit-backdrop-filter: blur(10px); /* For Safari browser compatibility. */
   transition: transform 0.3s ease-out, box-shadow 0.3s ease-out, background-color 0.3s ease;
 }
 
 .glassmorphism:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 10px 25px rgba(167, 139, 250, 0.2), 0 5px 15px rgba(244, 114, 182, 0.15);
+  transform: translateY(-5px); /* Lifts the card slightly on hover. */
+  box-shadow: 0 10px 25px rgba(167, 139, 250, 0.2), 0 5px 15px rgba(244, 114, 182, 0.15); /* Adds a colorful glow on hover. */
 }
 
 .active-link {
-  color: var(--violet);
+  color: var(--violet); /* Style for the currently active link in the navigation bar. */
   font-weight: 600;
 }
 
 .faq-answer {
-  max-height: 0;
+  max-height: 0; /* The answer is hidden by default. */
   overflow: hidden;
-  transition: max-height 0.5s ease-in-out;
+  transition: max-height 0.5s ease-in-out; /* Smoothly animates the opening/closing of the FAQ. */
 }
 
 .faq-item.active .faq-answer {
-  max-height: 500px;
+  max-height: 500px; /* Sets a max-height to reveal the answer when active. */
   margin-top: 1rem;
 }
 
 .faq-item.active .faq-arrow {
-  transform: rotate(180deg);
+  transform: rotate(180deg); /* Flips the arrow icon when the FAQ item is open. */
 }
 
 /* Mouse Follower Styles */
@@ -141,12 +143,12 @@ html:lang(de), html:lang(fr), html:lang(ro), html:lang(es) {
   height: 40px;
   border-radius: 50%;
   background: radial-gradient(circle, rgba(167, 139, 250, 0.5) 0%, rgba(244, 114, 182, 0.3) 100%);
-  filter: blur(15px);
+  filter: blur(15px); /* Creates the soft, blurry glow effect. */
   z-index: 9999;
-  pointer-events: none;
-  transform: translate(-50%, -50%);
+  pointer-events: none; /* Allows clicks to pass through the follower element. */
+  transform: translate(-50%, -50%); /* Centers the follower on the cursor. */
   transition: width 0.2s ease-out, height 0.2s ease-out;
-  opacity: 0;
+  opacity: 0; /* Hidden by default, becomes visible on hover. */
 }
 
 body:hover #mouse-follower {
@@ -154,11 +156,12 @@ body:hover #mouse-follower {
 }
 
 a, button {
-  cursor: none;
+  cursor: none; /* Hides the default cursor for links and buttons to use the custom follower. */
 }
 
 /* =================================================================
    4. Component-Specific Styles
+   - Styles for individual components like the timeline, lists, gallery, and cards.
    ================================================================= */
 
 .timeline-border { border-color: var(--timeline-border); }
@@ -172,36 +175,102 @@ a, button {
   width: 0.5rem;
   height: 0.5rem;
   border-radius: 9999px;
-  background: linear-gradient(90deg, var(--violet), var(--pink));
+  background: linear-gradient(90deg, var(--violet), var(--pink)); /* Creates the gradient bullet points. */
 }
 
-.gallery-slideshow .prev, .gallery-slideshow .next {
-  padding: 0.25rem 0.5rem;
-  border-radius: 0.5rem;
-}
+/* --- CORRECTED GALLERY STYLES START HERE --- */
 
-.gallery-thumbs .thumb.active {
-  outline: 2px solid #a78bfa;
-  outline-offset: 2px;
-}
-
-/* This hides the mobile-only grid of images. */
+/* This hides the mobile-only grid which is no longer needed */
 .gallery-mobile-grid {
     display: none;
 }
 
-/* This makes the slideshow images responsive. */
-.gallery-slideshow .mySlides img {
-  width: 100%;
-  height: auto;
-  max-height: 70vh;
-  object-fit: contain;
+.gallery-container {
+  display: block; /* Ensures the main container is always visible */
+  max-width: 900px; /* Sets a maximum width for the gallery on very large screens */
+  margin: auto; /* Centers the gallery horizontally */
 }
 
-/* --- Newly Added Code Ends Here --- */
+.gallery-slideshow {
+  position: relative; /* Needed for positioning the prev/next arrows */
+  margin-bottom: 1rem;
+}
+
+.gallery-slideshow .mySlides {
+  display: none; /* All slides are hidden by default; JavaScript will show the active one */
+}
+
+.gallery-slideshow .mySlides img {
+  width: 100%; /* Makes the image take up the full width of its container, making it responsive */
+  height: auto; /* Height adjusts automatically to maintain aspect ratio */
+  border-radius: 0.75rem; /* Adds rounded corners to the main image */
+}
+
+/* Styles for the Previous and Next arrow buttons */
+.gallery-slideshow .prev, 
+.gallery-slideshow .next {
+  cursor: pointer;
+  position: absolute; /* Positions the arrows on top of the image */
+  top: 50%; /* Centers the arrows vertically */
+  width: auto;
+  padding: 16px;
+  margin-top: -22px; /* Fine-tunes the vertical centering */
+  color: white;
+  font-weight: bold;
+  font-size: 20px;
+  transition: 0.6s ease;
+  border-radius: 0 3px 3px 0;
+  user-select: none; /* Prevents text selection when clicking the arrows */
+  background-color: rgba(0,0,0,0.3); /* Semi-transparent background */
+}
+
+/* Positions the "next" button on the right side */
+.gallery-slideshow .next {
+  right: 0;
+  border-radius: 3px 0 0 3px;
+}
+
+/* Darkens the arrow background on hover for better feedback */
+.gallery-slideshow .prev:hover, 
+.gallery-slideshow .next:hover {
+  background-color: rgba(0,0,0,0.8);
+}
+
+/* Container for the thumbnail images */
+.gallery-thumbs {
+  display: flex;
+  flex-wrap: wrap; /* Allows thumbnails to wrap to the next line on small screens */
+  gap: 0.5rem; /* Space between thumbnails */
+  justify-content: center; /* Centers the thumbnails */
+}
+
+/* Individual thumbnail image styles */
+.gallery-thumbs .thumb {
+  width: 15%; /* Each thumbnail takes up 15% of the container width */
+  min-width: 80px; /* Ensures thumbnails don't become too small to see or click */
+  opacity: 0.6; /* Makes inactive thumbnails slightly transparent */
+  cursor: pointer;
+  transition: opacity 0.3s ease;
+  border-radius: 0.5rem;
+}
+
+/* Styles for a thumbnail when it's hovered over or is the active slide */
+.gallery-thumbs .thumb:hover,
+.gallery-thumbs .thumb.active {
+  opacity: 1; /* Makes the thumbnail fully opaque */
+  outline: 2px solid #a78bfa; /* Adds the purple highlight */
+  outline-offset: 2px;
+}
+
+/* --- CORRECTED GALLERY STYLES END HERE --- */
 
 footer p {
   color: var(--footer-text);
+}
+
+/* Ensures that elements being translated still inherit their parent's text color */
+[data-translate-key] {
+  color: inherit;
 }
 
 /* Logo Card Styles from Original Design */
@@ -225,10 +294,11 @@ footer p {
   max-height: 50px;
   width: auto;
   max-width: 100%;
-  object-fit: contain;
+  object-fit: contain; /* Ensures the logo is scaled correctly without being stretched */
   transition: filter 0.3s ease;
 }
 
+/* Adds a subtle glow to logos in dark mode */
 body:not(.light-mode) .logo-card img {
   filter: drop-shadow(0 0 5px rgba(255, 255, 255, 0.3));
 }
