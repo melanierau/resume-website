@@ -8,6 +8,7 @@
   <meta name="description" data-translate-key="meta_description"
         content="Melanie Rau is a strategic IT leader specializing in Cloud, Data, and AI. Explore her portfolio, projects, and expertise in FinOps, Zero Trust, and multi-cloud architecture." />
 
+  <!-- Preconnect to Google Fonts and other critical domains for faster loading -->
   <link rel="preconnect" href="https://fonts.googleapis.com"/>
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
   <link rel="preconnect" href="https://cdnjs.cloudflare.com"/>
@@ -18,11 +19,14 @@
   <link rel="manifest" href="assets/site.webmanifest">
   <link rel="icon" href="assets/images/icons/favicon.ico" type="image/x-icon">
 
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap&subset=latin,latin-ext" rel="stylesheet">
+  <!-- Load fonts asynchronously to prevent render-blocking -->
+  <link rel="preload" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap&subset=latin,latin-ext" as="style" onload="this.onload=null;this.rel='stylesheet'">
+  <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap&subset=latin,latin-ext"></noscript>
 
   <link rel="stylesheet" href="css/style.css">
 
   <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Defer loading of non-critical scripts -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js" defer></script>
 
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-7MCTBXH1NC"></script>
@@ -133,8 +137,10 @@
           <div class="md:w-2/5 flex justify-center">
             <div class="relative w-64 h-64 md:w-80 md:h-80">
               <div class="absolute inset-0 rounded-full bg-gradient-to-br from-violet-500 to-pink-500 blur-3xl opacity-70"></div>
+              <!-- Prioritize loading the main hero image (LCP element) -->
               <img src="assets/images/photos/linkedin-photo.jpeg" width="460" height="460" alt="Melanie Rau"
-                   class="relative w-full h-full rounded-full object-cover border-4 border-gray-800 shadow-2xl" fetchpriority="high"
+                   class="relative w-full h-full rounded-full object-cover border-4 border-gray-800 shadow-2xl" 
+                   fetchpriority="high"
                    data-translate-key="hero_headshot_alt" data-translate-attr="alt">
             </div>
           </div>
@@ -220,18 +226,18 @@
 
             <div class="row">
               <div class="column">
-                <img src="assets/images/photos/AgentCon.jpeg" alt="AgentCon" style="width:100%">
-                <img src="assets/images/photos/Google-Cloud-Summit.jpeg" alt="Google Cloud Summit" style="width:100%">
+                <img src="assets/images/photos/AgentCon.jpeg" alt="AgentCon" style="width:100%" loading="lazy" decoding="async">
+                <img src="assets/images/photos/Google-Cloud-Summit.jpeg" alt="Google Cloud Summit" style="width:100%" loading="lazy" decoding="async">
               </div>
               <div class="column">
-                <img src="assets/images/photos/Westminster-Awayday-BT.jpeg" alt="Away Day Westminster" style="width:100%">
-                <img src="assets/images/photos/Pagerduty-Mascot.jpeg" alt="PagerDuty Mascot" style="width:100%">
+                <img src="assets/images/photos/Westminster-Awayday-BT.jpeg" alt="Away Day Westminster" style="width:100%" loading="lazy" decoding="async">
+                <img src="assets/images/photos/Pagerduty-Mascot.jpeg" alt="PagerDuty Mascot" style="width:100%" loading="lazy" decoding="async">
               </div>
               <div class="column">
-                <img src="assets/images/photos/CDG.jpeg" alt="CDG" style="width:100%">
+                <img src="assets/images/photos/CDG.jpeg" alt="CDG" style="width:100%" loading="lazy" decoding="async">
               </div>
               <div class="column">
-                <img src="assets/images/photos/Google-Cloud-Summit-1.jpeg" alt="Google Cloud Summit 1" style="width:100%">
+                <img src="assets/images/photos/Google-Cloud-Summit-1.jpeg" alt="Google Cloud Summit 1" style="width:100%" loading="lazy" decoding="async">
               </div>
             </div>
         </div>
@@ -279,17 +285,17 @@
             <div class="text-center max-w-5xl mx-auto">
                 <h3 class="text-lg font-semibold uppercase tracking-widest mb-12" style="color: var(--text-secondary-color);" data-translate-key="orgs_title">Organisations I've Worked With</h3>
                 <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6 gap-6">
-                    <div class="logo-card"><img src="assets/images/logos/pwc.png" alt="PwC Logo"></div>
-                    <div class="logo-card"><img src="assets/images/logos/westminster-city-council.png" alt="Westminster City Council Logo"></div>
-                    <div class="logo-card"><img src="assets/images/logos/booking-com-logo.png" alt="Booking.com Logo"></div>
-                    <div class="logo-card"><img src="assets/images/logos/dentsu-aegis-network.png" alt="Dentsu Logo"></div>
-                    <div class="logo-card"><img src="assets/images/logos/gazprom-logo.jpg" alt="Gazprom Logo"></div>
-                    <div class="logo-card"><img src="assets/images/logos/Revolent.png" alt="Revolent Group Logo"></div>
-                    <div class="logo-card"><img src="assets/images/logos/NextGEN360.png" alt="NextGEN360 Logo"></div>
-                    <div class="logo-card"><img src="assets/images/logos/hologic-logo.png" alt="Hologic Logo"></div>
-                    <div class="logo-card"><img src="assets/images/logos/pca-logo.jpeg" alt="Phillips & Cohen Associates Logo"></div>
-                    <div class="logo-card"><img src="assets/images/logos/hotels-com-logo.png" alt="Hotels.com Logo"></div>
-                    <div class="logo-card"><img src="assets/images/logos/agaplesion-1.png" alt="Agaplesion Logo"></div>
+                    <div class="logo-card"><img src="assets/images/logos/pwc.png" alt="PwC Logo" loading="lazy" decoding="async"></div>
+                    <div class="logo-card"><img src="assets/images/logos/westminster-city-council.png" alt="Westminster City Council Logo" loading="lazy" decoding="async"></div>
+                    <div class="logo-card"><img src="assets/images/logos/booking-com-logo.png" alt="Booking.com Logo" loading="lazy" decoding="async"></div>
+                    <div class="logo-card"><img src="assets/images/logos/dentsu-aegis-network.png" alt="Dentsu Logo" loading="lazy" decoding="async"></div>
+                    <div class="logo-card"><img src="assets/images/logos/gazprom-logo.jpg" alt="Gazprom Logo" loading="lazy" decoding="async"></div>
+                    <div class="logo-card"><img src="assets/images/logos/Revolent.png" alt="Revolent Group Logo" loading="lazy" decoding="async"></div>
+                    <div class="logo-card"><img src="assets/images/logos/NextGEN360.png" alt="NextGEN360 Logo" loading="lazy" decoding="async"></div>
+                    <div class="logo-card"><img src="assets/images/logos/hologic-logo.png" alt="Hologic Logo" loading="lazy" decoding="async"></div>
+                    <div class="logo-card"><img src="assets/images/logos/pca-logo.jpeg" alt="Phillips & Cohen Associates Logo" loading="lazy" decoding="async"></div>
+                    <div class="logo-card"><img src="assets/images/logos/hotels-com-logo.png" alt="Hotels.com Logo" loading="lazy" decoding="async"></div>
+                    <div class="logo-card"><img src="assets/images/logos/agaplesion-1.png" alt="Agaplesion Logo" loading="lazy" decoding="async"></div>
                 </div>
             </div>
         </div>
@@ -379,7 +385,6 @@
             <p class="text-violet-300 mb-2" data-translate-key="university_institution">University of Kassel, Germany</p>
           </div>
         </div>
-        <!-- UPDATED: Certification grid now has "View certificate" links -->
         <div class="max-w-5xl mx-auto mt-8 grid grid-cols-2 md:grid-cols-3 gap-8">
           <a href="https://learn.microsoft.com/en-gb/users/melanierau-5714/credentials/d3dcd81136cb25dd" target="_blank" rel="noopener" class="glassmorphism p-6 rounded-xl flex flex-col justify-between card-interactive">
             <h4 class="font-semibold text-base" style="color:var(--header-text)">Azure Administrator Associate</h4>
