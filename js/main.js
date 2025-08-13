@@ -120,6 +120,25 @@ document.addEventListener('DOMContentLoaded', () => {
   };
   const translationCache = {};
 
+  // **NEW**: This function fetches all language files in the background when the page loads.
+  async function preloadTranslations() {
+    // We use Promise.all to fetch all files at the same time for efficiency.
+    await Promise.all(supportedLanguages.map(async (lang) => {
+      if (!translationCache[lang]) { // Only fetch if not already in cache
+        try {
+          const response = await fetch(`i18n/${lang}.json`);
+          if (response.ok) {
+            translationCache[lang] = await response.json();
+          } else {
+            console.error(`Failed to preload translation for: ${lang}`);
+          }
+        } catch (error) {
+          console.error(`Error preloading translation for ${lang}:`, error);
+        }
+      }
+    }));
+  }
+
   function chooseAndPersistLanguage() {
     const saved = localStorage.getItem('language');
     if (saved && supportedLanguages.includes(saved)) return saved;
@@ -132,20 +151,23 @@ document.addEventListener('DOMContentLoaded', () => {
   async function applyTranslations(lang) {
     lang = lang || 'en';
     try {
-      if (!translationCache.en) {
-        const r = await fetch('i18n/en.json');
-        if (!r.ok) throw new Error('Could not load English translations!');
-        translationCache.en = await r.json();
-      }
-      if (lang !== 'en' && !translationCache[lang]) {
+      // If preloading worked, the data will be in the cache.
+      // If not, this will fetch it just-in-time as a fallback.
+      if (!translationCache[lang]) {
         const r = await fetch(`i18n/${lang}.json`);
-        translationCache[lang] = r.ok ? await r.json() : {};
+        if (!r.ok) throw new Error(`Could not load translations for ${lang}!`);
+        translationCache[lang] = await r.json();
       }
-      const dict = { ...translationCache.en, ...translationCache[lang] };
+      
+      // We merge the selected language with English. This ensures that if a translation is missing
+      // in one file, it will fall back to the English version instead of showing a blank space.
+      const dict = { ... (translationCache.en || {}), ... (translationCache[lang] || {}) };
       currentTranslations = dict;
+      
       if (dict.meta_title) document.title = dict.meta_title;
       const md = document.querySelector('meta[name="description"]');
       if (md && dict.meta_description) md.setAttribute('content', dict.meta_description);
+      
       document.querySelectorAll('[data-translate-key]').forEach(el => {
         const key = el.dataset.translateKey;
         const val = dict[key];
@@ -157,14 +179,15 @@ document.addEventListener('DOMContentLoaded', () => {
           el.innerHTML = val;
         }
       });
+      
       const cvFileName = cvFiles[lang] || cvFiles.en;
       document.querySelectorAll('a[download]').forEach(link => {
         link.href = `assets/docs/cv/${cvFileName}`;
         link.download = cvFileName;
       });
+      
       document.documentElement.lang = lang;
       themeState.notify();
-      // After translations are applied, highlight the keywords.
       highlightKeywords();
     } catch (e) {
       console.error('Translation Error:', e);
@@ -185,82 +208,58 @@ document.addEventListener('DOMContentLoaded', () => {
   // --- 7) DYNAMIC CONTENT & ANIMATIONS ---
 
   // --- Section fade-in and Counter Animation Trigger ---
-  // This observer watches for sections to scroll into view.
   if (!prefersReducedMotion) {
     const animationObserver = new IntersectionObserver((entries, observer) => {
       entries.forEach(entry => {
-        // When an observed element is intersecting the viewport...
         if (entry.isIntersecting) {
-          // Add the 'visible' class to trigger the CSS fade-in animation.
           entry.target.classList.add('visible');
-
-          // If the element that just became visible is the 'impact' or 'case-studies' section,
-          // we call the function to start the number counters within it.
           if (entry.target.id === 'impact' || entry.target.id === 'case-studies') {
             initCounters(entry.target);
           }
-          
-          // We stop observing the element after it has animated once to save resources.
           observer.unobserve(entry.target);
         }
       });
-    }, { threshold: 0.2 }); // Trigger when 20% of the element is visible.
+    }, { threshold: 0.2 });
 
-    // Tell the observer to watch all sections with the 'section-fade-in' class.
     document.querySelectorAll('.section-fade-in').forEach(section => {
       animationObserver.observe(section);
     });
   }
 
-
   // --- Number Counters (Sequential & Slower) ---
-  // This function is 'async' which allows us to use 'await' to pause execution.
   async function initCounters(section) {
-    // Find counters only within the section that just became visible.
     const counters = section.querySelectorAll('.counter');
     if (counters.length === 0) return;
 
-    const duration = 2000; // Duration for each number to count up (in ms). 2000ms = 2 seconds.
-    const delayBetweenCounters = 500; // Delay before the next counter starts (in ms). 500ms = 0.5 seconds.
+    const duration = 2000;
+    const delayBetweenCounters = 500;
 
-    // This is a helper function that animates a single number.
-    // It returns a Promise, which is like a notification for when it's finished.
     const animateCounter = (counter) => {
       return new Promise(resolve => {
         const target = parseFloat(counter.getAttribute('data-target') || '0');
-        
-        // If the user prefers reduced motion, just set the final number and finish immediately.
         if (prefersReducedMotion) {
           counter.textContent = target;
           resolve();
           return;
         }
-
         let startTimestamp = null;
         const step = (timestamp) => {
           if (!startTimestamp) startTimestamp = timestamp;
           const progress = Math.min((timestamp - startTimestamp) / duration, 1);
           counter.textContent = Math.floor(progress * target);
-
           if (progress < 1) {
-            // If the animation isn't done, request the next frame to continue.
             requestAnimationFrame(step);
           } else {
-            // If it is done, set the final number and 'resolve' the promise to signal completion.
             counter.textContent = target;
             resolve();
           }
         };
-        // Start the animation loop.
         requestAnimationFrame(step);
       });
     };
 
-    // Loop through each counter element one by one.
     for (const counter of counters) {
-      // 'await' tells the code to wait here until the current counter's animation is finished.
       await animateCounter(counter);
-      // 'await' this to create a pause before the next counter starts.
       await new Promise(resolve => setTimeout(resolve, delayBetweenCounters));
     }
   }
@@ -268,24 +267,18 @@ document.addEventListener('DOMContentLoaded', () => {
   // --- Keyword Highlighting ---
   function highlightKeywords() {
       const keywords = ["FinOps", "Zero Trust", "Azure", "GCP", "Terraform", "Power BI", "Agile", "CI/CD", "Cloud"];
-      const elementsToScan = document.querySelectorAll('p, li, h3'); // Scan paragraphs, list items, and headings
+      const elementsToScan = document.querySelectorAll('p, li, h3');
 
-      // Create a regular expression from the keywords array.
-      // The 'gi' flags mean global (don't stop after the first match) and case-insensitive.
-      // The '\\b' ensures we match whole words only (e.g., it won't match "agile" inside "fragile").
       const regex = new RegExp(`\\b(${keywords.join('|')})\\b`, 'gi');
 
       elementsToScan.forEach(el => {
-          // We only want to modify text nodes, not the HTML structure itself.
           if (el.children.length === 0) {
               el.innerHTML = el.innerHTML.replace(regex, (match) => {
-                  // Wrap every match in a span with the 'highlight-keyword' class.
                   return `<span class="highlight-keyword">${match}</span>`;
               });
           }
       });
   }
-
 
   // --- FAQ accordion ---
   if (faqItems) {
@@ -427,4 +420,7 @@ document.addEventListener('DOMContentLoaded', () => {
   applyTranslations(initialLang);
 
   initSlideshow();
+  
+  // **NEW**: Call the preloading function after the initial page setup is done.
+  preloadTranslations();
 });
