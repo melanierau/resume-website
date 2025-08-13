@@ -203,6 +203,10 @@ a, button {
 .gallery-slideshow .mySlides img {
   width: 100%; /* Makes the image take up the full width of its container, making it responsive */
   height: auto; /* Height adjusts automatically to maintain aspect ratio */
+  max-height: 500px; /* **CHANGE**: Reduced from 70vh to a fixed 500px to make it shorter on desktops. */
+  object-fit: contain; /* Ensures the whole image is visible without being cropped or stretched */
+  margin: 0 auto; /* Centers the image horizontally if it's not filling the width */
+  display: block; /* Ensures margin auto works correctly */
   border-radius: 0.75rem; /* Adds rounded corners to the main image */
 }
 
