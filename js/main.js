@@ -287,31 +287,6 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  // --- Gallery slideshow ---
-  function initSlideshow() {
-    const slideshow = document.querySelector('.gallery-slideshow');
-    if (!slideshow) return;
-    let slideIndex = 1;
-    const slides = slideshow.getElementsByClassName('mySlides');
-    const thumbsWrap = document.querySelector('.gallery-thumbs');
-    if (!thumbsWrap) return;
-    const thumbs = thumbsWrap.getElementsByClassName('thumb');
-    function showSlides(n) {
-      if (n > slides.length) slideIndex = 1;
-      if (n < 1) slideIndex = slides.length;
-      for (let i = 0; i < slides.length; i++) slides[i].style.display = 'none';
-      for (let i = 0; i < thumbs.length; i++) thumbs[i].classList.remove('active');
-      slides[slideIndex - 1].style.display = 'block';
-      if (thumbs[slideIndex - 1]) thumbs[slideIndex - 1].classList.add('active');
-    }
-    slideshow.querySelector('.prev')?.addEventListener('click', () => showSlides(slideIndex += -1));
-    slideshow.querySelector('.next')?.addEventListener('click', () => showSlides(slideIndex += 1));
-    for (let i = 0; i < thumbs.length; i++) {
-      thumbs[i].addEventListener('click', () => showSlides(slideIndex = i + 1));
-    }
-    showSlides(slideIndex);
-  }
-
   // --- Active nav link highlighting on scroll ---
   const navObserver = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
@@ -405,8 +380,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
   const initialLang = chooseAndPersistLanguage();
   applyTranslations(initialLang);
-
-  initSlideshow();
   
   window.addEventListener('load', () => {
     preloadTranslations();
