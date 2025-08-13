@@ -178,13 +178,6 @@ a, button {
   background: linear-gradient(90deg, var(--violet), var(--pink)); /* Creates the gradient bullet points. */
 }
 
-/* --- **NEW**: Keyword Highlighting Style --- */
-.highlight-keyword {
-    color: #c4b5fd; /* A lighter violet color to make it stand out. */
-    font-weight: 500; /* Makes the text slightly bolder. */
-    text-shadow: 0 0 8px rgba(167, 139, 250, 0.3); /* Adds a subtle glow effect. */
-}
-
 /* --- CORRECTED GALLERY STYLES START HERE --- */
 
 /* This hides the mobile-only grid which is no longer needed */
@@ -316,4 +309,40 @@ body:not(.light-mode) .logo-card img {
 
 body:not(.light-mode) .logo-card:hover img {
   filter: drop-shadow(0 0 10px rgba(255, 255, 255, 0.5));
+}
+
+/* =================================================================
+   5. Stylish Header & Icon Overhaul (Apple + Nubia Inspired)
+   - This section adds a premium, sophisticated style to the header.
+   ================================================================= */
+
+/* --- Main Header Bar Style --- */
+#header {
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  background-color: rgba(18, 18, 20, 0.75); /* Dark, semi-transparent background */
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1); /* Subtle border for depth */
+}
+
+/* --- Header in Light Mode --- */
+.light-mode #header {
+  background-color: rgba(249, 249, 251, 0.85); /* Light, semi-transparent background */
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+/* --- Icon Button Styling --- */
+#language-toggle svg,
+#theme-toggle svg {
+    transition: color 0.3s ease, transform 0.3s ease;
+}
+
+#language-toggle:hover svg,
+#theme-toggle:hover svg {
+    color: var(--violet);
+    transform: scale(1.1); /* Slightly enlarges the icon on hover */
+}
+
+/* --- Initial State for Theme Icons --- */
+#sun-icon {
+    display: none; /* Hidden by default, will be shown in light mode by the JS. */
 }
