@@ -54,7 +54,6 @@
            data-translate-key="nav_cv">Download CV</a>
 
        <div id="language-switcher" class="relative">
-          <!-- UPDATED: Language toggle now uses a clearer, more detailed globe icon -->
           <button id="language-toggle"
                   class="p-2 rounded-lg flex items-center"
                   aria-haspopup="true" aria-expanded="false"
@@ -73,7 +72,6 @@
           </div>
         </div>
 
-        <!-- Theme toggle uses sophisticated sun/moon icons -->
         <button id="theme-toggle" class="p-2 rounded-lg"
                 aria-label="Toggle theme"
                 data-translate-key="theme_toggle_aria"
@@ -220,25 +218,21 @@
                 <p class="max-w-2xl mx-auto font-light" style="color:var(--text-secondary)" data-translate-key="gallery_subtitle">Snapshots from conferences, hackathons, and team days.</p>
             </div>
 
-            <div class="gallery-container">
-                <div class="gallery-slideshow" data-translate-skip>
-                    <div class="mySlides"><img src="assets/images/photos/AgentCon.jpeg" alt="AgentCon" data-translate-key="gallery_img_agentcon" data-translate-attr="alt"></div>
-                    <div class="mySlides"><img src="assets/images/photos/Westminster-Awayday-BT.jpeg" alt="Away Day Westminster" data-translate-key="gallery_img_away_day" data-translate-attr="alt"></div>
-                    <div class="mySlides"><img src="assets/images/photos/CDG.jpeg" alt="CDG" data-translate-key="gallery_img_cdg" data-translate-attr="alt"></div>
-                    <div class="mySlides"><img src="assets/images/photos/Google-Cloud-Summit-1.jpeg" alt="Google Cloud Summit 1" data-translate-key="gallery_img_gcs1" data-translate-attr="alt"></div>
-                    <div class="mySlides"><img src="assets/images/photos/Google-Cloud-Summit.jpeg" alt="Google Cloud Summit" data-translate-key="gallery_img_gcs" data-translate-attr="alt"></div>
-                    <div class="mySlides"><img src="assets/images/photos/Pagerduty-Mascot.jpeg" alt="PagerDuty Mascot" data-translate-key="gallery_img_pagerduty_mascot" data-translate-attr="alt"></div>
-                    <a class="prev" aria-label="Previous image" data-translate-key="aria_prev_photo" data-translate-attr="aria-label">❮</a>
-                    <a class="next" aria-label="Next image" data-translate-key="aria_next_photo" data-translate-attr="aria-label">❯</a>
-                </div>
-                <div class="gallery-thumbs" data-translate-skip>
-                    <img class="thumb" src="assets/images/photos/AgentCon.jpeg" alt="AgentCon thumbnail" data-translate-key="gallery_img_agentcon" data-translate-attr="alt">
-                    <img class="thumb" src="assets/images/photos/Westminster-Awayday-BT.jpeg" alt="Away Day Westminster thumbnail" data-translate-key="gallery_img_away_day" data-translate-attr="alt">
-                    <img class="thumb" src="assets/images/photos/CDG.jpeg" alt="CDG thumbnail" data-translate-key="gallery_img_cdg" data-translate-attr="alt">
-                    <img class="thumb" src="assets/images/photos/Google-Cloud-Summit-1.jpeg" alt="Google Cloud Summit 1 thumbnail" data-translate-key="gallery_img_gcs1" data-translate-attr="alt">
-                    <img class="thumb" src="assets/images/photos/Google-Cloud-Summit.jpeg" alt="Google Cloud Summit thumbnail" data-translate-key="gallery_img_gcs" data-translate-attr="alt">
-                    <img class="thumb" src="assets/images/photos/Pagerduty-Mascot.jpeg" alt="PagerDuty Mascot thumbnail" data-translate-key="gallery_img_pagerduty_mascot" data-translate-attr="alt">
-                </div>
+            <div class="row">
+              <div class="column">
+                <img src="assets/images/photos/AgentCon.jpeg" alt="AgentCon" style="width:100%">
+                <img src="assets/images/photos/Google-Cloud-Summit.jpeg" alt="Google Cloud Summit" style="width:100%">
+              </div>
+              <div class="column">
+                <img src="assets/images/photos/Westminster-Awayday-BT.jpeg" alt="Away Day Westminster" style="width:100%">
+                <img src="assets/images/photos/Pagerduty-Mascot.jpeg" alt="PagerDuty Mascot" style="width:100%">
+              </div>
+              <div class="column">
+                <img src="assets/images/photos/CDG.jpeg" alt="CDG" style="width:100%">
+              </div>
+              <div class="column">
+                <img src="assets/images/photos/Google-Cloud-Summit-1.jpeg" alt="Google Cloud Summit 1" style="width:100%">
+              </div>
             </div>
         </div>
     </section>
@@ -385,24 +379,31 @@
             <p class="text-violet-300 mb-2" data-translate-key="university_institution">University of Kassel, Germany</p>
           </div>
         </div>
-        <div class="max-w-5xl mx-auto mt-8 grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-          <a href="https://learn.microsoft.com/en-gb/users/melanierau-5714/credentials/d3dcd81136cb25dd" target="_blank" rel="noopener" class="glassmorphism p-4 rounded-xl text-center flex items-center justify-center h-24 card-interactive">
-            <span class="font-semibold text-sm">Azure Administrator Associate</span>
+        <!-- UPDATED: Certification grid now has "View certificate" links -->
+        <div class="max-w-5xl mx-auto mt-8 grid grid-cols-2 md:grid-cols-3 gap-8">
+          <a href="https://learn.microsoft.com/en-gb/users/melanierau-5714/credentials/d3dcd81136cb25dd" target="_blank" rel="noopener" class="glassmorphism p-6 rounded-xl flex flex-col justify-between card-interactive">
+            <h4 class="font-semibold text-base" style="color:var(--header-text)">Azure Administrator Associate</h4>
+            <span class="text-violet-400 hover:underline mt-4 text-sm">View certificate →</span>
           </a>
-          <a href="https://www.credly.com/badges/aa6be932-7970-4d2b-af90-7f07f6496ca9" target="_blank" rel="noopener" class="glassmorphism p-4 rounded-xl text-center flex items-center justify-center h-24 card-interactive">
-            <span class="font-semibold text-sm">Azure Fundamentals</span>
+          <a href="https://www.credly.com/badges/aa6be932-7970-4d2b-af90-7f07f6496ca9" target="_blank" rel="noopener" class="glassmorphism p-6 rounded-xl flex flex-col justify-between card-interactive">
+            <h4 class="font-semibold text-base" style="color:var(--header-text)">Azure Fundamentals</h4>
+            <span class="text-violet-400 hover:underline mt-4 text-sm">View certificate →</span>
           </a>
-          <a href="https://www.credly.com/badges/a4593d76-1125-4792-8c21-83a966441423" target="_blank" rel="noopener" class="glassmorphism p-4 rounded-xl text-center flex items-center justify-center h-24 card-interactive">
-            <span class="font-semibold text-sm">PagerDuty Administrator</span>
+          <a href="https://www.credly.com/badges/a4593d76-1125-4792-8c21-83a966441423" target="_blank" rel="noopener" class="glassmorphism p-6 rounded-xl flex flex-col justify-between card-interactive">
+            <h4 class="font-semibold text-base" style="color:var(--header-text)">PagerDuty Administrator</h4>
+            <span class="text-violet-400 hover:underline mt-4 text-sm">View certificate →</span>
           </a>
-          <a href="https://www.coursera.org/account/accomplishments/specialization/certificate/O64MF0GSNGHW" target="_blank" rel="noopener" class="glassmorphism p-4 rounded-xl text-center flex items-center justify-center h-24 card-interactive">
-            <span class="font-semibold text-sm">Google AI Essentials</span>
+          <a href="https://www.coursera.org/account/accomplishments/specialization/certificate/O64MF0GSNGHW" target="_blank" rel="noopener" class="glassmorphism p-6 rounded-xl flex flex-col justify-between card-interactive">
+            <h4 class="font-semibold text-base" style="color:var(--header-text)">Google AI Essentials</h4>
+            <span class="text-violet-400 hover:underline mt-4 text-sm">View certificate →</span>
           </a>
-          <a href="https://certificates.mooc.fi/validate/2x56pqhrlp8" target="_blank" rel="noopener" class="glassmorphism p-4 rounded-xl text-center flex items-center justify-center h-24 card-interactive">
-            <span class="font-semibold text-sm">Elements of AI</span>
+          <a href="https://certificates.mooc.fi/validate/2x56pqhrlp8" target="_blank" rel="noopener" class="glassmorphism p-6 rounded-xl flex flex-col justify-between card-interactive">
+            <h4 class="font-semibold text-base" style="color:var(--header-text)">Elements of AI</h4>
+            <span class="text-violet-400 hover:underline mt-4 text-sm">View certificate →</span>
           </a>
-          <a href="https://www.coursera.org/account/accomplishments/verify/NI87XVN5WZP5" target="_blank" rel="noopener" class="glassmorphism p-4 rounded-xl text-center flex items-center justify-center h-24 card-interactive">
-            <span class="font-semibold text-sm">Leading Teams: Developing as a Leader</span>
+          <a href="https://www.coursera.org/account/accomplishments/verify/NI87XVN5WZP5" target="_blank" rel="noopener" class="glassmorphism p-6 rounded-xl flex flex-col justify-between card-interactive">
+            <h4 class="font-semibold text-base" style="color:var(--header-text)">Leading Teams: Developing as a Leader</h4>
+            <span class="text-violet-400 hover:underline mt-4 text-sm">View certificate →</span>
           </a>
         </div>
       </div>
