@@ -14,6 +14,9 @@ document.addEventListener('DOMContentLoaded', () => {
   const navLinks = document.querySelectorAll('header nav a[href^="#"]');
   const faqItems = document.querySelectorAll('.faq-item');
   const follower = document.getElementById('mouse-follower');
+  const sunIcon = document.getElementById('sun-icon');
+  const moonIcon = document.getElementById('moon-icon');
+
 
   // --- 2) CHECK USER PREFERENCES ---
   const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -95,6 +98,12 @@ document.addEventListener('DOMContentLoaded', () => {
 
   themeState.subscribe((theme) => {
     document.documentElement.classList.toggle('light-mode', theme === 'light');
+    
+    if (sunIcon && moonIcon) {
+        sunIcon.style.display = theme === 'light' ? 'block' : 'none';
+        moonIcon.style.display = theme === 'light' ? 'none' : 'block';
+    }
+
     if (themeToggle) {
       const label = currentTranslations.theme_toggle_aria || 'Toggle light/dark mode';
       themeToggle.setAttribute('aria-label', label);
@@ -122,9 +131,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // This function fetches all language files in the background.
   async function preloadTranslations() {
-    // We use Promise.all to fetch all files at the same time for efficiency.
     await Promise.all(supportedLanguages.map(async (lang) => {
-      if (!translationCache[lang]) { // Only fetch if not already in cache
+      if (!translationCache[lang]) { 
         try {
           const response = await fetch(`i18n/${lang}.json`);
           if (response.ok) {
@@ -151,16 +159,12 @@ document.addEventListener('DOMContentLoaded', () => {
   async function applyTranslations(lang) {
     lang = lang || 'en';
     try {
-      // If preloading worked, the data will be in the cache.
-      // If not, this will fetch it just-in-time as a fallback.
       if (!translationCache[lang]) {
         const r = await fetch(`i18n/${lang}.json`);
         if (!r.ok) throw new Error(`Could not load translations for ${lang}!`);
         translationCache[lang] = await r.json();
       }
       
-      // We merge the selected language with English. This ensures that if a translation is missing
-      // in one file, it will fall back to the English version instead of showing a blank space.
       const dict = { ... (translationCache.en || {}), ... (translationCache[lang] || {}) };
       currentTranslations = dict;
       
@@ -188,7 +192,6 @@ document.addEventListener('DOMContentLoaded', () => {
       
       document.documentElement.lang = lang;
       themeState.notify();
-      highlightKeywords();
     } catch (e) {
       console.error('Translation Error:', e);
     }
@@ -262,22 +265,6 @@ document.addEventListener('DOMContentLoaded', () => {
       await animateCounter(counter);
       await new Promise(resolve => setTimeout(resolve, delayBetweenCounters));
     }
-  }
-
-  // --- Keyword Highlighting ---
-  function highlightKeywords() {
-      const keywords = ["FinOps", "Zero Trust", "Azure", "GCP", "Terraform", "Power BI", "Agile", "CI/CD", "Cloud"];
-      const elementsToScan = document.querySelectorAll('p, li, h3');
-
-      const regex = new RegExp(`\\b(${keywords.join('|')})\\b`, 'gi');
-
-      elementsToScan.forEach(el => {
-          if (el.children.length === 0) {
-              el.innerHTML = el.innerHTML.replace(regex, (match) => {
-                  return `<span class="highlight-keyword">${match}</span>`;
-              });
-          }
-      });
   }
 
   // --- FAQ accordion ---
@@ -421,8 +408,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
   initSlideshow();
   
-  // **OPTIMIZATION**: Wait until the entire window (including images) is loaded before
-  // starting the background preloading of other language files.
   window.addEventListener('load', () => {
     preloadTranslations();
   });
