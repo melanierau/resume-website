@@ -1,6 +1,3 @@
-Of course. Here is the complete and updated content for your `css/style.css` file, including the styles for the main layout, the new navigation animation, and the fully functional 3D slideshow.
-
-```css
 /* =================================================================
    1. Root Variables & Base Styles
    - This section is like the control panel for the website's entire look and feel.
@@ -113,7 +110,7 @@ html:lang(de), html:lang(fr), html:lang(ro), html:lang(es) {
 }
 
 .glassmorphism:hover {
-  transform: translateY(-8px) scale(1.02); 
+  transform: translateY(-8px) scale(1.02);
   box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
 }
 
@@ -218,7 +215,6 @@ a, button {
   background-size: cover;
   background-position: center;
   box-shadow: 0 5px 15px rgba(0,0,0,0.3);
-  -webkit-box-reflect: below 10px linear-gradient(transparent, transparent, #0004);
 }
 
 /* Assigning the actual images to each slide */
@@ -315,7 +311,7 @@ body:not(.light-mode) .logo-card:hover img {
 @media (min-width: 992px) {
   header {
     /* Required for the absolutely positioned SVG lines */
-    position: relative; 
+    position: relative;
     overflow: hidden;
   }
 
@@ -360,7 +356,7 @@ body:not(.light-mode) .logo-card:hover img {
     position: relative;
     z-index: 1; /* Keep nav links above the SVG lines */
   }
-  
+
   /* Applying active styles to the link */
   header nav a.active-anim-link {
     color: var(--violet);
