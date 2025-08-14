@@ -1,6 +1,3 @@
-// This is the main JavaScript file for the entire website.
-// We wrap everything in this 'DOMContentLoaded' listener, which is a safety net.
-// It makes sure the HTML page is fully loaded before we try to find and manipulate any elements on it.
 document.addEventListener('DOMContentLoaded', () => {
 
   // --- 1) GRAB ALL THE ELEMENTS WE'LL NEED ---
@@ -22,8 +19,6 @@ document.addEventListener('DOMContentLoaded', () => {
   const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
   // --- 3) UTILITY: DEBOUNCE ---
-  // This function prevents another function from running too frequently.
-  // It's used on the scroll event to improve performance.
   function debounce(func, delay = 100) {
     let timeoutId;
     return (...args) => {
@@ -34,7 +29,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // --- 4) CORE UI INTERACTIONS ---
 
-  // --- Mobile menu toggle ---
   if (mobileMenuButton && mobileMenu) {
     mobileMenuButton.addEventListener('click', () => {
       const isHidden = mobileMenu.classList.toggle('hidden');
@@ -42,7 +36,6 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  // --- Desktop language dropdown ---
   if (languageToggle && languageDropdown) {
     languageToggle.addEventListener('click', (event) => {
       event.stopPropagation();
@@ -52,7 +45,6 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  // --- Close dropdowns on outside click ---
   window.addEventListener('click', () => {
     if (languageDropdown && languageDropdown.style.display === 'block') {
       languageDropdown.style.display = 'none';
@@ -60,7 +52,6 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   });
 
-  // --- Back-to-top button visibility ---
   const handleScroll = () => {
     if (!backToTopButton) return;
     if (window.scrollY > 300) {
@@ -71,7 +62,6 @@ document.addEventListener('DOMContentLoaded', () => {
   };
   window.addEventListener('scroll', debounce(handleScroll, 150));
 
-  // --- Mouse Follower Logic ---
   if (follower) {
     document.addEventListener('mousemove', (e) => {
       requestAnimationFrame(() => {
@@ -98,7 +88,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   themeState.subscribe((theme) => {
     document.documentElement.classList.toggle('light-mode', theme === 'light');
-    
+
     if (sunIcon && moonIcon) {
         sunIcon.style.display = theme === 'light' ? 'block' : 'none';
         moonIcon.style.display = theme === 'light' ? 'none' : 'block';
@@ -129,10 +119,9 @@ document.addEventListener('DOMContentLoaded', () => {
   };
   const translationCache = {};
 
-  // This function fetches all language files in the background.
   async function preloadTranslations() {
     await Promise.all(supportedLanguages.map(async (lang) => {
-      if (!translationCache[lang]) { 
+      if (!translationCache[lang]) {
         try {
           const response = await fetch(`i18n/${lang}.json`);
           if (response.ok) {
@@ -164,14 +153,14 @@ document.addEventListener('DOMContentLoaded', () => {
         if (!r.ok) throw new Error(`Could not load translations for ${lang}!`);
         translationCache[lang] = await r.json();
       }
-      
+
       const dict = { ... (translationCache.en || {}), ... (translationCache[lang] || {}) };
       currentTranslations = dict;
-      
+
       if (dict.meta_title) document.title = dict.meta_title;
       const md = document.querySelector('meta[name="description"]');
       if (md && dict.meta_description) md.setAttribute('content', dict.meta_description);
-      
+
       document.querySelectorAll('[data-translate-key]').forEach(el => {
         const key = el.dataset.translateKey;
         const val = dict[key];
@@ -183,13 +172,13 @@ document.addEventListener('DOMContentLoaded', () => {
           el.innerHTML = val;
         }
       });
-      
+
       const cvFileName = cvFiles[lang] || cvFiles.en;
       document.querySelectorAll('a[download]').forEach(link => {
         link.href = `assets/docs/cv/${cvFileName}`;
         link.download = cvFileName;
       });
-      
+
       document.documentElement.lang = lang;
       themeState.notify();
     } catch (e) {
@@ -210,7 +199,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // --- 7) DYNAMIC CONTENT & ANIMATIONS ---
 
-  // --- Section fade-in and Counter Animation Trigger ---
   if (!prefersReducedMotion) {
     const animationObserver = new IntersectionObserver((entries, observer) => {
       entries.forEach(entry => {
@@ -229,7 +217,6 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  // --- Number Counters (Sequential & Slower) ---
   async function initCounters(section) {
     const counters = section.querySelectorAll('.counter');
     if (counters.length === 0) return;
@@ -267,7 +254,6 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   }
 
-  // --- FAQ accordion ---
   if (faqItems) {
     faqItems.forEach(item => {
       const button = item.querySelector('button');
@@ -287,7 +273,6 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  // --- Active nav link highlighting on scroll ---
   const navObserver = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
       if (entry.isIntersecting) {
@@ -380,8 +365,197 @@ document.addEventListener('DOMContentLoaded', () => {
 
   const initialLang = chooseAndPersistLanguage();
   applyTranslations(initialLang);
-  
+
   window.addEventListener('load', () => {
     preloadTranslations();
   });
+
+  // --- 10) DESKTOP NAV SVG ANIMATION ---
+  if (window.matchMedia('(min-width: 992px)').matches) {
+    const navLinksForAnim = document.querySelectorAll('header nav a[href^="#"]');
+    const lineBottom = document.querySelector(".line-bottom");
+    const lineDash = document.querySelector(".line-dash");
+
+    if (navLinksForAnim.length > 0 && lineBottom && lineDash) {
+      const headerNav = document.querySelector("header nav");
+      let selectedLiOffset = 0;
+      let dashOrigin = 0;
+
+      const menuWidth = 1000;
+      const navWidth = headerNav.offsetWidth;
+      const scalingFactor = menuWidth / navWidth;
+
+      navLinksForAnim.forEach((link, i) => {
+        const linkWidth = link.offsetWidth * scalingFactor;
+        const linkLeft = link.offsetLeft * scalingFactor;
+        const center = linkLeft + (linkWidth / 2);
+
+        const points = `${center - 40},53 ${center - 30},53 ${center},43 ${center + 10},53 ${center + 50},53`;
+        const polygon = document.createElementNS("http://www.w3.org/2000/svg", "polygon");
+        polygon.setAttribute("class", "lb");
+        polygon.setAttribute("points", points);
+        polygon.style.transform = "translateY(50px)";
+        lineBottom.appendChild(polygon);
+      });
+
+      const lbs = document.querySelectorAll(".lb");
+
+      const getDashOffset = (link) => {
+          const linkCenter = link.offsetLeft + link.offsetWidth / 2;
+          return (linkCenter / headerNav.offsetWidth) * -1000 - 35;
+      };
+
+      setTimeout(() => {
+        navLinksForAnim[0].classList.add("active-anim-link");
+        selectedLiOffset = getDashOffset(navLinksForAnim[0]);
+        dashOrigin = selectedLiOffset;
+        lineDash.style.strokeDashoffset = selectedLiOffset;
+        if (lbs[0]) {
+            lbs[0].style.transition = 'transform 0.6s cubic-bezier(0.68, -0.55, 0.27, 1.55)';
+            lbs[0].style.transform = 'translateY(0)';
+        }
+      }, 500);
+
+
+      headerNav.addEventListener('mouseleave', () => {
+        lineDash.style.transition = 'stroke-dashoffset 0.5s cubic-bezier(0.68, -0.55, 0.27, 1.55)';
+        lineDash.style.strokeDashoffset = selectedLiOffset;
+        dashOrigin = selectedLiOffset;
+      });
+
+      navLinksForAnim.forEach((link, i) => {
+        link.addEventListener('mouseover', () => {
+          const targetOffset = getDashOffset(link);
+          lineDash.style.transition = 'stroke-dashoffset 0.4s ease-out';
+          lineDash.style.strokeDashoffset = targetOffset;
+        });
+
+        link.addEventListener('click', (e) => {
+          navLinksForAnim.forEach(l => l.classList.remove('active-anim-link'));
+          link.classList.add('active-anim-link');
+
+          selectedLiOffset = getDashOffset(link);
+
+          lbs.forEach(lb => {
+            lb.style.transition = 'transform 0.3s ease-out';
+            lb.style.transform = 'translateY(50px)';
+          });
+
+          if(lbs[i]) {
+            lbs[i].style.transition = 'transform 0.5s cubic-bezier(0.68, -0.55, 0.27, 1.55)';
+            lbs[i].style.transform = 'translateY(0)';
+          }
+        });
+      });
+    }
+  }
+
+  // --- 11) 3D CAROUSEL GALLERY LOGIC ---
+  const stage = document.querySelector('.stage');
+  if (stage && window.matchMedia('(min-width: 768px)').matches) {
+    const ring = document.querySelector('.ring');
+    let xPos = 0;
+    let yPos = 0;
+    let isMouseDown = false;
+    let startX;
+    let startY;
+    let scrollLeft;
+    let scrollTop;
+
+    stage.addEventListener('mousedown', (e) => {
+      isMouseDown = true;
+      startX = e.pageX - stage.offsetLeft;
+      startY = e.pageY - stage.offsetTop;
+      scrollLeft = ring.style.transform ? parseInt(ring.style.transform.split('(')[1].split('deg)')[0]) : 0;
+      scrollTop = ring.style.transform.includes('rotateX') ? parseInt(ring.style.transform.split('rotateX(')[1].split('deg)')[0]) : -10;
+      ring.style.transition = 'none';
+      ring.style.animationPlayState = 'paused';
+    });
+
+    stage.addEventListener('mouseleave', () => {
+      isMouseDown = false;
+      ring.style.animationPlayState = 'running';
+    });
+
+    stage.addEventListener('mouseup', () => {
+      isMouseDown = false;
+      ring.style.animationPlayState = 'running';
+    });
+
+    stage.addEventListener('mousemove', (e) => {
+      if (!isMouseDown) return;
+      e.preventDefault();
+      const x = e.pageX - stage.offsetLeft;
+      const y = e.pageY - stage.offsetTop;
+      const walkX = (x - startX) * 0.5;
+      const walkY = (y - startY) * 0.5;
+
+      const rotateY = scrollLeft + walkX;
+      let rotateX = scrollTop - walkY;
+
+      if(rotateX > 20) rotateX = 20;
+      if(rotateX < -50) rotateX = -50;
+
+      ring.style.transform = `rotateY(${rotateY}deg) rotateX(${rotateX}deg)`;
+    });
+  }
+
+  // --- 12) GALLERY LIGHTBOX LOGIC ---
+  const lightbox = document.getElementById('lightbox');
+  if (lightbox) {
+    const lightboxImg = document.getElementById('lightbox-img');
+    const lightboxClose = document.getElementById('lightbox-close');
+    const lightboxNext = document.getElementById('lightbox-next');
+    const lightboxPrev = document.getElementById('lightbox-prev');
+    const carouselImages = document.querySelectorAll('.ring .img');
+
+    let currentIndex = 0;
+    const imageUrls = Array.from(carouselImages).map(img => {
+      const style = window.getComputedStyle(img);
+      return style.backgroundImage.slice(4, -1).replace(/"/g, "");
+    });
+
+    const showLightbox = (index) => {
+      currentIndex = index;
+      lightboxImg.src = imageUrls[currentIndex];
+      lightbox.classList.remove('hidden');
+      setTimeout(() => lightbox.classList.add('visible'), 10);
+    };
+
+    const hideLightbox = () => {
+      lightbox.classList.remove('visible');
+      setTimeout(() => lightbox.classList.add('hidden'), 400);
+    };
+
+    const showNextImage = () => {
+      currentIndex = (currentIndex + 1) % imageUrls.length;
+      lightboxImg.src = imageUrls[currentIndex];
+    };
+
+    const showPrevImage = () => {
+      currentIndex = (currentIndex - 1 + imageUrls.length) % imageUrls.length;
+      lightboxImg.src = imageUrls[currentIndex];
+    };
+
+    carouselImages.forEach((img, index) => {
+      img.addEventListener('click', () => showLightbox(index));
+    });
+
+    lightboxClose.addEventListener('click', hideLightbox);
+    lightboxNext.addEventListener('click', showNextImage);
+    lightboxPrev.addEventListener('click', showPrevImage);
+
+    window.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && lightbox.classList.contains('visible')) {
+        hideLightbox();
+      }
+    });
+
+    lightbox.addEventListener('click', (e) => {
+        if (e.target === lightbox) {
+            hideLightbox();
+        }
+    });
+  }
+
 });
