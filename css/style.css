@@ -1,27 +1,22 @@
 /* =================================================================
    1. Root Variables & Base Styles
-   - This section is like the control panel for the website's entire look and feel.
-   - We define all our colors here as "CSS variables" (the things with '--').
-   - This makes it super easy to change a color everywhere at once.
    ================================================================= */
 :root {
-  /* These are the colors for the default Dark Mode theme. */
-  --bg: #0b0a1a; /* The main background color of the page. */
-  --text: #e5e7eb; /* The primary color for most of the text. */
-  --text-secondary: #9ca3af; /* A lighter gray for less important text. */
-  --header-text: #f3f4f6; /* The color for text inside the header. */
-  --footer-text: #9ca3af; /* The color for text in the footer. */
-  --card-bg: rgba(255, 255, 255, 0.05); /* A slightly transparent white for the "glass" cards. */
-  --card-border: rgba(255, 255, 255, 0.1); /* A subtle border for the "glass" cards. */
-  --timeline-border: #4c1d95; /* Color for the vertical line in the experience timeline. */
-  --timeline-dot: #A78BFA; /* Color for the dots on the experience timeline. */
-  --logo-card-bg: #111827; /* Background for the company logo cards. */
-  --violet: #8b5cf6; /* The main accent color. */
-  --pink: #f472b6; /* The secondary accent color for gradients. */
+  --bg: #0b0a1a;
+  --text: #e5e7eb;
+  --text-secondary: #9ca3af;
+  --header-text: #f3f4f6;
+  --footer-text: #9ca3af;
+  --card-bg: rgba(255, 255, 255, 0.05);
+  --card-border: rgba(255, 255, 255, 0.1);
+  --timeline-border: #4c1d95;
+  --timeline-dot: #A78BFA;
+  --logo-card-bg: #111827;
+  --violet: #8b5cf6;
+  --pink: #f472b6;
 }
 
 .light-mode {
-  /* When the <html> tag gets the 'light-mode' class, these colors will be used instead. */
   --bg: #F9FAFB;
   --text: #1F2937;
   --text-secondary: #4B5563;
@@ -198,11 +193,11 @@ a, button {
   width: 100%;
   height: 100%;
   transform-style: preserve-3d;
-  animation: spin 25s infinite linear; /* This creates the rotation */
+  animation: spin 25s infinite linear;
 }
 
 .ring:hover {
-  animation-play-state: paused; /* Pause animation on hover */
+  animation-play-state: paused;
 }
 
 .img {
@@ -225,7 +220,6 @@ a, button {
 .ring .img:nth-child(5) { transform: rotateY(240deg) translateZ(350px); background-image: url('../assets/images/photos/CDG.jpeg'); }
 .ring .img:nth-child(6) { transform: rotateY(300deg) translateZ(350px); background-image: url('../assets/images/photos/AgentCon.jpeg'); }
 
-/* Keyframe animation for the continuous spinning */
 @keyframes spin {
   from { transform: rotateY(0deg); }
   to { transform: rotateY(360deg); }
@@ -309,20 +303,25 @@ body:not(.light-mode) .logo-card:hover img {
    6. Desktop Navigation SVG Animation
    ================================================================= */
 @media (min-width: 992px) {
-  header {
-    /* Required for the absolutely positioned SVG lines */
-    position: relative;
-    overflow: hidden;
+  #header {
+    /* **REMOVED** overflow: hidden; */
   }
 
-  /* Positioning the SVG lines */
+  /* This container for the main header content needs to be positioned
+     above the SVG lines to allow clicking */
+  #header > .container {
+    position: relative;
+    z-index: 2;
+  }
+  
   .line-top {
     position: absolute;
     top: 0;
     left: 0;
     width: 100%;
     height: 15px;
-    z-index: 0;
+    z-index: 1;
+    pointer-events: none; /* Make SVG non-interactive */
   }
 
   .line-bottom {
@@ -331,36 +330,61 @@ body:not(.light-mode) .logo-card:hover img {
     left: 0;
     width: 100%;
     height: 30px;
-    transform: translateY(100%); /* Start hidden below the header */
-    z-index: 0;
+    transform: translateY(100%);
+    z-index: 1;
+    pointer-events: none; /* Make SVG non-interactive */
   }
 
-  /* Style for the top dashed line */
   .line-dash {
     stroke: var(--violet);
     stroke-width: 2;
     stroke-linecap: round;
-    stroke-dasharray: 180, 1200; /* Controls the length of the dash and the gap */
-    stroke-dashoffset: -35; /* Starting position of the dash */
+    stroke-dasharray: 180, 1200;
+    stroke-dashoffset: -35;
   }
 
-  /* Style for the bottom polygons */
   .lb {
     stroke-width: 2px;
     stroke: var(--violet);
     fill: var(--violet);
   }
 
-  /* Making sure the nav links are positioned correctly for the effect */
-  header nav {
-    position: relative;
-    z-index: 1; /* Keep nav links above the SVG lines */
+  header nav a {
+      position: relative; /* Crucial for alignment */
   }
 
-  /* Applying active styles to the link */
   header nav a.active-anim-link {
     color: var(--violet);
     transform: scale(1.1);
     font-weight: 700;
   }
+}
+
+/* =================================================================
+   7. Gallery Lightbox Styles
+   ================================================================= */
+#lightbox {
+  opacity: 0;
+  transition: opacity 0.4s ease-in-out;
+}
+
+#lightbox.visible {
+  opacity: 1;
+}
+
+.ring .img {
+  cursor: pointer;
+}
+
+body.cursor-pointer-alt .ring .img {
+    cursor: none;
+}
+
+#lightbox-img {
+  animation: zoomIn 0.4s ease-in-out;
+}
+
+@keyframes zoomIn {
+    from { transform: scale(0.8); opacity: 0; }
+    to { transform: scale(1); opacity: 1; }
 }
