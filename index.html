@@ -8,7 +8,6 @@
   <meta name="description" data-translate-key="meta_description"
         content="Melanie Rau is a strategic IT leader specializing in Cloud, Data, and AI. Explore her portfolio, projects, and expertise in FinOps, Zero Trust, and multi-cloud architecture." />
 
-  <!-- Preconnect to Google Fonts and other critical domains for faster loading -->
   <link rel="preconnect" href="https://fonts.googleapis.com"/>
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
   <link rel="preconnect" href="https://cdnjs.cloudflare.com"/>
@@ -19,14 +18,11 @@
   <link rel="manifest" href="assets/site.webmanifest">
   <link rel="icon" href="assets/images/icons/favicon.ico" type="image/x-icon">
 
-  <!-- Load fonts asynchronously to prevent render-blocking -->
-  <link rel="preload" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap&subset=latin,latin-ext" as="style" onload="this.onload=null;this.rel='stylesheet'">
-  <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap&subset=latin,latin-ext"></noscript>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap&subset=latin,latin-ext" rel="stylesheet">
 
   <link rel="stylesheet" href="css/style.css">
 
   <script src="https://cdn.tailwindcss.com"></script>
-  <!-- Defer loading of non-critical scripts -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js" defer></script>
 
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-7MCTBXH1NC"></script>
@@ -137,10 +133,8 @@
           <div class="md:w-2/5 flex justify-center">
             <div class="relative w-64 h-64 md:w-80 md:h-80">
               <div class="absolute inset-0 rounded-full bg-gradient-to-br from-violet-500 to-pink-500 blur-3xl opacity-70"></div>
-              <!-- Prioritize loading the main hero image (LCP element) -->
               <img src="assets/images/photos/linkedin-photo.jpeg" width="460" height="460" alt="Melanie Rau"
-                   class="relative w-full h-full rounded-full object-cover border-4 border-gray-800 shadow-2xl" 
-                   fetchpriority="high"
+                   class="relative w-full h-full rounded-full object-cover border-4 border-gray-800 shadow-2xl" fetchpriority="high"
                    data-translate-key="hero_headshot_alt" data-translate-attr="alt">
             </div>
           </div>
@@ -175,7 +169,7 @@
 
     <section id="about" class="py-28 section-fade-in">
       <div class="container mx-auto px-6">
-        <h2 class="text-3xl md:text-4xl font-bold mb-10 gradient-text text-left"
+        <h2 class="text-3xl md:text-4xl font-bold mb-10 gradient-text"
             data-translate-key="about_title">My Journey: From Infrastructure to Strategy</h2>
 
         <div class="book-container mb-12">
@@ -219,9 +213,9 @@
 
     <section id="gallery" class="py-28 section-fade-in">
         <div class="container mx-auto px-6">
-            <div class="text-center mb-10">
+            <div class="mb-10">
                 <h2 class="text-3xl md:text-4xl font-bold mb-2" style="color:var(--header-text)" data-translate-key="gallery_title">Moments at Work</h2>
-                <p class="max-w-2xl mx-auto font-light" style="color:var(--text-secondary)" data-translate-key="gallery_subtitle">Snapshots from conferences, hackathons, and team days.</p>
+                <p class="max-w-2xl font-light" style="color:var(--text-secondary)" data-translate-key="gallery_subtitle">Snapshots from conferences, hackathons, and team days.</p>
             </div>
 
             <div class="row">
@@ -243,37 +237,35 @@
         </div>
     </section>
 
+    <!-- UPDATED: Case Studies Section -->
     <section id="case-studies" class="py-28 section-bg section-fade-in">
         <div class="container mx-auto px-6">
-            <div class="text-center mb-12">
+            <div class="mb-12">
                 <h2 class="text-3xl md:text-4xl font-bold mb-3" style="color:var(--header-text)" data-translate-key="projects_title">Case Studies: Strategy in Action</h2>
-                <p class="max-w-3xl mx-auto font-light" style="color:var(--text-secondary)" data-translate-key="projects_subtitle">I turn complex challenges into measurable outcomes.</p>
-            </div>
-
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-12">
-                <div class="case-card p-10">
-                    <h3 class="text-3xl mb-8 gradient-text" data-translate-key="project1_heading_card">FinOps Strategy</h3>
-                    <div class="rounded-xl bg-[#161338] h-56 flex items-center justify-center shadow-inner">
-                        <span class="text-2xl md:text-3xl font-semibold" style="color:#c7b7ff" data-translate-key="project1_heading_card">FinOps Strategy</span>
-                    </div>
-                </div>
-                <div class="case-study case-text">
-                    <h3 class="text-2xl font-bold mb-2" style="color:var(--header-text)" data-translate-key="project1_box_title">FinOps & Governance Board Creation</h3>
-                    <p data-translate-key="project1_box_desc">Authored the business case and launched FinOps from the ground up. Now chair the Azure Governance Board to oversee spend, new projects, and standards.</p>
-                    <p class="mt-4 text-violet-300" data-translate-key="project1_box_result">Result: <span class="counter" data-target="15">0</span>% reduction in annual cloud spend.</p>
-                </div>
+                <p class="max-w-3xl font-light" style="color:var(--text-secondary)" data-translate-key="projects_subtitle">I turn complex challenges into measurable outcomes.</p>
             </div>
 
             <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-                <div class="case-study case-text md:order-2">
-                    <h3 class="text-2xl font-bold mb-2" style="color:var(--header-text)" data-translate-key="project2_box_title">Secure Tenant Disaggregation</h3>
-                    <p data-translate-key="project2_box_desc">Designed the future state, applied Zero Trust, and aligned leaders with clear diagrams and plans.</p>
-                    <p class="mt-4 text-violet-300" data-translate-key="project2_box_result">Outcome: increased security, licensing flexibility, and total cloud control.</p>
+                <!-- Case Study 1: FinOps -->
+                <div class="case-study-card glassmorphism">
+                    <div class="case-study-visual">
+                        <span class="case-study-title" data-translate-key="project1_heading_card">FinOps Strategy</span>
+                    </div>
+                    <div class="case-study-details">
+                        <h3 class="text-xl font-bold mb-2" style="color:var(--header-text)" data-translate-key="project1_box_title">FinOps & Governance Board Creation</h3>
+                        <p class="text-sm" data-translate-key="project1_box_desc">Authored the business case and launched FinOps from the ground up. Now chair the Azure Governance Board to oversee spend, new projects, and standards.</p>
+                        <p class="case-study-result" data-translate-key="project1_box_result">Result: <span class="counter" data-target="15">0</span>% reduction in annual cloud spend.</p>
+                    </div>
                 </div>
-                <div class="case-card p-10 md:order-1">
-                    <h3 class="text-3xl mb-8 gradient-text" data-translate-key="project2_heading_card">Zero Trust</h3>
-                    <div class="rounded-xl bg-[#161338] h-56 flex items-center justify-center shadow-inner">
-                        <span class="text-2xl md:text-3xl font-semibold" style="color:#c7b7ff" data-translate-key="project2_card_badge">Secure Separation</span>
+                <!-- Case Study 2: Zero Trust -->
+                <div class="case-study-card glassmorphism">
+                    <div class="case-study-visual">
+                        <span class="case-study-title" data-translate-key="project2_heading_card">Zero Trust</span>
+                    </div>
+                    <div class="case-study-details">
+                        <h3 class="text-xl font-bold mb-2" style="color:var(--header-text)" data-translate-key="project2_box_title">Secure Tenant Disaggregation</h3>
+                        <p class="text-sm" data-translate-key="project2_box_desc">Designed the future state, applied Zero Trust, and aligned leaders with clear diagrams and plans.</p>
+                        <p class="case-study-result" data-translate-key="project2_box_result">Outcome: increased security, licensing flexibility, and total cloud control.</p>
                     </div>
                 </div>
             </div>
@@ -282,7 +274,7 @@
 
     <section id="companies" class="py-20 section-fade-in section-bg">
         <div class="container mx-auto px-6">
-            <div class="text-center max-w-5xl mx-auto">
+            <div class="max-w-5xl mx-auto">
                 <h3 class="text-lg font-semibold uppercase tracking-widest mb-12" style="color: var(--text-secondary-color);" data-translate-key="orgs_title">Organisations I've Worked With</h3>
                 <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6 gap-6">
                     <div class="logo-card"><img src="assets/images/logos/pwc.png" alt="PwC Logo" loading="lazy" decoding="async"></div>
@@ -303,7 +295,7 @@
 
     <section id="experience" class="py-28 section-fade-in">
       <div class="container mx-auto px-6">
-        <div class="text-center mb-12">
+        <div class="mb-12">
           <h2 class="text-3xl md:text-4xl font-bold mb-3" style="color:var(--header-text)" data-translate-key="experience_title">Professional Experience</h2>
           <p class="font-light" style="color:var(--text-secondary)" data-translate-key="experience_subtitle">My path in technology leadership.</p>
         </div>
@@ -369,9 +361,9 @@
 
     <section id="certifications" class="py-28 section-bg section-fade-in">
       <div class="container mx-auto px-6">
-        <div class="text-center mb-12">
+        <div class="mb-12">
           <h2 class="text-3xl md:text-4xl font-bold mb-3" style="color:var(--header-text)" data-translate-key="certs_title">Education & Certifications</h2>
-        <p class="max-w-3xl mx-auto font-light" style="color:var(--text-secondary)" data-translate-key="certs_subtitle">Formal training and continuous learning.</p>
+        <p class="max-w-3xl font-light" style="color:var(--text-secondary)" data-translate-key="certs_subtitle">Formal training and continuous learning.</p>
         </div>
         <div class="max-w-5xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-8">
           <a href="assets/docs/certificates/IHK.pdf" target="_blank" rel="noopener" class="glassmorphism p-8 rounded-2xl block card-interactive">
@@ -416,7 +408,7 @@
 
     <section id="faq" class="py-28 section-bg section-fade-in">
       <div class="container mx-auto px-6">
-        <div class="text-center mb-12">
+        <div class="mb-12">
           <h2 class="text-3xl md:text-4xl font-bold mb-3" style="color:var(--header-text)" data-translate-key="faq_title">Frequently Asked Questions</h2>
           <p class="font-light" style="color:var(--text-secondary)" data-translate-key="faq_subtitle">Useful details for recruiters.</p>
         </div>
@@ -517,11 +509,11 @@
 
     <section id="contact" class="py-28 section-fade-in">
       <div class="container mx-auto px-6">
-        <div class="text-center max-w-3xl mx-auto">
+        <div class="max-w-3xl mx-auto">
           <h2 class="text-3xl md:text-4xl font-bold mb-4" style="color:var(--header-text)" data-translate-key="contact_title">Let's Connect</h2>
           <p class="mb-10 font-light" style="color:var(--text-secondary)" data-translate-key="contact_subtitle">I’m open to new opportunities and collaborations. Reach out or download my CV.</p>
 
-          <form action="https://formspree.io/f/xldlozkz" method="POST" class="max-w-xl mx-auto space-y-6 text-left">
+          <form action="https://formspree.io/f/xldlozkz" method="POST" class="max-w-xl space-y-6 text-left">
             <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
               <div>
                 <label for="name" class="block text-sm mb-2" style="color:var(--text-secondary)" data-translate-key="form_name_label">Your Name</label>
@@ -536,7 +528,7 @@
               <label for="message" class="block text-sm mb-2" style="color:var(--text-secondary)" data-translate-key="form_message_label">Message</label>
               <textarea id="message" name="message" rows="5" required class="w-full p-3 rounded-lg bg-white/5 border border-white/10 text-sm"></textarea>
             </div>
-            <div class="text-center">
+            <div class="text-left">
               <button type="submit" class="inline-flex items-center justify-center w-full sm:w-auto bg-violet-600 hover:bg-violet-700 text-white font-bold py-3 px-8 rounded-lg">
                 <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" viewBox="0 0 20 20" fill="currentColor"><path d="M2.003 5.884L10 9.882l7.997-3.998A2 2 0 0016 4H4a2 2 0 00-1.997 1.884z"/><path d="M18 8.118l-8 4-8-4V14a2 2 0 002 2h12a2 2 0 002-2V8.118z"/></svg>
                 <span data-translate-key="contact_send_button">Send message</span>
@@ -544,7 +536,7 @@
             </div>
           </form>
 
-          <div class="mt-12 flex justify-center gap-8">
+          <div class="mt-12 flex justify-start gap-8">
             <a href="https://www.linkedin.com/in/melanie-rau" target="_blank" rel="noopener"
                class="text-gray-400 hover:text-violet-400"
                aria-label="LinkedIn Profile"
