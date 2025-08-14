@@ -1,3 +1,6 @@
+Of course. Here is the complete and updated content for your `css/style.css` file, including the styles for the main layout, the new navigation animation, and the fully functional 3D slideshow.
+
+```css
 /* =================================================================
    1. Root Variables & Base Styles
    - This section is like the control panel for the website's entire look and feel.
@@ -176,36 +179,63 @@ a, button {
   background: linear-gradient(90deg, var(--violet), var(--pink));
 }
 
-/* --- NEW: 3D Carousel Styles --- */
-.stage, .ring, .img {
-  width: 100%;
-  height: 100%;
-  transform-style: preserve-3d;
-  user-select: none;
-}
-
+/* --- UPDATED: 3D Carousel Styles --- */
 .stage {
-  overflow: hidden;
-  background: transparent;
-  min-height: 400px; /* Ensure stage has height */
-  position: relative;
+  width: 100%;
+  height: 400px;
+  perspective: 1200px;
+  transform-style: preserve-3d;
 }
 
 .carousel-container {
-  perspective: 2000px;
-  width: 300px;
-  height: 400px;
-  position: absolute;
-  left: 50%;
+  width: 210px;
+  height: 140px;
+  position: relative;
+  margin: 0 auto;
   top: 50%;
-  transform: translate(-50%, -50%);
+  transform: translateY(-50%) rotateX(-10deg);
+  transform-style: preserve-3d;
+}
+
+.ring {
+  width: 100%;
+  height: 100%;
+  transform-style: preserve-3d;
+  animation: spin 25s infinite linear; /* This creates the rotation */
+}
+
+.ring:hover {
+  animation-play-state: paused; /* Pause animation on hover */
 }
 
 .img {
-    position: absolute;
-    border-radius: 8px;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 220px;
+  height: 150px;
+  border-radius: 8px;
+  background-size: cover;
+  background-position: center;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+  -webkit-box-reflect: below 10px linear-gradient(transparent, transparent, #0004);
+}
+
+/* Assigning the actual images to each slide */
+.ring .img:nth-child(1) { transform: rotateY(0deg) translateZ(350px); background-image: url('../assets/images/photos/Google-Cloud-Summit.jpeg'); }
+.ring .img:nth-child(2) { transform: rotateY(60deg) translateZ(350px); background-image: url('../assets/images/photos/Away-Day-Westminster.jpeg'); }
+.ring .img:nth-child(3) { transform: rotateY(120deg) translateZ(350px); background-image: url('../assets/images/photos/PwC-Bakesale-Charity.jpeg'); }
+.ring .img:nth-child(4) { transform: rotateY(180deg) translateZ(350px); background-image: url('../assets/images/photos/Pagerduty-social.jpeg'); }
+.ring .img:nth-child(5) { transform: rotateY(240deg) translateZ(350px); background-image: url('../assets/images/photos/CDG.jpeg'); }
+.ring .img:nth-child(6) { transform: rotateY(300deg) translateZ(350px); background-image: url('../assets/images/photos/AgentCon.jpeg'); }
+
+/* Keyframe animation for the continuous spinning */
+@keyframes spin {
+  from { transform: rotateY(0deg); }
+  to { transform: rotateY(360deg); }
 }
 /* --- End 3D Carousel Styles --- */
+
 
 footer p {
   color: var(--footer-text);
@@ -276,4 +306,65 @@ body:not(.light-mode) .logo-card:hover img {
 
 #sun-icon {
     display: none;
+}
+
+
+/* =================================================================
+   6. Desktop Navigation SVG Animation
+   ================================================================= */
+@media (min-width: 992px) {
+  header {
+    /* Required for the absolutely positioned SVG lines */
+    position: relative; 
+    overflow: hidden;
+  }
+
+  /* Positioning the SVG lines */
+  .line-top {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 15px;
+    z-index: 0;
+  }
+
+  .line-bottom {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 30px;
+    transform: translateY(100%); /* Start hidden below the header */
+    z-index: 0;
+  }
+
+  /* Style for the top dashed line */
+  .line-dash {
+    stroke: var(--violet);
+    stroke-width: 2;
+    stroke-linecap: round;
+    stroke-dasharray: 180, 1200; /* Controls the length of the dash and the gap */
+    stroke-dashoffset: -35; /* Starting position of the dash */
+  }
+
+  /* Style for the bottom polygons */
+  .lb {
+    stroke-width: 2px;
+    stroke: var(--violet);
+    fill: var(--violet);
+  }
+
+  /* Making sure the nav links are positioned correctly for the effect */
+  header nav {
+    position: relative;
+    z-index: 1; /* Keep nav links above the SVG lines */
+  }
+  
+  /* Applying active styles to the link */
+  header nav a.active-anim-link {
+    color: var(--violet);
+    transform: scale(1.1);
+    font-weight: 700;
+  }
 }
