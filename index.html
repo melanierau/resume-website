@@ -24,6 +24,10 @@
 
   <script src="https://cdn.tailwindcss.com"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js" defer></script>
+  
+  <!-- Added Libraries for 3D Carousel -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.9.1/gsap.min.js"></script>
 
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-7MCTBXH1NC"></script>
   <script>
@@ -211,6 +215,7 @@
       </div>
     </section>
 
+    <!-- UPDATED: Gallery Section with 3D Carousel -->
     <section id="gallery" class="py-28 section-fade-in">
         <div class="container mx-auto px-6">
             <div class="mb-10">
@@ -218,26 +223,21 @@
                 <p class="max-w-2xl font-light" style="color:var(--text-secondary)" data-translate-key="gallery_subtitle">Snapshots from conferences, hackathons, and team days.</p>
             </div>
 
-            <div class="row">
-              <div class="column">
-                <img src="assets/images/photos/AgentCon.jpeg" alt="AgentCon" style="width:100%" loading="lazy" decoding="async">
-                <img src="assets/images/photos/Google-Cloud-Summit.jpeg" alt="Google Cloud Summit" style="width:100%" loading="lazy" decoding="async">
-              </div>
-              <div class="column">
-                <img src="assets/images/photos/Westminster-Awayday-BT.jpeg" alt="Away Day Westminster" style="width:100%" loading="lazy" decoding="async">
-                <img src="assets/images/photos/Pagerduty-Mascot.jpeg" alt="PagerDuty Mascot" style="width:100%" loading="lazy" decoding="async">
-              </div>
-              <div class="column">
-                <img src="assets/images/photos/CDG.jpeg" alt="CDG" style="width:100%" loading="lazy" decoding="async">
-              </div>
-              <div class="column">
-                <img src="assets/images/photos/Google-Cloud-Summit-1.jpeg" alt="Google Cloud Summit 1" style="width:100%" loading="lazy" decoding="async">
+            <div class="stage">
+              <div class="carousel-container">
+                <div class="ring">
+                  <div class="img"></div>
+                  <div class="img"></div>
+                  <div class="img"></div>
+                  <div class="img"></div>
+                  <div class="img"></div>
+                  <div class="img"></div>
+                </div>
               </div>
             </div>
         </div>
     </section>
 
-    <!-- UPDATED: Case Studies Section -->
     <section id="case-studies" class="py-28 section-bg section-fade-in">
         <div class="container mx-auto px-6">
             <div class="mb-12">
@@ -246,7 +246,6 @@
             </div>
 
             <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-                <!-- Case Study 1: FinOps -->
                 <div class="case-study-card glassmorphism">
                     <div class="case-study-visual">
                         <span class="case-study-title" data-translate-key="project1_heading_card">FinOps Strategy</span>
@@ -257,7 +256,6 @@
                         <p class="case-study-result" data-translate-key="project1_box_result">Result: <span class="counter" data-target="15">0</span>% reduction in annual cloud spend.</p>
                     </div>
                 </div>
-                <!-- Case Study 2: Zero Trust -->
                 <div class="case-study-card glassmorphism">
                     <div class="case-study-visual">
                         <span class="case-study-title" data-translate-key="project2_heading_card">Zero Trust</span>
